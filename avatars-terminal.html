@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TERMINAL_VIEWER_V4_REAL_COLOR</title>
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Requested Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=IBM+Plex+Sans+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+          /* --- GLOBAL RESET & TERMINAL STYLE --- */
+          * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+              font-family: "Share Tech Mono", monospace;
+          }
+
+          body {
+              background-color: #000000;
+              color: #00ff00;
+              overflow: hidden;
+              height: 100vh;
+              width: 100vw;
+          }
+
+          /* --- CRT EFFECTS --- */
+          .crt-container {
+              position: relative;
+              width: 100%;
+              height: 100%;
+              overflow: hidden;
+          }
+
+          .scanlines {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: linear-gradient(
+                  to bottom,
+                  rgba(255, 255, 255, 0),
+                  rgba(255, 255, 255, 0) 50%,
+                  rgba(0, 0, 0, 0.2) 50%,
+                  rgba(0, 0, 0, 0.2)
+              );
+              background-size: 100% 4px;
+              pointer-events: none;
+              z-index: 1000;
+          }
+
+          .flicker-overlay {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: rgba(0, 255, 0, 0.02);
+              opacity: 0;
+              pointer-events: none;
+              z-index: 999;
+              animation: flicker 0.15s infinite;
+          }
+
+          @keyframes flicker {
+              0% { opacity: 0.02; }
+              50% { opacity: 0.05; }
+              100% { opacity: 0.02; }
+          }
+
+          /* --- VIEWER --- */
+          .viewer-container {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              z-index: 1;
+              background: #000;
+          }
+
+          #viewer-canvas {
+              width: 100%;
+              height: 100%;
+              display: block;
+              /* YEŞİL FİLTRE BURADA: Gerçek renkleri korur ama yeşil tonlar */
+              filter: sepia(100%) hue-rotate(60deg) saturate(250%) contrast(1.1) brightness(0.9);
+          }
+
+          /* --- UI ELEMENTS --- */
+          .avatar-details {
+              position: absolute;
+              top: 20px;
+              left: 20px;
+              z-index: 10;
+              pointer-events: none;
+          }
+
+          .details-title {
+              font-size: 24px;
+              text-transform: uppercase;
+              letter-spacing: 2px;
+              border-bottom: 1px solid #00ff00;
+              padding-bottom: 5px;
+              text-shadow: 0 0 5px #00ff00;
+              background-color: #000;
+              padding-right: 10px;
+          }
+
+          /* --- GRID VIEW --- */
+          .avatar-grid-container {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background-color: #000;
+              padding: 20px;
+              overflow-y: auto;
+              z-index: 20;
+              display: none;
+          }
+
+          .avatar-grid-container::-webkit-scrollbar { width: 8px; }
+          .avatar-grid-container::-webkit-scrollbar-track { background: #000; border-left: 1px solid #003300; }
+          .avatar-grid-container::-webkit-scrollbar-thumb { background: #00ff00; }
+
+          .avatar-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+              gap: 20px;
+              padding-bottom: 100px;
+          }
+
+          .grid-item {
+              cursor: pointer;
+              border: 1px solid #004400;
+              padding: 5px;
+              transition: all 0.2s;
+              position: relative;
+          }
+
+          .grid-item:hover {
+              border-color: #00ff00;
+              box-shadow: 0 0 10px #00ff00;
+              background-color: rgba(0, 255, 0, 0.1);
+          }
+
+          .grid-item img {
+              width: 100%;
+              aspect-ratio: 1;
+              object-fit: cover;
+              filter: grayscale(100%) brightness(0.8) sepia(100%) hue-rotate(50deg) saturate(3);
+              display: block;
+          }
+
+          .grid-item-name {
+              font-size: 10px;
+              margin-top: 5px;
+              text-align: center;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              color: #00ff00;
+          }
+
+          /* --- CAROUSEL (BOTTOM SECTION) --- */
+          .bottom-section {
+              position: absolute;
+              bottom: 20px;
+              left: 0;
+              width: 100%;
+              height: 80px;
+              z-index: 15;
+              display: flex;
+              justify-content: center;
+              pointer-events: none;
+          }
+
+          .avatar-selector {
+              width: 100%;
+              height: 100%;
+              position: relative;
+              pointer-events: auto;
+          }
+
+          .avatar-carousel {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              position: relative;
+              width: 100%;
+              height: 100%;
+          }
+
+          .avatar-item {
+              width: 60px;
+              height: 60px;
+              position: absolute;
+              transition: all 0.3s ease;
+              opacity: 0.5;
+              cursor: pointer;
+              border: 1px solid #004400;
+              background: #000;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+          }
+
+          .avatar-item.active {
+              opacity: 1;
+              border-color: #00ff00;
+              box-shadow: 0 0 10px #00ff00;
+              z-index: 100;
+              transform: scale(1.2);
+          }
+
+          .avatar-item img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              /* Küçük resimlerde de aynı filtre olsun */
+              filter: grayscale(100%) brightness(0.8) sepia(100%) hue-rotate(50deg) saturate(3);
+          }
+
+          .avatar-item .avatar-name {
+              display: none; 
+          }
+
+          /* --- CONTROLS --- */
+          .grid-toggle-button {
+              position: absolute;
+              bottom: 110px;
+              left: 50%;
+              transform: translateX(-50%);
+              background: #000;
+              border: 1px solid #00ff00;
+              color: #00ff00;
+              padding: 5px 15px;
+              cursor: pointer;
+              z-index: 50;
+              font-size: 12px;
+              text-transform: uppercase;
+              transition: 0.3s;
+              box-shadow: 0 0 5px #003300;
+          }
+
+          .grid-toggle-button:hover {
+              background: #00ff00;
+              color: #000;
+              box-shadow: 0 0 15px #00ff00;
+          }
+
+          .loading-overlay {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              z-index: 5;
+              text-align: center;
+              display: none;
+          }
+
+          .loading-text {
+              background: #000;
+              padding: 5px;
+              border: 1px solid #00ff00;
+              font-weight: bold;
+          }
+
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/DRACOLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://unpkg.com/meshoptimizer@0.18.1/meshopt_decoder.js"></script>
+  </head>
+  <body>
+    
+    <div class="crt-container">
+        <div class="scanlines"></div>
+        <div class="flicker-overlay"></div>
+
+        <div class="avatar-grid-container" id="avatar-grid-container">
+            <div style="margin-bottom: 20px; border-bottom: 1px solid #00ff00; padding-bottom:10px;">
+                > SYSTEM_READY<br>
+                > SELECT_AVATAR_UNIT...
+            </div>
+            <div class="avatar-grid" id="avatar-grid"></div>
+        </div>
+
+        <div class="viewer-container" id="viewer-container">
+            <canvas id="viewer-canvas"></canvas>
+            
+            <div class="avatar-details" id="avatar-details">
+                <div class="details-title" id="avatar-title">Wait...</div>
+            </div>
+
+            <div class="loading-overlay" id="loading-overlay">
+                <div class="loading-text">
+                    > LOADING_ASSETS... <span id="loading-percentage">0%</span>
+                </div>
+            </div>
+        </div>
+
+        <button class="grid-toggle-button" id="grid-toggle-button">
+            <i class="fas fa-th-large"></i> [GRID_INDEX]
+        </button>
+
+        <div class="bottom-section" id="bottom-section" style="display:none;">
+            <div class="avatar-selector">
+                <div class="avatar-carousel" id="avatar-carousel"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- 1. CONFIGURATION ---
+        let scene, camera, renderer, controls, mixer, clock = new THREE.Clock();
+        let currentModel = null;
+        let isGridView = true;
+        let avatarData = [];
+        let activeAvatarIndex = 0;
+        
+        // --- 2. DATA (SADECE 10 ADET) ---
+        function loadAvatarData() {
+            avatarData = [
+                {
+                    id: 1,
+                    name: "Neue²Dojo Curator",
+                    collection: "Paintings",
+                    thumbnailUrl: "https://raw.githubusercontent.com/decentralize-dfw/thmbnl/refs/heads/main/neuedojo.png",
+                    modelUrl: "https://raw.githubusercontent.com/decentralize-dfw/c2w2-glb/main/curator-900-opt-v67.glb"
+                },
+                {
+                    id: 2,
+                    name: "Lydia",
+                    collection: "Paintings",
+                    thumbnailUrl: "https://raw.githubusercontent.com/decentralize-dfw/thmbnl/refs/heads/main/purplecoat.png",
+                    modelUrl: "https://raw.githubusercontent.com/decentralize-dfw/c2w2-glb/main/matisse-900-opt-v80.glb"
+                },
+                {
+                    id: 3,
+                    name: "Lucien",
+                    collection: "Paintings",
+                    thumbnailUrl: "https://raw.githubusercontent.com/decentralize-dfw/thmbnl/refs/heads/main/frued.png",
+                    modelUrl: "https://raw.githubusercontent.com/decentralize-dfw/c2w2-glb/main/frued-human-900-opt-v72.glb"
+                },
+                {
+                    id: 4,
+                    name: "The Wrestler of Silence",
+                    collection: "Paintings",
+                    thumbnailUrl: "https://raw.githubusercontent.com/decentralize-dfw/thmbnl/refs/heads/main/baconscene-humanstudy.png",
+                    modelUrl: "https://raw.githubusercontent.com/decentralize-dfw/c2w2-glb/main/baconscene-900-opt-v59.glb"
+                },
+                {
+                    id: 5,
+                    name: "The Devoured Remnant",
+                    collection: "Paintings",
+                    thumbnailUrl: "https://raw.githubusercontent.com/decentralize-dfw/thmbnl/refs/heads/main/mutantbacon.png",
+                    modelUrl: "https://raw.githubusercontent.com/decentralize-dfw/c2w2-glb/main/mutantbacon-900-opt-v86.glb"
+                },
+                {
+                    id: 6,
+                    name: "Squallor Shark",
+                    collection: "Paintings",
+                    thumbnailUrl: "https://raw.githubusercontent.com/decentralize-dfw/thmbnl/refs/heads/main/squallo.png",
+                    modelUrl: "https://raw.githubusercontent.com/decentralize-dfw/c2w2-glb/main/squallo-900-opt-v101.glb"
+                },
+                {
+                    id: 7,
+                    name: "Belli Capelli",
+                    collection: "Paintings",
+                    thumbnailUrl: "https://raw.githubusercontent.com/decentralize-dfw/thmbnl/refs/heads/main/bellicapelli.png",
+                    modelUrl: "https://raw.githubusercontent.com/decentralize-dfw/c2w2-glb/main/bellicapelli-900-opt-v64.glb"
+                },
+                {
+                    id: 8,
+                    name: "Joker",
+                    collection: "Virtual Fashion",
+                    thumbnailUrl: "https://raw.githubusercontent.com/decentralize-dfw/thmbnl/refs/heads/main/joker.png",
+                    modelUrl: "https://raw.githubusercontent.com/decentralize-dfw/c2w2/main/Joker-web-NOMAT-V3-v4.glb"
+                },
+                {
+                    id: 9,
+                    name: "Bulky Bride",
+                    collection: "Virtual Fashion",
+                    thumbnailUrl: "https://raw.githubusercontent.com/decentralize-dfw/thmbnl/refs/heads/main/blukybride.png",
+                    modelUrl: "https://raw.githubusercontent.com/decentralize-dfw/c2w2-glb/main/bulkgelin-900-opt-v65.glb"
+                },
+                {
+                    id: 10,
+                    name: "Mare",
+                    collection: "Virtual Fashion",
+                    thumbnailUrl: "https://raw.githubusercontent.com/decentralize-dfw/thmbnl/refs/heads/main/mare.png",
+                    modelUrl: "https://raw.githubusercontent.com/decentralize-dfw/c2w2-glb/main/mare-900-opt-v79.glb"
+                }
+            ];
+        }
+
+        // --- 3. INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            initMeshoptDecoder();
+            loadAvatarData(); 
+            initScene();
+            populateGrid();
+            populateCarousel();
+            toggleGridView(true);
+        });
+
+        function initMeshoptDecoder() {
+            if (typeof MeshoptDecoder !== 'undefined') {
+                THREE.GLTFLoader.prototype.setMeshoptDecoder = function(decoder) {
+                    this.meshoptDecoder = decoder;
+                    return this;
+                };
+            }
+        }
+
+        function initScene() {
+            scene = new THREE.Scene();
+            scene.background = null; 
+
+            const canvas = document.getElementById('viewer-canvas');
+            const container = document.getElementById('viewer-container');
+            const aspect = container.clientWidth / container.clientHeight;
+
+            camera = new THREE.PerspectiveCamera(45, aspect, 0.01, 1000);
+            camera.position.set(0, 1, 4);
+
+            renderer = new THREE.WebGLRenderer({
+                canvas: canvas,
+                antialias: true,
+                alpha: true
+            });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            // Standart renk yönetimi
+            renderer.outputEncoding = THREE.sRGBEncoding;
+
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.autoRotate = true;
+            controls.autoRotateSpeed = 1.0;
+            controls.target.set(0, 0.5, 0);
+            
+            // Işıklar geri geldi çünkü Wireframe değil
+            const ambientLight = new THREE.AmbientLight(0xffffff, 1.0); // Güçlü ambient
+            scene.add(ambientLight);
+            const dirLight = new THREE.DirectionalLight(0xffffff, 1.0);
+            dirLight.position.set(2, 5, 5);
+            scene.add(dirLight);
+
+            window.addEventListener('resize', onWindowResize);
+            
+            document.getElementById('grid-toggle-button').addEventListener('click', () => {
+                toggleGridView(!isGridView);
+            });
+
+            animate();
+        }
+
+        function onWindowResize() {
+            const container = document.getElementById('viewer-container');
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            updateAvatarCarousel();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            if (controls) controls.update();
+            if (mixer) mixer.update(clock.getDelta());
+            renderer.render(scene, camera);
+        }
+
+        // --- 4. GRID LOGIC ---
+        function populateGrid() {
+            const grid = document.getElementById('avatar-grid');
+            grid.innerHTML = '';
+            
+            avatarData.forEach((avatar, index) => {
+                const item = document.createElement('div');
+                item.className = 'grid-item';
+                item.innerHTML = `
+                    <img src="${avatar.thumbnailUrl}" alt="${avatar.name}" loading="lazy">
+                    <div class="grid-item-name">${avatar.name}</div>
+                `;
+                item.addEventListener('click', () => {
+                    activeAvatarIndex = index;
+                    loadAvatar(avatar);
+                    toggleGridView(false);
+                    updateAvatarCarousel();
+                });
+                grid.appendChild(item);
+            });
+        }
+
+        function toggleGridView(show) {
+            isGridView = show;
+            const grid = document.getElementById('avatar-grid-container');
+            const btn = document.getElementById('grid-toggle-button');
+            const details = document.getElementById('avatar-details');
+            const carousel = document.getElementById('bottom-section');
+            const viewer = document.getElementById('viewer-container');
+            
+            if (show) {
+                grid.style.display = 'block';
+                details.style.display = 'none';
+                carousel.style.display = 'none';
+                viewer.style.opacity = '0.2';
+                btn.innerHTML = '> BACK_TO_VIEW';
+            } else {
+                grid.style.display = 'none';
+                details.style.display = 'block';
+                carousel.style.display = 'flex';
+                viewer.style.opacity = '1';
+                btn.innerHTML = '> [GRID_INDEX]';
+                onWindowResize();
+            }
+        }
+
+        // --- 5. CAROUSEL LOGIC ---
+        function populateCarousel() {
+            const container = document.getElementById('avatar-carousel');
+            container.innerHTML = '';
+            
+            avatarData.forEach((avatar, index) => {
+                const item = document.createElement('div');
+                item.className = 'avatar-item';
+                item.dataset.index = index;
+                item.innerHTML = `
+                    <img src="${avatar.thumbnailUrl}" alt="${avatar.name}">
+                    <div class="avatar-name">${avatar.name}</div>
+                `;
+                item.addEventListener('click', () => {
+                    activeAvatarIndex = index;
+                    loadAvatar(avatar);
+                    updateAvatarCarousel();
+                });
+                container.appendChild(item);
+            });
+        }
+
+        function updateAvatarCarousel() {
+            const items = document.querySelectorAll('.avatar-item');
+            const total = items.length;
+            if (total === 0) return;
+
+            const width = window.innerWidth;
+            const itemSize = 60; 
+            const spacing = 20; 
+            const centerX = width / 2;
+            
+            items.forEach((item, i) => {
+                let diff = (i - activeAvatarIndex);
+                if (diff > total / 2) diff -= total;
+                if (diff < -total / 2) diff += total;
+                
+                if (Math.abs(diff) > 5) {
+                    item.style.display = 'none';
+                } else {
+                    item.style.display = 'flex';
+                    const x = centerX - (itemSize/2) + (diff * (itemSize + spacing));
+                    item.style.left = x + 'px';
+                    item.classList.toggle('active', i === activeAvatarIndex);
+                    item.style.zIndex = 100 - Math.abs(diff);
+                }
+            });
+        }
+
+        // --- 6. MODEL LOADING & ANIMATION ---
+        function loadAvatar(avatar) {
+            if(currentModel) {
+                scene.remove(currentModel);
+                currentModel.traverse(o => {
+                    if (o.geometry) o.geometry.dispose();
+                    if (o.material) {
+                        if (Array.isArray(o.material)) o.material.forEach(m => m.dispose());
+                        else o.material.dispose();
+                    }
+                });
+                currentModel = null;
+            }
+            if(mixer) {
+                mixer.stopAllAction();
+                mixer = null;
+            }
+
+            document.getElementById('avatar-title').innerText = `> ${avatar.name}`;
+            const loadingOverlay = document.getElementById('loading-overlay');
+            const loadingPct = document.getElementById('loading-percentage');
+            loadingOverlay.style.display = 'block';
+            loadingPct.innerText = '0%';
+
+            const loader = new THREE.GLTFLoader();
+            const dracoLoader = new THREE.DRACOLoader();
+            dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
+            loader.setDRACOLoader(dracoLoader);
+            if (typeof MeshoptDecoder !== 'undefined') loader.setMeshoptDecoder(MeshoptDecoder);
+
+            loader.load(
+                avatar.modelUrl,
+                (gltf) => {
+                    currentModel = gltf.scene;
+
+                    // Orijinal Pozisyonlama
+                    const bbox = new THREE.Box3().setFromObject(currentModel);
+                    const center = bbox.getCenter(new THREE.Vector3());
+                    
+                    currentModel.position.x = -center.x;
+                    currentModel.position.z = -center.z;
+                    currentModel.position.y = -0.8; 
+
+                    // WİREFRAME YOK - MATERYAL DEĞİŞTİRME YOK
+                    // Sadece sahneye ekliyoruz. CSS filtresi görseli halledecek.
+
+                    // Animasyonlar (TÜMÜ LOOPTA)
+                    if (gltf.animations && gltf.animations.length) {
+                        mixer = new THREE.AnimationMixer(currentModel);
+                        // Clock resetle ki animasyon zıplamasın
+                        clock = new THREE.Clock();
+                        clock.start();
+
+                        gltf.animations.forEach((clip) => {
+                            const action = mixer.clipAction(clip);
+                            action.setLoop(THREE.LoopRepeat);
+                            action.play();
+                        });
+                        // İlk kareyi hemen güncelle
+                        mixer.update(0);
+                    }
+
+                    scene.add(currentModel);
+                    loadingOverlay.style.display = 'none';
+                    
+                    controls.target.set(0, 0.5, 0);
+                    controls.update();
+                },
+                (xhr) => {
+                    if (xhr.lengthComputable) {
+                        const percent = Math.round((xhr.loaded / xhr.total) * 100);
+                        loadingPct.innerText = percent + "%";
+                    }
+                },
+                (error) => {
+                    console.error('An error happened', error);
+                    loadingPct.innerText = "ERR";
+                }
+            );
+        }
+
+    </script>
+  </body>
+</html>
