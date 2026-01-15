@@ -1,0 +1,1609 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DECENTRALIZE™</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lilex:wght@400;500;600;700&family=Italianno&display=swap" rel="stylesheet">
+    <style>
+        /* BRUTALIST BLACK LAYOUT - WHITE GLOW TEXT */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* GLOW TEXT EFFECT */
+        .glow {
+            text-shadow:
+                0 0 10px rgba(255,255,255,0.8),
+                0 0 20px rgba(255,255,255,0.6),
+                0 0 30px rgba(255,255,255,0.4),
+                0 0 40px rgba(255,255,255,0.2);
+        }
+
+        .glow-subtle {
+            text-shadow:
+                0 0 5px rgba(255,255,255,0.5),
+                0 0 10px rgba(255,255,255,0.3),
+                0 0 15px rgba(255,255,255,0.2);
+        }
+
+        /* TOP LOGO BAR - TRANSPARENT */
+        .top-logo {
+            position: fixed;
+            top: 20px;
+            left: 30px;
+            z-index: 1000;
+        }
+
+        .top-logo img {
+            height: 50px;
+            width: auto;
+            filter: brightness(0) invert(1);
+            opacity: 0.9;
+        }
+
+        /* RIGHT SIDE VERTICAL NAV */
+        .side-nav {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .nav-icon {
+            width: 26px;
+            height: 26px;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+
+        .nav-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+
+        .nav-icon:hover {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .nav-icon.active {
+            opacity: 1;
+        }
+
+        /* TOOLTIP */
+        .nav-icon::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #fff;
+            color: #000;
+            padding: 0.4rem 0.8rem;
+            font-size: 9px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-icon:hover::after {
+            opacity: 1;
+        }
+
+        /* MAIN CONTENT */
+        main {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* SECTION BASE - BRUTALIST */
+        section {
+            min-height: 100vh;
+            padding: 0;
+            position: relative;
+            background: #000;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding-right: 60px;
+        }
+
+        /* TYPOGRAPHY HIERARCHY - ORIGINAL FONTS */
+
+        /* LEVEL 2 - TOP BLOCK - Lilex */
+        .level-2-top {
+            font-family: 'Lilex', monospace;
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            font-weight: 600;
+            line-height: 1.2;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-align: center;
+            padding-top: 4rem;
+            color: #fff;
+        }
+
+        /* MASSIVE NEGATIVE SPACE */
+        .spacer-20 {
+            height: 18vh;
+        }
+
+        .spacer-10 {
+            height: 8vh;
+        }
+
+        .spacer-5 {
+            height: 4vh;
+        }
+
+        /* LEVEL 1 - GIANT HEADLINE - Helvetica Bold - NO QUOTES */
+        .level-1-quote {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: clamp(3.5rem, 10vw, 10rem);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            text-align: center;
+            color: #fff;
+            padding: 0 2rem;
+        }
+
+        /* LEVEL 2 - SUBTITLE - Lilex */
+        .level-2-subtitle {
+            font-family: 'Lilex', monospace;
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            font-weight: 600;
+            line-height: 1.3;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-align: center;
+            color: #fff;
+        }
+
+        /* LEVEL 3 - CTA WITH DASHED UNDERLINE */
+        .level-3-cta {
+            font-family: 'Lilex', monospace;
+            font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+            font-weight: 500;
+            line-height: 1.4;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: center;
+            color: #fff;
+            margin-top: 1.5rem;
+            text-decoration: underline;
+            text-underline-offset: 8px;
+            text-decoration-style: dashed;
+        }
+
+        /* LEVEL 4 - BODY TEXT - Italianno */
+        .level-4-body {
+            font-family: 'Italianno', cursive;
+            font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+            font-weight: 400;
+            line-height: 1.5;
+            text-align: center;
+            color: #fff;
+            max-width: 700px;
+            padding: 0 2rem;
+            margin-top: 3rem;
+        }
+
+        /* SERVICES GRID */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .service-card {
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 2rem;
+            background: rgba(255,255,255,0.02);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        .service-title {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: clamp(1.2rem, 2vw, 1.6rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            letter-spacing: 0.02em;
+        }
+
+        .service-desc {
+            font-family: 'Lilex', monospace;
+            font-size: clamp(0.7rem, 1vw, 0.85rem);
+            line-height: 1.6;
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            list-style: none;
+            font-family: 'Lilex', monospace;
+            font-size: clamp(0.65rem, 0.9vw, 0.75rem);
+            opacity: 0.6;
+        }
+
+        .service-features li {
+            padding: 0.3rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .service-features li:last-child {
+            border-bottom: none;
+        }
+
+        /* LEVEL 2 - DATA BLOCKS */
+        .data-blocks {
+            display: flex;
+            justify-content: center;
+            gap: clamp(4rem, 15vw, 20rem);
+            width: 100%;
+            margin-top: 5rem;
+        }
+
+        .data-block {
+            text-align: center;
+        }
+
+        .data-num {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 900;
+            line-height: 1;
+            color: #fff;
+        }
+
+        .data-label {
+            font-family: 'Lilex', monospace;
+            font-size: clamp(0.65rem, 0.9vw, 0.85rem);
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #fff;
+            margin-top: 0.5rem;
+            opacity: 0.7;
+        }
+
+        /* HORIZONTAL SCROLLING LOOP */
+        .scroll-container {
+            width: 100vw;
+            position: relative;
+            overflow: hidden;
+            background: rgba(255,255,255,0.03);
+            padding: 1.5rem 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .scroll-track {
+            display: flex;
+            animation: scroll 40s linear infinite;
+            width: fit-content;
+            gap: 2rem;
+        }
+
+        .scroll-item {
+            flex-shrink: 0;
+            margin: 0 2rem;
+            font-family: 'Lilex', monospace;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: #fff;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        .scroll-item img {
+            height: 70px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+            opacity: 0.9;
+        }
+
+        .scroll-item a {
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .scroll-item a:hover {
+            transform: scale(1.1);
+        }
+
+        .scroll-item a:hover img {
+            opacity: 1;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* DIAGRAM */
+        .diagram {
+            margin: 3rem 0;
+            padding: 0;
+            background: transparent;
+        }
+
+        .diagram img {
+            max-width: 85%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: brightness(0) invert(1);
+            opacity: 0.9;
+        }
+
+        /* DRAGGABLE WINDOWS */
+        .window {
+            position: absolute;
+            background: #111;
+            border: 2px solid rgba(255,255,255,0.3);
+            box-shadow:
+                0 0 30px rgba(255,255,255,0.1),
+                0 0 60px rgba(255,255,255,0.05);
+            z-index: 900;
+            min-width: 150px;
+            min-height: 100px;
+            display: block;
+        }
+
+        .window.fullscreen {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            z-index: 9999 !important;
+            border: none;
+        }
+
+        .window-header {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            padding: 0.5rem 0.8rem;
+            cursor: grab;
+            touch-action: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Lilex', monospace;
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            user-select: none;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .window-header:active {
+            cursor: grabbing;
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 6px;
+        }
+
+        .window-btn {
+            background: #fff;
+            color: #000;
+            border: none;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            font-weight: 900;
+            font-size: 10px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .window-btn:hover {
+            background: #0af;
+            color: #fff;
+        }
+
+        .window-btn.close:hover {
+            background: #f00;
+        }
+
+        .window-content {
+            padding: 0;
+            overflow: hidden;
+            height: calc(100% - 30px);
+            background: #000;
+        }
+
+        .window-content img,
+        .window-content video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #000;
+        }
+
+        .window-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* SCALED HTML IFRAME WRAPPER */
+        .window-content .scaled-html-wrapper {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .window-content .scaled-html-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-origin: 0 0;
+        }
+
+        .window-resize {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 14px;
+            height: 14px;
+            background: rgba(255,255,255,0.3);
+            cursor: nwse-resize;
+        }
+
+        .window.fullscreen .window-resize {
+            display: none;
+        }
+
+        /* FOOTER LINKS */
+        .footer-links {
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .footer-links a {
+            font-family: 'Lilex', monospace;
+            font-size: 0.8rem;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+            margin: 0 1rem;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .copyright {
+            margin-top: 3rem;
+            text-align: center;
+            font-family: 'Lilex', monospace;
+            font-size: 9px;
+            letter-spacing: 0.2em;
+            opacity: 0.4;
+            padding-bottom: 2rem;
+        }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            .level-1-quote {
+                font-size: clamp(2rem, 12vw, 4rem);
+                padding: 0 1rem;
+            }
+
+            .spacer-20 {
+                height: 10vh;
+            }
+
+            .data-blocks {
+                gap: 3rem;
+            }
+
+            .level-4-body {
+                max-width: 95%;
+                font-size: 1.3rem;
+            }
+
+            .side-nav {
+                right: 8px;
+                gap: 6px;
+            }
+
+            .nav-icon {
+                width: 20px;
+                height: 20px;
+            }
+
+            .container {
+                padding-right: 35px;
+            }
+
+            .top-logo {
+                left: 15px;
+                top: 15px;
+            }
+
+            .top-logo img {
+                height: 35px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .service-card {
+                padding: 1.5rem;
+            }
+        }
+/* --- DEBUG GRID (GELİŞTİRİCİ IZGARASI) --- */
+        .dev-grid-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Tıklamaları engelleme, arkaya geçsin */
+            z-index: 1; /* Arka planda ama en altta */
+            overflow: hidden;
+            opacity: 0.5; /* Çok göz yormasın diye hafif saydam */
+        }
+
+        /* YATAY ÇİZGİLER (PX) - CYAN RENK */
+        .dev-line-h {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.1); /* Cyan */
+        }
+        .dev-label-h {
+            position: absolute;
+            left: 5px;
+            color: white;
+            font-size: 10px;
+            font-family: monospace;
+            transform: translateY(-12px);
+        }
+
+        /* DİKEY ÇİZGİLER (%) - KIRMIZI RENK */
+        .dev-line-v {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background-color: rgba(255, 255, 255, 0.1); /* Kırmızı */
+        }
+        .dev-label-v {
+            position: absolute;
+            top: 5px;
+            color: white;
+            font-size: 10px;
+            font-family: monospace;
+            margin-left: 2px;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <!-- TOP LOGO -->
+    <div class="top-logo">
+        <img src="https://static.wixstatic.com/media/54a996_4e9f8ec5649349a5ac7b21ef80e8272f~mv2.png" alt="DECENTRALIZE">
+    </div>
+
+    <!-- RIGHT SIDE VERTICAL NAV -->
+    <nav class="side-nav">
+        <div class="nav-icon" data-tooltip="INTRO" onclick="scrollToSection('intro')">
+            <img src="https://static.wixstatic.com/media/54a996_4e9f8ec5649349a5ac7b21ef80e8272f~mv2.png" alt="Intro">
+        </div>
+        <div class="nav-icon" data-tooltip="PROBLEM" onclick="scrollToSection('problem')">
+            <img src="https://static.wixstatic.com/media/54a996_5c1696cfda2a41909b021894f7236293~mv2.png" alt="Problem">
+        </div>
+        <div class="nav-icon" data-tooltip="EXPERIENCE" onclick="scrollToSection('experience')">
+            <img src="https://static.wixstatic.com/media/54a996_edfe743a8afb47c2a7c743b9ec288da3~mv2.png" alt="Experience">
+        </div>
+        <div class="nav-icon" data-tooltip="PHILOSOPHY" onclick="scrollToSection('philosophy')">
+            <img src="https://static.wixstatic.com/media/54a996_eb3a59a9d22f454186e28c3c5d24461f~mv2.png" alt="Philosophy">
+        </div>
+        <div class="nav-icon" data-tooltip="VISION" onclick="scrollToSection('vision')">
+            <img src="https://static.wixstatic.com/media/54a996_145e862db9034dd9b0249c171eb5a3fa~mv2.png" alt="Vision">
+        </div>
+        <div class="nav-icon" data-tooltip="WORK" onclick="scrollToSection('work')">
+            <img src="https://static.wixstatic.com/media/54a996_0f5300ff7aac4ad7aced9e84ec9a543a~mv2.png" alt="Work">
+        </div>
+        <div class="nav-icon" data-tooltip="FUTURE" onclick="scrollToSection('future')">
+            <img src="https://static.wixstatic.com/media/54a996_5555b50437514963a389e43f199d5e0b~mv2.png" alt="Future">
+        </div>
+        <div class="nav-icon" data-tooltip="CONTACT" onclick="scrollToSection('contact')">
+            <img src="https://static.wixstatic.com/media/54a996_653b957c76d8468cb4d41dc8e051434f~mv2.png" alt="Contact">
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main>
+
+        <!-- INTRO -->
+        <section id="intro">
+            <div class="container">
+                <div class="level-2-top glow-subtle">
+                    DECENTRALIZE DESIGN<br>
+                    MILAN–METAVERSE / EST. 2021
+                </div>
+
+                <div class="spacer-20"></div>
+
+                <div class="level-1-quote glow">
+                    THE INTERNET IS STILL FLAT
+                </div>
+
+                <div class="spacer-20"></div>
+
+                <div class="level-2-subtitle glow-subtle">
+                    WE ARE SPATIAL BEINGS LIVING IN A TWO-DIMENSIONAL DIGITAL WORLD
+                </div>
+
+                <div class="level-3-cta glow-subtle">
+                    BREAK FREE FROM THE RECTANGLE
+                </div>
+
+                <div class="level-4-body glow-subtle">
+                    Your entire online existence happens through rectangles. You scroll, tap, swipe—all flat. Websites are documents. Social media is a feed. Even our "3D" experiences are projected onto 2D screens. We've trapped infinity in a rectangle. Every interaction you have online is mediated through rectangular interfaces—your phone, your monitor, even VR goggles project rectangles. But why? Is it because rectangles are the best way to experience digital content, or simply because we haven't imagined alternatives? We believe digital space can be something more. Not a simulation of reality, but a new realm with its own language and logic. What if digital space could be truly spatial—not confined to flat surfaces, but expanding into dimensions we haven't explored yet?
+                </div>
+
+                <div class="data-blocks">
+                    <div class="data-block">
+                        <div class="data-num glow">52</div>
+                        <div class="data-label">ARCHITECTURE MODELS</div>
+                    </div>
+                    <div class="data-block">
+                        <div class="data-num glow">60+</div>
+                        <div class="data-label">DESIGN OBJECTS</div>
+                    </div>
+                </div>
+
+                <div class="scroll-container" style="margin-top: 5rem;">
+                    <div class="scroll-track">
+                        <div class="scroll-item"><a href="#project1"><img src="https://static.wixstatic.com/media/54a996_4e9f8ec5649349a5ac7b21ef80e8272f~mv2.png" alt="Project 1"></a></div>
+                        <div class="scroll-item"><a href="#project2"><img src="https://static.wixstatic.com/media/54a996_5c1696cfda2a41909b021894f7236293~mv2.png" alt="Project 2"></a></div>
+                        <div class="scroll-item"><a href="#project3"><img src="https://static.wixstatic.com/media/54a996_edfe743a8afb47c2a7c743b9ec288da3~mv2.png" alt="Project 3"></a></div>
+                        <div class="scroll-item"><a href="#project4"><img src="https://static.wixstatic.com/media/54a996_eb3a59a9d22f454186e28c3c5d24461f~mv2.png" alt="Project 4"></a></div>
+                        <div class="scroll-item"><a href="#project5"><img src="https://static.wixstatic.com/media/54a996_145e862db9034dd9b0249c171eb5a3fa~mv2.png" alt="Project 5"></a></div>
+                        <div class="scroll-item"><a href="#project6"><img src="https://static.wixstatic.com/media/54a996_0f5300ff7aac4ad7aced9e84ec9a543a~mv2.png" alt="Project 6"></a></div>
+                        <div class="scroll-item"><a href="#project7"><img src="https://static.wixstatic.com/media/54a996_5555b50437514963a389e43f199d5e0b~mv2.png" alt="Project 7"></a></div>
+                        <div class="scroll-item"><a href="#project8"><img src="https://static.wixstatic.com/media/54a996_653b957c76d8468cb4d41dc8e051434f~mv2.png" alt="Project 8"></a></div>
+                        <div class="scroll-item"><a href="#project9"><img src="https://static.wixstatic.com/media/54a996_20b0ff7ed58c40c0a5ed9506dea9aeef~mv2.png" alt="Project 9"></a></div>
+                        <div class="scroll-item"><a href="#project1"><img src="https://static.wixstatic.com/media/54a996_4e9f8ec5649349a5ac7b21ef80e8272f~mv2.png" alt="Project 1"></a></div>
+                        <div class="scroll-item"><a href="#project2"><img src="https://static.wixstatic.com/media/54a996_5c1696cfda2a41909b021894f7236293~mv2.png" alt="Project 2"></a></div>
+                        <div class="scroll-item"><a href="#project3"><img src="https://static.wixstatic.com/media/54a996_edfe743a8afb47c2a7c743b9ec288da3~mv2.png" alt="Project 3"></a></div>
+                        <div class="scroll-item"><a href="#project4"><img src="https://static.wixstatic.com/media/54a996_eb3a59a9d22f454186e28c3c5d24461f~mv2.png" alt="Project 4"></a></div>
+                        <div class="scroll-item"><a href="#project5"><img src="https://static.wixstatic.com/media/54a996_145e862db9034dd9b0249c171eb5a3fa~mv2.png" alt="Project 5"></a></div>
+                        <div class="scroll-item"><a href="#project6"><img src="https://static.wixstatic.com/media/54a996_0f5300ff7aac4ad7aced9e84ec9a543a~mv2.png" alt="Project 6"></a></div>
+                        <div class="scroll-item"><a href="#project7"><img src="https://static.wixstatic.com/media/54a996_5555b50437514963a389e43f199d5e0b~mv2.png" alt="Project 7"></a></div>
+                        <div class="scroll-item"><a href="#project8"><img src="https://static.wixstatic.com/media/54a996_653b957c76d8468cb4d41dc8e051434f~mv2.png" alt="Project 8"></a></div>
+                        <div class="scroll-item"><a href="#project9"><img src="https://static.wixstatic.com/media/54a996_20b0ff7ed58c40c0a5ed9506dea9aeef~mv2.png" alt="Project 9"></a></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROBLEM -->
+        <section id="problem">
+            <div class="container">
+                <div class="level-2-top glow-subtle">
+                    01 / THE PROBLEM<br>
+                    DIGITAL PRISON
+                </div>
+
+                <div class="spacer-20"></div>
+
+                <div class="level-1-quote glow">
+                    INFINITY TRAPPED IN A RECTANGLE
+                </div>
+
+                <div class="spacer-20"></div>
+
+                <div class="level-2-subtitle glow-subtle">
+                    BOUNDLESS REALM, PAPER DESIGN
+                </div>
+
+                <div class="level-3-cta glow-subtle">
+                    DIGITAL MUST FIND ITS OWN VOICE
+                </div>
+
+                <div class="level-4-body glow-subtle">
+                    We've created a boundless virtual realm, yet we're still designing it like paper. Websites are documents. Apps are pages. Even our "immersive" experiences are just rectangles we strap to our faces. Why? Because we're afraid. Afraid that if we let go of familiar metaphors, people won't understand. Every revolutionary medium went through this. Early films were filmed plays. Early websites were digital brochures. But eventually, each medium discovered its own language. Film learned montage, cinema learned to move the camera, television learned the close-up. Digital space is still in its infancy, still mimicking the past instead of embracing its own possibilities. We're designing websites like magazines, social feeds like bulletin boards, virtual worlds like real-world architecture. But digital space doesn't have to follow physical rules.
+                </div>
+
+                <div class="data-blocks">
+                    <div class="data-block">
+                        <div class="data-num glow">∞</div>
+                        <div class="data-label">POTENTIAL</div>
+                    </div>
+                    <div class="data-block">
+                        <div class="data-num glow">2D</div>
+                        <div class="data-label">CURRENT LIMITATION</div>
+                    </div>
+                </div>
+
+                <div class="diagram" style="margin-top: 5rem;">
+                    <img src="https://static.wixstatic.com/media/54a996_917c0c59916347c786dea3fdf87d6626~mv2.png" alt="DIAGRAM 2">
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE / SERVICES -->
+        <section id="experience">
+            <div class="container">
+                <div class="level-2-top glow-subtle">
+                    02 / WHAT WE OFFER<br>
+                    BROWSER-BASED EXPERIENCES
+                </div>
+
+                <div class="spacer-20"></div>
+
+                <div class="level-1-quote glow">
+                    SERVICES
+                </div>
+
+                <div class="spacer-10"></div>
+
+                <div class="level-2-subtitle glow-subtle">
+                    CLICK A LINK. ENTER A WORLD. NO DOWNLOADS. NO APPS.
+                </div>
+
+                <div class="level-3-cta glow-subtle">
+                    EVERYTHING RUNS IN YOUR BROWSER UNDER 15MB
+                </div>
+
+                <div class="spacer-10"></div>
+
+                <!-- SERVICES GRID -->
+                <div class="services-grid">
+                    <!-- 3D DESIGN BROWSER -->
+                    <div class="service-card">
+                        <div class="service-title glow-subtle">3D Design Browser</div>
+                        <div class="service-desc">
+                            Transform your portfolio or products into an interactive 3D space. Share a single link. Anyone can explore immediately. We call this dimensional appreciation—making complex experiences simple to access.
+                        </div>
+                        <ul class="service-features">
+                            <li>Single-link access to full 3D environments</li>
+                            <li>Works on any device with a browser</li>
+                            <li>52 architecture models built this way</li>
+                            <li>60+ design objects ready to place</li>
+                            <li>Real-time navigation with WASD keys</li>
+                            <li>VR compatible with thumbstick controls</li>
+                        </ul>
+                    </div>
+
+                    <!-- VIRTUAL THEATER -->
+                    <div class="service-card">
+                        <div class="service-title glow-subtle">Virtual Theater</div>
+                        <div class="service-desc">
+                            A format between cinema and stage. Real-time digital performances where 3D files become actors. Everything scripted but happening live in your browser. Three productions completed: "Why We Exist?", "Balloon", and "Hatch".
+                        </div>
+                        <ul class="service-features">
+                            <li>Cinematic mode: watch from fixed cameras</li>
+                            <li>Immersive mode: walk through the scene</li>
+                            <li>Actor mode: become a performer yourself</li>
+                            <li>Time manipulation: repeat, reverse, loop</li>
+                            <li>Spatial audio that responds to position</li>
+                            <li>Under 15MB total file size</li>
+                        </ul>
+                    </div>
+
+                    <!-- MUSEUM/GALLERY -->
+                    <div class="service-card">
+                        <div class="service-title glow-subtle">Museum / Gallery Spaces</div>
+                        <div class="service-desc">
+                            Exhibition spaces that work differently than physical galleries. Walls can shift based on visitor traffic. Artworks can respond to proximity. Lighting adjusts automatically. The Neue²Dojo gallery hosts 300+ artworks. Scaffold shows 50 architectural designs.
+                        </div>
+                        <ul class="service-features">
+                            <li>Dynamic layouts that adapt to visitors</li>
+                            <li>Proximity-triggered interactions</li>
+                            <li>Environmental audio that changes per zone</li>
+                            <li>Multiple simultaneous exhibitions</li>
+                            <li>Global access, local experience</li>
+                            <li>No physical conservation constraints</li>
+                        </ul>
+                    </div>
+
+                    <!-- FASHION/RETAIL -->
+                    <div class="service-card">
+                        <div class="service-title glow-subtle">Fashion / Retail</div>
+                        <div class="service-desc">
+                            Runway shows where every seat is the best seat. Retail spaces where products float around you. The C2W Launch Runway hosted 16 digital fashion pieces with live global attendees. Shopping becomes spatial storytelling.
+                        </div>
+                        <ul class="service-features">
+                            <li>360° viewing of runway presentations</li>
+                            <li>Products respond to user movement</li>
+                            <li>Interactive preview before purchase</li>
+                            <li>Avatar try-on capabilities</li>
+                            <li>Blockchain payment integration</li>
+                            <li>Crystalline and floating display options</li>
+                        </ul>
+                    </div>
+
+                    <!-- DESIGN OBJECTS -->
+                    <div class="service-card">
+                        <div class="service-title glow-subtle">Design Objects</div>
+                        <div class="service-desc">
+                            Digital furniture and sculptures for virtual spaces. Chairs, sofas, tables, DJ equipment, carpets, and vehicles. Each piece optimized for browser performance. Four color variants: metallic, black, white, and red.
+                        </div>
+                        <ul class="service-features">
+                            <li>Mermaid Chair, Fetu Chair, DSE Chair series</li>
+                            <li>Glass Gougnut Sofa, Crawreck Sofa</li>
+                            <li>2070s DJ Table, Boardroom Table</li>
+                            <li>Osiris Rake, Midas Space sculptures</li>
+                            <li>XYZ008, Zen Bubble, Skewer vehicles</li>
+                            <li>All pieces under 2MB each</li>
+                        </ul>
+                    </div>
+
+                    <!-- ON-CHAIN OWNERSHIP -->
+                    <div class="service-card">
+                        <div class="service-title glow-subtle">On-Chain Ownership</div>
+                        <div class="service-desc">
+                            When you acquire a virtual world or theater, you get a complete, editable environment as an NFT on Ethereum. Not just a file—full ownership with modification rights. Change anything. Spawn new objects. Host your own events.
+                        </div>
+                        <ul class="service-features">
+                            <li>Full world NFT rights on Ethereum</li>
+                            <li>Complete editing capabilities</li>
+                            <li>Original asset files included</li>
+                            <li>Technical documentation provided</li>
+                            <li>Four theater worlds available</li>
+                            <li>One dedicated virtual runway</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="spacer-10"></div>
+
+                <div class="level-4-body glow-subtle">
+                    Everything loads in seconds. No installation required. Works on phones, tablets, laptops, desktops, and VR headsets. We optimize every model with mesh decimation, efficient UV mapping, and baked lighting. The glTF/GLB format keeps file sizes small while maintaining visual quality. Smart objects respond to triggers. NPCs guide visitors. Chain reactions coordinate lighting, sound, and movement. The technical complexity stays invisible—you just click and explore.
+                </div>
+
+                <div class="data-blocks">
+                    <div class="data-block">
+                        <div class="data-num glow">&lt;15MB</div>
+                        <div class="data-label">AVERAGE WORLD SIZE</div>
+                    </div>
+                    <div class="data-block">
+                        <div class="data-num glow">3</div>
+                        <div class="data-label">THEATER PRODUCTIONS</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHILOSOPHY -->
+        <section id="philosophy">
+            <div class="container">
+                <div class="level-2-top glow-subtle">
+                    03 / OUR PHILOSOPHY<br>
+                    DIGITAL AUTONOMY
+                </div>
+
+                <div class="spacer-20"></div>
+
+                <div class="level-1-quote glow">
+                    RELIGIOUS ROBOTICS
+                </div>
+
+                <div class="spacer-20"></div>
+
+                <div class="level-2-subtitle glow-subtle">
+                    LET DIGITAL SPACE BE WHAT IT ACTUALLY IS
+                </div>
+
+                <div class="level-3-cta glow-subtle">
+                    NO GRAVITY · NO SOLID MASSES · CHROME EVERYTHING
+                </div>
+
+                <div class="level-4-body glow-subtle">
+                    There's something deeply unsettling about watching empty digital spaces pretending to be something they're not. Every virtual café, every digital office space feels like an admission of our inability to face what these spaces actually want to be. We've created a realm free from every constraint that defines physical existence—gravity, material cost, linear time—and what do we do with this freedom? We chain it to our earthbound habits. It reminds me of those dreams where you realize you can fly, but instead of soaring, you keep walking because you're afraid of what freedom might mean. That's us, right now, with digital architecture. Lebbeus Woods understood this, though he worked with paper and pencil. His drawings weren't trying to be buildable—they were attempts to free architecture from self-imposed limitations. Religious Robotics is about letting digital space exist on its own terms.
+                </div>
+
+                <div class="data-blocks">
+                    <div class="data-block">
+                        <div class="data-num glow">0</div>
+                        <div class="data-label">GRAVITY</div>
+                    </div>
+                    <div class="data-block">
+                        <div class="data-num glow">∞</div>
+                        <div class="data-label">POSITIONS</div>
+                    </div>
+                </div>
+
+                <div class="scroll-container" style="margin-top: 5rem;">
+                    <div class="scroll-track">
+                        <div class="scroll-item">NO GRAVITY</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">ZERO MATERIAL COST</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">TIME LOOPS</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">INFINITE SPACE</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">CHROME SURFACES</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">FLOATING FORMS</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">NO GRAVITY</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">ZERO MATERIAL COST</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">TIME LOOPS</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">INFINITE SPACE</div>
+                        <div class="scroll-item">◆</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISION -->
+        <section id="vision">
+            <div class="container">
+                <div class="level-2-top glow-subtle">
+                    04 / THE VISION<br>
+                    LIVING ARCHITECTURE
+                </div>
+
+                <div class="spacer-20"></div>
+
+                <div class="level-1-quote glow">
+                    SPACES THAT THINK, BREATHE, REMEMBER
+                </div>
+
+                <div class="spacer-20"></div>
+
+                <div class="level-2-subtitle glow-subtle">
+                    MUSEUMS · GALLERIES · THEATERS · FASHION · RETAIL
+                </div>
+
+                <div class="level-3-cta glow-subtle">
+                    SAME MOMENT, INFINITE VIEWPOINTS
+                </div>
+
+                <div class="level-4-body glow-subtle">
+                    Digital worlds no longer just mirror reality—they dance with it. In our browser-based environments, galleries breathe, theaters defy physics, and fashion shows ripple through impossible geometries. A virtual museum might remember your footsteps, a play could unfold differently for each viewer, and a runway show lets every seat be the perfect seat. Walk through walls that respond to sound, watch performances from angles that shouldn't exist, or float through fashion collections that transform with your movement. These aren't static 3D models—they're living spaces where art, architecture, and imagination collide. Imagine a concert hall that breathes with its audience, walls rippling with collective emotion. Float up to watch from the rafters, then dive through the stage to feel the bass from inside the speakers.
+                </div>
+
+                <div class="data-blocks">
+                    <div class="data-block">
+                        <div class="data-num glow">360°</div>
+                        <div class="data-label">PERSPECTIVE</div>
+                    </div>
+                    <div class="data-block">
+                        <div class="data-num glow">1</div>
+                        <div class="data-label">SHARED MOMENT</div>
+                    </div>
+                </div>
+
+                <div class="diagram" style="margin-top: 5rem;">
+                    <img src="https://static.wixstatic.com/media/54a996_54c73b3af02e4793941ebe4d7f6269f4~mv2.png" alt="DIAGRAM 1">
+                </div>
+            </div>
+        </section>
+
+        <!-- WORK -->
+        <section id="work">
+            <div class="container">
+                <div class="level-2-top glow-subtle">
+                    05 / WHAT WE CREATE<br>
+                    BROWSER-BASED WORLDS
+                </div>
+
+                <div class="spacer-20"></div>
+
+                <div class="level-1-quote glow">
+                    DIGITAL TOPOGRAPHIES
+                </div>
+
+                <div class="spacer-20"></div>
+
+                <div class="level-2-subtitle glow-subtle">
+                    WEBGL · NO DOWNLOAD · INSTANT ACCESS
+                </div>
+
+                <div class="level-3-cta glow-subtle">
+                    FROM CONCEPT TO LIVE IN YOUR BROWSER
+                </div>
+
+                <div class="level-4-body glow-subtle">
+                    Digital Topographies is a sweeping exploration into what architecture could become when freed from earthly constraints of gravity, weather, and material scarcity. Conceived as a series of lightweight 3D models, this body of work functions both as portfolio and provocative research project. We build spatial experiences for the browser—no downloads, no apps, just pure WebGL architecture that anyone can access instantly. Our work spans galleries, multi-purpose halls, headquarters, event venues, sculptural pavilions, and retail environments. Each space is designed to load quickly and run smoothly on any device. We employ mesh optimization, level of detail strategies, and efficient texture mapping. The glTF/GLB format supports PBR materials for realistic shading without heavy computational overhead. From DAOTOWN at Milan Design Week to floating chrome galleries, from virtual theaters to crystalline retail spaces—every project is an experiment.
+                </div>
+
+                <div class="data-blocks">
+                    <div class="data-block">
+                        <div class="data-num glow">52</div>
+                        <div class="data-label">ARCHITECTURE MODELS</div>
+                    </div>
+                    <div class="data-block">
+                        <div class="data-num glow">3</div>
+                        <div class="data-label">THEATER PRODUCTIONS</div>
+                    </div>
+                </div>
+
+                <div class="scroll-container" style="margin-top: 5rem;">
+                    <div class="scroll-track">
+                        <div class="scroll-item">52 MODELS</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">60+ DESIGN OBJECTS</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">3 PRODUCTIONS</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">MILAN 2024</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">5 AWARDS</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">5 COUNTRIES</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">52 MODELS</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">60+ DESIGN OBJECTS</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">3 PRODUCTIONS</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">MILAN 2024</div>
+                        <div class="scroll-item">◆</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FUTURE -->
+        <section id="future">
+            <div class="container">
+                <div class="level-2-top glow-subtle">
+                    06 / THE FUTURE<br>
+                    COLLECTIVE DREAMING
+                </div>
+
+                <div class="spacer-20"></div>
+
+                <div class="level-1-quote glow">
+                    EXPLORE, NOT BUILD
+                </div>
+
+                <div class="spacer-20"></div>
+
+                <div class="level-2-subtitle glow-subtle">
+                    NEVER DONE · ALWAYS EVOLVING
+                </div>
+
+                <div class="level-3-cta glow-subtle">
+                    YOU ARE PART OF THIS EXPLORATION
+                </div>
+
+                <div class="level-4-body glow-subtle">
+                    We're not constructing a metaverse—we're exploring what digital space could become when freed from physical constraints. Every project is a question, not an answer. Every space invites remix, reinterpretation, collective dreaming. The future we're building isn't about replacing physical experiences—it's about expanding the vocabulary of human connection and creativity. Some pioneers have already set sail. In Milan's creative quarter, architects and artists craft virtual theaters where stories unfold like living dreams. Fashion houses discover runways needn't be bound by gravity, that collections can transform mid-stride, that every attendee can have both intimate view and shared moment of collective wonder. Museums learn their walls can breathe with memory, that art can evolve with each visitor's gaze, that time itself can become a medium for expression.
+                </div>
+
+                <div class="data-blocks">
+                    <div class="data-block">
+                        <div class="data-num glow">5</div>
+                        <div class="data-label">AWARDS</div>
+                    </div>
+                    <div class="data-block">
+                        <div class="data-num glow">2021</div>
+                        <div class="data-label">FOUNDED</div>
+                    </div>
+                </div>
+
+                <div class="scroll-container" style="margin-top: 5rem;">
+                    <div class="scroll-track">
+                        <div class="scroll-item">QUESTION EVERYTHING</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">EXPLORE TOGETHER</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">BUILD THE FUTURE</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">NEVER DONE</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">COLLECTIVE IMAGINATION</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">DIGITAL FREEDOM</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">QUESTION EVERYTHING</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">EXPLORE TOGETHER</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">BUILD THE FUTURE</div>
+                        <div class="scroll-item">◆</div>
+                        <div class="scroll-item">NEVER DONE</div>
+                        <div class="scroll-item">◆</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact">
+            <div class="container">
+                <div class="level-2-top glow-subtle">
+                    07 / CONTACT<br>
+                    MILAN / METAVERSE
+                </div>
+
+                <div class="spacer-20"></div>
+
+                <div class="level-1-quote glow">
+                    LET'S BUILD TOGETHER
+                </div>
+
+                <div class="spacer-20"></div>
+
+                <div class="level-2-subtitle glow-subtle">
+                    DEFINE IT TOGETHER
+                </div>
+
+                <div class="level-3-cta glow-subtle">
+                    REACH OUT NOW
+                </div>
+
+                <div class="level-4-body glow-subtle">
+                    Decentralize is a design practice founded in Milan, operating at the critical intersection of architecture, fashion, art, and technology. Emerging from architectural roots, we have evolved into a defining voice in virtual spatial design, challenging traditional disciplinary boundaries and creating new paradigms for digital experience. We work with museums reimagining how art can be experienced online. Fashion brands creating virtual showrooms that transcend physical retail. Cultural institutions building digital pavilions. Tech companies exploring new interface paradigms beyond screens. Artists and designers who want to push spatial digital work into new territories. Our process is collaborative and experimental—we don't just execute briefs, we explore possibilities together.
+                </div>
+
+                <div class="footer-links">
+                    <a href="mailto:community@de-centralize.com">EMAIL: COMMUNITY@DE-CENTRALIZE.COM</a>
+                    <a href="https://calendly.com/d--f--w/meeting" target="_blank">BOOK A CALL</a>
+                </div>
+
+                <div class="copyright glow-subtle">
+                    © 2026 DECENTRALIZE™ · MILAN / METAVERSE · THE INTERNET IS STILL FLAT
+                </div>
+
+                <div class="scroll-container" style="margin-top: 4rem;">
+                    <div class="scroll-track">
+                        <div class="scroll-item"><a href="#project1"><img src="https://static.wixstatic.com/media/54a996_4e9f8ec5649349a5ac7b21ef80e8272f~mv2.png" alt="Project 1"></a></div>
+                        <div class="scroll-item"><a href="#project2"><img src="https://static.wixstatic.com/media/54a996_5c1696cfda2a41909b021894f7236293~mv2.png" alt="Project 2"></a></div>
+                        <div class="scroll-item"><a href="#project3"><img src="https://static.wixstatic.com/media/54a996_edfe743a8afb47c2a7c743b9ec288da3~mv2.png" alt="Project 3"></a></div>
+                        <div class="scroll-item"><a href="#project4"><img src="https://static.wixstatic.com/media/54a996_eb3a59a9d22f454186e28c3c5d24461f~mv2.png" alt="Project 4"></a></div>
+                        <div class="scroll-item"><a href="#project5"><img src="https://static.wixstatic.com/media/54a996_145e862db9034dd9b0249c171eb5a3fa~mv2.png" alt="Project 5"></a></div>
+                        <div class="scroll-item"><a href="#project6"><img src="https://static.wixstatic.com/media/54a996_0f5300ff7aac4ad7aced9e84ec9a543a~mv2.png" alt="Project 6"></a></div>
+                        <div class="scroll-item"><a href="#project7"><img src="https://static.wixstatic.com/media/54a996_5555b50437514963a389e43f199d5e0b~mv2.png" alt="Project 7"></a></div>
+                        <div class="scroll-item"><a href="#project8"><img src="https://static.wixstatic.com/media/54a996_653b957c76d8468cb4d41dc8e051434f~mv2.png" alt="Project 8"></a></div>
+                        <div class="scroll-item"><a href="#project9"><img src="https://static.wixstatic.com/media/54a996_20b0ff7ed58c40c0a5ed9506dea9aeef~mv2.png" alt="Project 9"></a></div>
+                        <div class="scroll-item"><a href="#project1"><img src="https://static.wixstatic.com/media/54a996_4e9f8ec5649349a5ac7b21ef80e8272f~mv2.png" alt="Project 1"></a></div>
+                        <div class="scroll-item"><a href="#project2"><img src="https://static.wixstatic.com/media/54a996_5c1696cfda2a41909b021894f7236293~mv2.png" alt="Project 2"></a></div>
+                        <div class="scroll-item"><a href="#project3"><img src="https://static.wixstatic.com/media/54a996_edfe743a8afb47c2a7c743b9ec288da3~mv2.png" alt="Project 3"></a></div>
+                        <div class="scroll-item"><a href="#project4"><img src="https://static.wixstatic.com/media/54a996_eb3a59a9d22f454186e28c3c5d24461f~mv2.png" alt="Project 4"></a></div>
+                        <div class="scroll-item"><a href="#project5"><img src="https://static.wixstatic.com/media/54a996_145e862db9034dd9b0249c171eb5a3fa~mv2.png" alt="Project 5"></a></div>
+                        <div class="scroll-item"><a href="#project6"><img src="https://static.wixstatic.com/media/54a996_0f5300ff7aac4ad7aced9e84ec9a543a~mv2.png" alt="Project 6"></a></div>
+                        <div class="scroll-item"><a href="#project7"><img src="https://static.wixstatic.com/media/54a996_5555b50437514963a389e43f199d5e0b~mv2.png" alt="Project 7"></a></div>
+                        <div class="scroll-item"><a href="#project8"><img src="https://static.wixstatic.com/media/54a996_653b957c76d8468cb4d41dc8e051434f~mv2.png" alt="Project 8"></a></div>
+                        <div class="scroll-item"><a href="#project9"><img src="https://static.wixstatic.com/media/54a996_20b0ff7ed58c40c0a5ed9506dea9aeef~mv2.png" alt="Project 9"></a></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- DRAGGABLE WINDOWS CONTAINER -->
+    <div id="windows-container"></div>
+
+<script>
+    // --- GLB SETTINGS ---
+    const GLB_VIEWER_URL = "glb-viewer.html";
+
+    let windowCounter = 0;
+
+    /**
+     * WINDOW OPEN FUNCTION
+     * Supports: video, glb, iframe, png, html (auto-scaled)
+     * Mobile sizes are 50% of desktop
+     * Fullscreen toggle available
+     */
+    function openWindow(parentId, title, src, type = 'video', xPercent = 50, y = 50, w = 500, h = 350, htmlBaseWidth = 1200, htmlBaseHeight = 800) {
+        windowCounter++;
+        const windowId = `window-${windowCounter}`;
+        const parentSection = document.getElementById(parentId);
+
+        if (!parentSection) {
+            console.error("ERROR: Section not found -> " + parentId);
+            return;
+        }
+
+        // Store original dimensions
+        const originalW = w;
+        const originalH = h;
+
+        // --- MOBILE: 50% of desktop size ---
+        if (window.innerWidth < 768) {
+            w = Math.round(w * 0.5);
+            h = Math.round(h * 0.5);
+            var leftPos = (parentSection.offsetWidth - w) / 2;
+        } else {
+            var leftPos = (parentSection.offsetWidth * (xPercent / 100)) - (w / 2);
+        }
+
+        const windowEl = document.createElement('div');
+        windowEl.className = 'window';
+        windowEl.id = windowId;
+        windowEl.dataset.originalW = originalW;
+        windowEl.dataset.originalH = originalH;
+        windowEl.dataset.type = type;
+        windowEl.dataset.htmlBaseWidth = htmlBaseWidth;
+        windowEl.dataset.htmlBaseHeight = htmlBaseHeight;
+
+        windowEl.style.left = `${leftPos}px`;
+        windowEl.style.top = `${y}px`;
+        windowEl.style.width = `${w}px`;
+        windowEl.style.height = `${h}px`;
+
+        let contentHTML = '';
+        const contentHeight = h - 30;
+
+        if (type === 'video') {
+            contentHTML = `<video autoplay loop muted playsinline controls style="width:100%; height:100%; object-fit:cover;"><source src="${src}" type="video/mp4"></video>`;
+        }
+        else if (type === 'glb') {
+            const finalSrc = `${GLB_VIEWER_URL}?model=${encodeURIComponent(src)}`;
+            contentHTML = `<iframe src="${finalSrc}" style="width:100%; height:100%; border:none;" allow="camera; microphone; fullscreen; accelerometer; gyroscope; magnetometer; xr-spatial-tracking"></iframe>`;
+        }
+        else if (type === 'iframe') {
+            contentHTML = `<iframe src="${src}" style="width:100%; height:100%; border:none;"></iframe>`;
+        }
+        else if (type === 'png' || type === 'image') {
+            contentHTML = `<img src="${src}" style="width:100%; height:100%; object-fit:contain;">`;
+        }
+        else if (type === 'html') {
+            const scaleX = w / htmlBaseWidth;
+            const scaleY = contentHeight / htmlBaseHeight;
+            const scale = Math.min(scaleX, scaleY);
+
+            contentHTML = `
+                <div class="scaled-html-wrapper" data-base-width="${htmlBaseWidth}" data-base-height="${htmlBaseHeight}">
+                    <iframe src="${src}" style="width:${htmlBaseWidth}px; height:${htmlBaseHeight}px; transform: scale(${scale}); transform-origin: 0 0;"></iframe>
+                </div>
+            `;
+        }
+
+        windowEl.innerHTML = `
+            <div class="window-header">
+                <span>${title.toUpperCase()}</span>
+                <div class="window-controls">
+                    <button class="window-btn fullscreen" onclick="toggleFullscreen('${windowId}')" title="Fullscreen">⤢</button>
+                    <button class="window-btn close" onclick="closeWindow('${windowId}')" title="Close">×</button>
+                </div>
+            </div>
+            <div class="window-content">${contentHTML}</div>
+            <div class="window-resize"></div>
+        `;
+
+        parentSection.appendChild(windowEl);
+
+        if (getComputedStyle(parentSection).position === 'static') {
+            parentSection.style.position = 'relative';
+        }
+
+        makeDraggable(windowEl);
+        makeResizable(windowEl);
+        bringToFront(windowEl);
+    }
+
+    function closeWindow(windowId) {
+        const el = document.getElementById(windowId);
+        if (el) el.remove();
+    }
+
+    function toggleFullscreen(windowId) {
+        const el = document.getElementById(windowId);
+        if (!el) return;
+
+        if (el.classList.contains('fullscreen')) {
+            // Exit fullscreen
+            el.classList.remove('fullscreen');
+            el.style.width = el.dataset.savedW + 'px';
+            el.style.height = el.dataset.savedH + 'px';
+            el.style.left = el.dataset.savedL + 'px';
+            el.style.top = el.dataset.savedT + 'px';
+            el.style.position = 'absolute';
+
+            // Update scale for HTML type
+            updateHtmlScale(el);
+        } else {
+            // Enter fullscreen - save current state
+            el.dataset.savedW = el.offsetWidth;
+            el.dataset.savedH = el.offsetHeight;
+            el.dataset.savedL = el.offsetLeft;
+            el.dataset.savedT = el.offsetTop;
+            el.classList.add('fullscreen');
+
+            // Update scale for HTML type
+            setTimeout(() => updateHtmlScale(el), 50);
+        }
+    }
+
+    function updateHtmlScale(windowEl) {
+        const type = windowEl.dataset.type;
+        if (type === 'html') {
+            const wrapper = windowEl.querySelector('.scaled-html-wrapper');
+            if (wrapper) {
+                const width = windowEl.offsetWidth;
+                const height = windowEl.offsetHeight - 30;
+                const baseW = parseInt(wrapper.dataset.baseWidth);
+                const baseH = parseInt(wrapper.dataset.baseHeight);
+                const scaleX = width / baseW;
+                const scaleY = height / baseH;
+                const scale = Math.min(scaleX, scaleY);
+                const iframe = wrapper.querySelector('iframe');
+                if (iframe) {
+                    iframe.style.transform = `scale(${scale})`;
+                }
+            }
+        }
+    }
+
+    function bringToFront(windowEl) {
+        document.querySelectorAll('.window').forEach(w => w.style.zIndex = 900);
+        windowEl.style.zIndex = 950;
+    }
+
+    // --- DRAGGING ---
+    function makeDraggable(windowEl) {
+        const header = windowEl.querySelector('.window-header');
+        header.style.touchAction = "none";
+        header.style.cursor = "grab";
+        header.addEventListener('pointerdown', startDrag);
+
+        function startDrag(e) {
+            if (e.target.closest('.window-btn')) return;
+            if (windowEl.classList.contains('fullscreen')) return;
+            e.preventDefault();
+            bringToFront(windowEl);
+
+            const initialLeft = windowEl.offsetLeft;
+            const initialTop = windowEl.offsetTop;
+            const startX = e.clientX;
+            const startY = e.clientY;
+
+            header.style.cursor = "grabbing";
+            header.setPointerCapture(e.pointerId);
+
+            function onMove(e) {
+                const dx = e.clientX - startX;
+                const dy = e.clientY - startY;
+                windowEl.style.left = `${initialLeft + dx}px`;
+                windowEl.style.top = `${initialTop + dy}px`;
+            }
+
+            function onUp(e) {
+                document.removeEventListener('pointermove', onMove);
+                document.removeEventListener('pointerup', onUp);
+                header.style.cursor = "grab";
+                header.releasePointerCapture(e.pointerId);
+            }
+            document.addEventListener('pointermove', onMove);
+            document.addEventListener('pointerup', onUp);
+        }
+    }
+
+    // --- RESIZING ---
+    function makeResizable(windowEl) {
+        const resizer = windowEl.querySelector('.window-resize');
+        let isResizing = false;
+        let startX, startY, startW, startH;
+
+        resizer.addEventListener('pointerdown', (e) => {
+            if (windowEl.classList.contains('fullscreen')) return;
+            e.preventDefault();
+            isResizing = true;
+            startX = e.clientX;
+            startY = e.clientY;
+            startW = windowEl.offsetWidth;
+            startH = windowEl.offsetHeight;
+            bringToFront(windowEl);
+            resizer.setPointerCapture(e.pointerId);
+
+            document.addEventListener('pointermove', onResize);
+            document.addEventListener('pointerup', stopResize);
+        });
+
+        function onResize(e) {
+            if (!isResizing) return;
+            const width = startW + (e.clientX - startX);
+            const height = startH + (e.clientY - startY);
+            if (width > 120) windowEl.style.width = `${width}px`;
+            if (height > 100) windowEl.style.height = `${height}px`;
+
+            updateHtmlScale(windowEl);
+        }
+
+        function stopResize(e) {
+            isResizing = false;
+            document.removeEventListener('pointermove', onResize);
+            document.removeEventListener('pointerup', stopResize);
+            resizer.releasePointerCapture(e.pointerId);
+        }
+    }
+
+    // --- MENU OPERATIONS ---
+    function scrollToSection(id) {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+
+    const sections = document.querySelectorAll('section[id]');
+    const navIcons = document.querySelectorAll('.nav-icon');
+
+    const updateActiveSection = () => {
+        let current = '';
+        sections.forEach(section => {
+            if (window.pageYOffset >= section.offsetTop - 200) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navIcons.forEach((icon, index) => {
+            const sectionId = ['intro', 'problem', 'experience', 'philosophy', 'vision', 'work', 'future', 'contact'][index];
+            if (sectionId === current) {
+                icon.classList.add('active');
+            } else {
+                icon.classList.remove('active');
+            }
+        });
+    };
+    window.addEventListener('scroll', updateActiveSection);
+
+    // --- INITIAL SETUP ---
+    document.addEventListener('DOMContentLoaded', () => {
+        updateActiveSection();
+
+        // VIDEO WINDOWS
+        openWindow('intro', 'METAOFFICE', 'https://video.wixstatic.com/video/54a996_e6d16d06cf7b490bbc64d936760c2dae/1080p/mp4/file.mp4', 'video', 20, 600, 320, 220);
+        openWindow('intro', 'DESIGN ELEMENTS', 'https://video.wixstatic.com/video/54a996_089c17f8355849d5a11f6115ab1025ba/1080p/mp4/file.mp4', 'video', 75, 1600, 320, 220);
+
+        openWindow('problem', 'STEVE JOBS', 'https://video.wixstatic.com/video/54a996_6da48d6916b24734aba549bb585d4675/720p/mp4/file.mp4', 'video', 30, 1100, 380, 260);
+
+        openWindow('philosophy', 'YA-BISH*OPPS', 'https://video.wixstatic.com/video/54a996_8aa90b1ff14142418242abf6726a45e2/1080p/mp4/file.mp4', 'video', 80, 250, 180, 180);
+
+        openWindow('work', 'digitops', 'https://video.wixstatic.com/video/54a996_bc5e4a8565ee4af4a9d31b14bce8083b/480p/mp4/file.mp4', 'video', 20, 1800, 180, 180);
+
+        openWindow('work', 'matisse time chaipel', 'https://video.wixstatic.com/video/54a996_b94f28de763848129b330a544614216c/1080p/mp4/file.mp4', 'video', 80, 250, 180, 180);
+
+        // GLB MODELS
+        const glbLink1 = 'https://raw.githubusercontent.com/decentralize-dfw/co/refs/heads/main/warhol-basq-opt-v1.glb';
+        const glbLink2 = 'https://raw.githubusercontent.com/decentralize-dfw/c2w2-glb/main/papaz-900-opt-v89.glb';
+        const glbLink3 = 'https://raw.githubusercontent.com/decentralize-dfw/digitaltopographies/main/2-VEGANCELL+PARK-Digital_Topographies_02.glb';
+        const glbLink4 = 'https://raw.githubusercontent.com/decentralize-dfw/digitaltopographies/main/1-XHBTION_SPC-Digital_Topographies_01.glb';
+
+        openWindow('contact', 'logo3d', glbLink1, 'glb', 20, 1200, 420, 380);
+        openWindow('philosophy', 'YA BISH OPPS', glbLink2, 'glb', 15, 250, 280, 320);
+        openWindow('vision', 'VEGANCELL+PARK', glbLink3, 'glb', 18, 550, 240, 240);
+         openWindow('vision', '01_Xhbtion_Spc.glb', glbLink4, 'glb', 80, 2200, 340, 340);
+
+        // PNG EXAMPLE
+        openWindow('work', 'DIGITAL TOPOGRAPHIES', 'https://static.wixstatic.com/media/54a996_145e862db9034dd9b0249c171eb5a3fa~mv2.png', 'png', 85, 400, 200, 200);
+
+        // HTML EXAMPLE (scaled website preview)
+        openWindow('future', 'WEBSITE PREVIEW', 'https://de-centralize.com', 'html', 75, 450, 350, 280, 1400, 900);
+
+        openWindow('philosophy', 'rr text', 'https://brief.decentralize.design/rr','html', 85, 450, 350, 280, 1400, 900);
+
+openWindow('future', 'index', 'https://brief.decentralize.design/infolist','html', 30, 1200, 250, 400, 500, 800);
+        
+
+// --- DEBUG GRID OLUŞTURUCU ---
+        // Her section için ızgara çizer
+        const sectionsList = document.querySelectorAll('section');
+        
+        sectionsList.forEach(section => {
+            // Section'ın pozisyonunu relative yap ki çizgiler içinde kalsın
+            // (Zaten CSS'de var ama garanti olsun)
+            if(getComputedStyle(section).position === 'static') {
+                section.style.position = 'relative';
+            }
+
+            const gridContainer = document.createElement('div');
+            gridContainer.className = 'dev-grid-container';
+
+            // Section yüksekliği ve genişliği
+            const secHeight = section.offsetHeight;
+            const secWidth = section.offsetWidth;
+
+            // 1. YATAY ÇİZGİLER (Her 100px'de bir)
+            for (let h = 100; h < secHeight; h += 100) {
+                const line = document.createElement('div');
+                line.className = 'dev-line-h';
+                line.style.top = h + 'px';
+                
+                const label = document.createElement('span');
+                label.className = 'dev-label-h';
+                label.innerText = h + 'px'; // 100px, 200px yazar
+                
+                line.appendChild(label);
+                gridContainer.appendChild(line);
+            }
+
+            // 2. DİKEY ÇİZGİLER (Her %10'da bir)
+            for (let v = 10; v < 100; v += 10) {
+                const line = document.createElement('div');
+                line.className = 'dev-line-v';
+                line.style.left = v + '%';
+                
+                const label = document.createElement('span');
+                label.className = 'dev-label-v';
+                label.innerText = v + '%'; // 10%, 20% yazar
+                
+                line.appendChild(label);
+                gridContainer.appendChild(line);
+            }
+
+            section.appendChild(gridContainer);
+        });
+
+    });
+</script>
+
+</body>
+</html>
