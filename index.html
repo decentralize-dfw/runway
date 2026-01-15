@@ -16,18 +16,19 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #000;
-            color: #fff;
+            background: #000 url('https://raw.githubusercontent.com/decentralize-dfw/runway/main/beton.jpg') repeat;
+            background-size: 100% auto;
+            color: #00ff00;
             overflow-x: hidden;
         }
 
         /* SPACERS */
-        .spacer-40 { height: 40vh; }
-        .spacer-30 { height: 30vh; }
-        .spacer-20 { height: 20vh; }
-        .spacer-15 { height: 15vh; }
-        .spacer-10 { height: 10vh; }
-        .spacer-5 { height: 5vh; }
+        .spacer-40 { height: 8vh; }
+        .spacer-30 { height: 6vh; }
+        .spacer-20 { height: 4vh; }
+        .spacer-15 { height: 3vh; }
+        .spacer-10 { height: 2vh; }
+        .spacer-5 { height: 1vh; }
 
         /* TYPOGRAPHY */
         .page-number {
@@ -37,8 +38,8 @@
             letter-spacing: 0.2em;
             text-transform: uppercase;
             text-align: center;
-            opacity: 0.5;
-            margin-bottom: 3rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
         }
 
         .section-label {
@@ -48,8 +49,8 @@
             letter-spacing: 0.25em;
             text-transform: uppercase;
             text-align: center;
-            opacity: 0.7;
-            margin-bottom: 2rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
         }
 
         .title-massive {
@@ -98,10 +99,10 @@
             line-height: 1.6;
             letter-spacing: 0.05em;
             text-align: center;
-            margin: 2rem auto 0;
+            margin: 0.5rem auto 0;
             max-width: 800px;
             padding: 0 2rem;
-            opacity: 0.85;
+            opacity: 1;
         }
 
         .body-text {
@@ -113,7 +114,7 @@
             margin: 0 auto;
             max-width: 900px;
             padding: 0 2rem;
-            opacity: 0.9;
+            opacity: 1;
         }
 
         .body-text-large {
@@ -136,14 +137,14 @@
             margin: 0 auto;
             max-width: 900px;
             padding: 0 2rem;
-            opacity: 0.95;
+            opacity: 1;
         }
 
         /* STATS GRID */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 4rem;
+            gap: 1.5rem;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
@@ -158,7 +159,7 @@
             font-size: clamp(3rem, 8vw, 7rem);
             font-weight: 900;
             line-height: 1;
-            margin-bottom: 1rem;
+            margin-bottom: 0.3rem;
         }
 
         .stat-label {
@@ -167,7 +168,7 @@
             font-weight: 600;
             letter-spacing: 0.2em;
             text-transform: uppercase;
-            opacity: 0.7;
+            opacity: 0.9;
         }
 
         /* CHAPTER BLOCKS */
@@ -179,9 +180,9 @@
 
         .chapter-item {
             text-align: center;
-            margin-bottom: 5rem;
-            padding-bottom: 5rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(0,255,0,0.15);
         }
 
         .chapter-item:last-child {
@@ -194,8 +195,8 @@
             font-weight: 600;
             letter-spacing: 0.3em;
             text-transform: uppercase;
-            opacity: 0.5;
-            margin-bottom: 1rem;
+            opacity: 0.8;
+            margin-bottom: 0.3rem;
         }
 
         .chapter-title {
@@ -205,7 +206,7 @@
             line-height: 1.2;
             letter-spacing: -0.01em;
             text-transform: uppercase;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.5rem;
         }
 
         .chapter-description {
@@ -215,7 +216,7 @@
             line-height: 1.8;
             max-width: 800px;
             margin: 0 auto;
-            opacity: 0.9;
+            opacity: 1;
         }
 
         /* FEATURED MEDIA */
@@ -229,7 +230,7 @@
             position: relative;
             width: 100%;
             background: #111;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(0,255,0,0.2);
             overflow: hidden;
             cursor: pointer;
             transition: transform 0.3s ease;
@@ -237,7 +238,7 @@
 
         .media-wrapper:hover {
             transform: scale(1.01);
-            border-color: rgba(255,255,255,0.3);
+            border-color: rgba(0,255,0,0.5);
         }
 
         .media-wrapper video,
@@ -252,9 +253,9 @@
             width: 100%;
             max-width: 1800px;
             height: 700px;
-            margin: 3rem auto;
+            margin: 1rem auto;
             background: #111;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(0,255,0,0.2);
             overflow: hidden;
             cursor: pointer;
             transition: border-color 0.3s;
@@ -262,7 +263,7 @@
         }
 
         .fullscreen-media:hover {
-            border-color: rgba(255,255,255,0.3);
+            border-color: rgba(0,255,0,0.5);
         }
 
         .fullscreen-media video,
@@ -282,7 +283,7 @@
             font-size: 10px;
             font-weight: 600;
             letter-spacing: 0.2em;
-            color: rgba(255,255,255,0.6);
+            color: rgba(0,255,0,0.8);
             pointer-events: none;
         }
 
@@ -309,8 +310,8 @@
             width: 60px;
             height: 60px;
             background: rgba(0,0,0,0.8);
-            border: 2px solid rgba(255,255,255,0.3);
-            color: #fff;
+            border: 2px solid rgba(0,255,0,0.3);
+            color: #00ff00;
             font-size: 2rem;
             cursor: pointer;
             z-index: 10000;
@@ -323,8 +324,8 @@
         }
 
         .media-overlay-close:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: rgba(255,255,255,0.6);
+            background: rgba(0,255,0,0.1);
+            border-color: rgba(0,255,0,0.8);
         }
 
         .media-overlay video,
@@ -367,9 +368,9 @@
             right: 1rem;
             width: 50px;
             height: 50px;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.3);
-            color: #fff;
+            background: rgba(0,255,0,0.1);
+            border: 1px solid rgba(0,255,0,0.3);
+            color: #00ff00;
             font-size: 1.5rem;
             cursor: pointer;
             z-index: 10;
@@ -381,7 +382,8 @@
         }
 
         .overlay-close:hover {
-            background: rgba(255,255,255,0.2);
+            background: rgba(0,255,0,0.2);
+            border-color: rgba(0,255,0,0.6);
         }
 
         .overlay-content video,
@@ -395,7 +397,7 @@
         .content-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 3rem;
+            gap: 1rem;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
@@ -403,15 +405,15 @@
 
         .content-card {
             text-align: center;
-            padding: 3rem 2rem;
-            border: 1px solid rgba(255,255,255,0.1);
-            background: rgba(255,255,255,0.02);
+            padding: 1.5rem 1rem;
+            border: 1px solid rgba(0,255,0,0.15);
+            background: rgba(0,255,0,0.02);
             transition: all 0.3s;
         }
 
         .content-card:hover {
-            border-color: rgba(255,255,255,0.3);
-            background: rgba(255,255,255,0.05);
+            border-color: rgba(0,255,0,0.4);
+            background: rgba(0,255,0,0.05);
         }
 
         .card-title {
@@ -420,7 +422,7 @@
             font-weight: 700;
             letter-spacing: -0.01em;
             text-transform: uppercase;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.5rem;
         }
 
         .card-text {
@@ -428,7 +430,7 @@
             font-size: clamp(0.95rem, 1.4vw, 1.1rem);
             font-weight: 400;
             line-height: 1.7;
-            opacity: 0.85;
+            opacity: 1;
         }
 
         /* SECTION */
@@ -438,23 +440,23 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 8rem 0;
+            padding: 3rem 0;
         }
 
         /* BUTTONS */
         .btn-group {
             display: flex;
-            gap: 2rem;
+            gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 3rem;
+            margin-top: 1rem;
         }
 
         .btn {
-            padding: 1.2rem 3rem;
+            padding: 1rem 2rem;
             background: transparent;
-            border: 2px solid rgba(255,255,255,0.3);
-            color: #fff;
+            border: 2px solid rgba(0,255,0,0.3);
+            color: #00ff00;
             font-family: 'IBM Plex Mono', monospace;
             font-size: 11px;
             font-weight: 600;
@@ -467,8 +469,8 @@
         }
 
         .btn:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: rgba(255,255,255,0.6);
+            background: rgba(0,255,0,0.1);
+            border-color: rgba(0,255,0,0.8);
         }
 
         /* LIST STYLE */
@@ -485,28 +487,28 @@
             font-weight: 500;
             letter-spacing: 0.05em;
             line-height: 2;
-            opacity: 0.8;
+            opacity: 1;
         }
 
         /* RESPONSIVE */
         @media (max-width: 768px) {
             .stats-grid {
                 grid-template-columns: 1fr 1fr;
-                gap: 2rem;
+                gap: 1rem;
             }
 
             .content-grid {
                 grid-template-columns: 1fr;
-                gap: 2rem;
+                gap: 1rem;
             }
 
-            .spacer-40 { height: 20vh; }
-            .spacer-30 { height: 15vh; }
-            .spacer-20 { height: 10vh; }
+            .spacer-40 { height: 4vh; }
+            .spacer-30 { height: 3vh; }
+            .spacer-20 { height: 2vh; }
 
             .fullscreen-media {
                 height: 100vh;
-                margin: 2rem 0;
+                margin: 0.5rem 0;
             }
 
             .media-overlay-close {
@@ -581,9 +583,9 @@
             </div>
         </div>
         <div class="spacer-10"></div>
-        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_06faa3498bf146b5aa739b4c1012aadd/1080p/mp4/file.mp4', 'video')">
+        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_18ce69160dc64eaa88c1343afa08cd43/1080p/mp4/file.mp4', 'video')">
             <video muted loop playsinline>
-                <source src="https://video.wixstatic.com/video/54a996_06faa3498bf146b5aa739b4c1012aadd/1080p/mp4/file.mp4" type="video/mp4">
+                <source src="https://video.wixstatic.com/video/54a996_18ce69160dc64eaa88c1343afa08cd43/1080p/mp4/file.mp4" type="video/mp4">
             </video>
         </div>
     </section>
@@ -670,9 +672,9 @@
             </div>
         </div>
         <div class="spacer-10"></div>
-        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_029c9577e1d245f386a0ebe2c64a9b6e/1080p/mp4/file.mp4', 'video')">
+        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_716b93f1589a442fb9d65b8ed68aa803/1080p/mp4/file.mp4', 'video')">
             <video muted loop playsinline>
-                <source src="https://video.wixstatic.com/video/54a996_029c9577e1d245f386a0ebe2c64a9b6e/1080p/mp4/file.mp4" type="video/mp4">
+                <source src="https://video.wixstatic.com/video/54a996_716b93f1589a442fb9d65b8ed68aa803/1080p/mp4/file.mp4" type="video/mp4">
             </video>
         </div>
     </section>
@@ -760,9 +762,9 @@
             The runway is a minted .html application on Ethereum. Through its animation URL, the show can be experienced in three different ways: a marketplace version with 3 fixed cameras, a desktop version that allows users to move freely during the show, and a VR version. All three are packed into the same link.
         </div>
         <div class="spacer-10"></div>
-        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_029c9577e1d245f386a0ebe2c64a9b6e/1080p/mp4/file.mp4', 'video')">
+        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_a5d98402ce57459fa2c3448998051112/1080p/mp4/file.mp4', 'video')">
             <video muted loop playsinline>
-                <source src="https://video.wixstatic.com/video/54a996_029c9577e1d245f386a0ebe2c64a9b6e/1080p/mp4/file.mp4" type="video/mp4">
+                <source src="https://video.wixstatic.com/video/54a996_a5d98402ce57459fa2c3448998051112/1080p/mp4/file.mp4" type="video/mp4">
             </video>
         </div>
     </section>
@@ -912,9 +914,9 @@
             </div>
         </div>
         <div class="spacer-10"></div>
-        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_06faa3498bf146b5aa739b4c1012aadd/1080p/mp4/file.mp4', 'video')">
+        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_061edf32058b42298197ed0ce603f18a/1080p/mp4/file.mp4', 'video')">
             <video muted loop playsinline>
-                <source src="https://video.wixstatic.com/video/54a996_06faa3498bf146b5aa739b4c1012aadd/1080p/mp4/file.mp4" type="video/mp4">
+                <source src="https://video.wixstatic.com/video/54a996_061edf32058b42298197ed0ce603f18a/1080p/mp4/file.mp4" type="video/mp4">
             </video>
         </div>
     </section>
@@ -1031,9 +1033,9 @@
             Welcome to the existence. Click to be.
         </div>
         <div class="spacer-10"></div>
-        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_029c9577e1d245f386a0ebe2c64a9b6e/1080p/mp4/file.mp4', 'video')">
+        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_054e886262bf41e0bef2cbe7bf171cb2/1080p/mp4/file.mp4', 'video')">
             <video muted loop playsinline>
-                <source src="https://video.wixstatic.com/video/54a996_029c9577e1d245f386a0ebe2c64a9b6e/1080p/mp4/file.mp4" type="video/mp4">
+                <source src="https://video.wixstatic.com/video/54a996_054e886262bf41e0bef2cbe7bf171cb2/1080p/mp4/file.mp4" type="video/mp4">
             </video>
         </div>
     </section>
