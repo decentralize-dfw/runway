@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VIRTUAL RUNWAY — RESPONSIVE TERMINAL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=IBM+Plex+Sans+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #000;
+            --panel: rgba(10, 10, 10, 0.98);
+            --text: #888;
+            --text-bright: #fff;
+            --accent: #0f0; 
+            --accent-dim: rgba(0, 255, 0, 0.15);
+            --border: #333;
+            --grid-line: rgba(255, 255, 255, 0.04);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'IBM Plex Sans Condensed', sans-serif;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden; /* Desktop: No Scroll */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: 
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 10px 10px;
+        }
+
+        /* MAIN TERMINAL CONTAINER */
+        .terminal-wrapper {
+            width: 99.5vw;
+            height: 99vh;
+            max-width: 1920px;
+            display: grid;
+            /* DESKTOP FIXED: 3 Equal Columns (33.3% each) */
+            grid-template-columns: 1fr 1fr 1fr; 
+            grid-template-rows: 35px 1fr 25px; 
+            gap: 4px;
+            border: 1px solid var(--border);
+            padding: 2px;
+            background: #050505;
+            position: relative;
+        }
+
+        /* DECORATIONS */
+        .terminal-wrapper::after {
+            content: "SYSTEM_LOAD: 99%";
+            position: absolute; top: -14px; right: 0;
+            font-family: 'Share Tech Mono'; font-size: 9px; color: var(--accent); background:#000; padding:0 5px;
+        }
+        .terminal-wrapper::before {
+            content: "/// WARNING: HIGH INFO DENSITY";
+            position: absolute; top: -14px; left: 0;
+            font-family: 'Share Tech Mono'; font-size: 9px; color: #ff003c; background:#000; padding:0 5px;
+        }
+
+        /* TYPOGRAPHY */
+        h2 {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            color: var(--accent);
+            background: rgba(0, 255, 0, 0.05);
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border);
+            padding: 2px 4px;
+            margin-bottom: 3px;
+            letter-spacing: 1px;
+            display: flex; justify-content: space-between;
+        }
+        
+        p, li {
+            font-size: 10px;
+            line-height: 1.2;
+            color: #999;
+            margin-bottom: 3px;
+            text-align: justify;
+            letter-spacing: -0.1px;
+        }
+        
+        strong { color: var(--text-bright); font-weight: 700; }
+        .mono { font-family: 'Share Tech Mono', monospace; }
+        .highlight { color: var(--accent); text-shadow: 0 0 5px rgba(0,255,0,0.3); font-weight:bold; }
+        .warning { color: #ff003c; }
+
+        /* HEADER */
+        header {
+            grid-column: 1 / -1;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--border); padding: 0 10px;
+            background: #0a0a0a;
+        }
+        .brand-title { font-family: 'Share Tech Mono'; font-size: 18px; color: #fff; }
+        .header-meta { font-size: 9px; display: flex; gap: 15px; font-family: 'Share Tech Mono'; color:#555; }
+        .header-meta span b { color: #fff; }
+
+        /* COLUMNS */
+        .col { display: flex; flex-direction: column; gap: 4px; overflow: hidden; height: 100%; }
+        
+        /* DATA BLOCKS */
+        .data-block {
+            border: 1px solid #222;
+            padding: 5px;
+            background: rgba(20,20,20,0.4);
+            position: relative;
+        }
+        
+        /* --- MODULES --- */
+        .specs-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2px; font-family: 'Share Tech Mono'; font-size: 9px; }
+        .spec-row { display: flex; justify-content: space-between; border-bottom: 1px solid #222; padding: 1px 0; }
+        .spec-lbl { color: #666; }
+        .spec-val { color: var(--text-bright); }
+
+        .physics-list { font-size: 9px; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+        .physics-list li { background: #111; padding: 3px; text-align: center; color: #aaa; border: 1px solid #222; }
+
+        /* Center Layout */
+        .center-split { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; flex-shrink: 0; }
+        
+        /* Video Frame */
+        .video-frame {
+            flex-grow: 0; 
+            height: 18%; /* Compact Height */
+            border: 1px solid var(--accent-dim);
+            position: relative; background: #000; overflow: hidden;
+        }
+        video { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; filter: contrast(1.2) grayscale(100%); }
+        .video-overlay {
+            position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;
+            border: 1px solid rgba(0,255,0,0.1);
+            background: linear-gradient(rgba(0,255,0,0.02) 50%, transparent 50%); background-size: 100% 4px;
+        }
+        .vid-tag { position:absolute; font-family:'Share Tech Mono'; font-size:10px; color:var(--accent); background:#000; padding:2px 4px; }
+        .vt-tl { top:5px; left:5px; border:1px solid var(--accent); }
+        .vt-tr { top:5px; right:5px; }
+        .vt-bl { bottom:5px; left:5px; }
+        .vt-br { bottom:5px; right:5px; }
+
+        /* HTML Viewer (Left & Right) */
+        .html-viewer {
+            flex-grow: 1; 
+            border: 1px solid var(--border);
+            background: #000;
+            position: relative;
+            min-height: 100px;
+            overflow: hidden;
+        }
+        .html-viewer iframe {
+            width: 100%; height: 100%;
+            border: none;
+            display: block;
+            background: #000;
+        }
+        .viewer-label {
+            position: absolute; top: 0; right: 0;
+            background: var(--accent); color: #000;
+            font-family: 'Share Tech Mono'; font-size: 8px;
+            padding: 1px 4px; pointer-events: none; z-index: 20;
+        }
+
+        /* Center Viewer Specific (Bottom Center) */
+        .center-viewer {
+            flex-grow: 1; /* Takes ALL remaining space */
+            border: none; /* No border as requested */
+            background: #000;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        /* [VIRTUAL RESOLUTION HACK]
+           İçeriği 2 kat (200%) genişlikte render edip, 
+           0.5 oranında küçülterek (scale) kutuya sığdırır.
+           Böylece "Desktop" görünümü küçük alana sığar.
+        */
+        .center-viewer.zoom-in iframe {
+            width:350%;  /* Genişliği 2 katına çıkar (Sanal 1920px gibi) */
+            height: 350%; /* Yüksekliği 2 katına çıkar */
+            transform: scale(0.3); /* Yarıya küçült */
+            transform-origin: 0 0; /* Sol üstten hizala */
+            border: none;
+        }
+
+        /* RUN BUTTON OVERLAY */
+        .run-overlay {
+            position: absolute; top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.85);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; z-index: 10;
+            transition: opacity 0.3s;
+        }
+        .run-overlay:hover .run-btn {
+            background: var(--accent);
+            color: #000;
+            box-shadow: 0 0 20px rgba(0,255,0,0.6);
+        }
+        .run-btn {
+            font-family: 'Share Tech Mono'; font-size: 14px; color: var(--accent);
+            border: 1px solid var(--accent); padding: 5px 15px;
+            background: #000;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.2s;
+        }
+
+        /* Manifesto */
+        .manifesto-box { 
+            flex-grow: 0; 
+            height: auto;
+            overflow: visible; /* No Scroll */
+            background: #080808; 
+        }
+        .manifesto-text p { 
+            margin-bottom: 2px; border-left: 2px solid #333; padding-left: 6px; 
+            font-size: 10px; color: #aaa;
+        }
+
+        /* Chapter List */
+        .chapter-list li {
+            border-bottom: 1px solid #222; padding: 2px 0;
+            display: flex; justify-content: space-between; font-size: 9px; align-items: center;
+        }
+        .chapter-list li:last-child { border: none; }
+        .ch-idx { font-family: 'Share Tech Mono'; color: var(--accent); font-size: 11px; margin-right:5px;}
+        .ch-desc { font-size: 8px; color: #555; text-transform: uppercase; text-align: right;}
+
+        /* Stat Matrix */
+        .stat-matrix { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
+        .mini-stat { background: #111; padding: 4px 2px; text-align: center; border: 1px solid #222; }
+        .ms-val { display: block; font-family: 'Share Tech Mono'; font-size: 14px; color: #fff; font-weight:bold; }
+        .ms-lbl { font-size: 7px; color:#666; letter-spacing:1px; }
+
+        /* Agency Badge */
+        .agency-services { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
+        .srv-tag { font-size: 8px; background: #222; color: #ccc; padding: 1px 4px; border-radius: 2px; }
+
+        /* FOOTER */
+        footer {
+            grid-column: 1 / -1; border-top: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 10px; font-size: 9px; font-family: 'Share Tech Mono'; background:#0a0a0a;
+        }
+        .footer-scroll { overflow: hidden; white-space: nowrap; width: 400px; color: #444; }
+        .link-bar a {
+            color: #fff; text-decoration: none; margin-left: 8px;
+            background: #222; padding: 2px 8px; border: 1px solid #444;
+        }
+        .link-bar a:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+
+        ::-webkit-scrollbar { width: 3px; }
+        ::-webkit-scrollbar-thumb { background: var(--accent); }
+        ::-webkit-scrollbar-track { background: #111; }
+
+        /* =========================================
+           MOBILE RESPONSIVE LOGIC: STACKED & SCROLLABLE
+           ========================================= */
+        @media (max-width: 900px) {
+            body {
+                height: auto;
+                overflow-y: auto; 
+                display: block;
+            }
+
+            .terminal-wrapper {
+                display: flex;
+                flex-direction: column; 
+                height: auto;
+                width: 100%;
+                border: none;
+                gap: 20px;
+                padding-bottom: 40px;
+            }
+
+            .terminal-wrapper::before, .terminal-wrapper::after { display: none; }
+
+            /* ================= ORDERING ================= */
+            header { order: 0; margin-bottom: 10px; }
+            
+            /* Center Column -> Top */
+            .col:nth-of-type(2) { order: 1; height: auto; overflow: visible; }
+
+            /* Left Column -> Middle */
+            .col:nth-of-type(1) { order: 2; height: auto; overflow: visible; }
+
+            /* Right Column -> Bottom */
+            .col:nth-of-type(3) { order: 3; height: auto; overflow: visible; }
+
+            /* Footer */
+            footer { order: 99; margin-top: 20px; height: auto; padding: 10px; flex-wrap: wrap; gap: 10px; }
+
+            /* ================= STYLING ================= */
+            .col { gap: 10px; padding: 0 10px; }
+            .data-block { padding: 15px; height: auto; }
+            
+            h2 { font-size: 16px; padding: 5px; height: auto; }
+            p, li { font-size: 14px; margin-bottom: 8px; line-height: 1.5; }
+            .spec-row, .physics-list li { font-size: 12px; padding: 4px; }
+            .ms-val { font-size: 24px; }
+            .ms-lbl { font-size: 10px; }
+            .brand-title { font-size: 24px; }
+            .chapter-list li { font-size: 12px; padding: 5px 0; }
+            .ch-desc { font-size: 10px; }
+            
+            /* Video Adjustment */
+            .video-frame { height: 150px; } 
+            
+            /* Viewers on Mobile - FORCE SQUARE */
+            .html-viewer, .center-viewer {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1 / 1; 
+                min-height: 0;
+                border: 1px solid var(--border);
+            }
+            
+            /* [MOBIL] Center Viewer Virtual Resolution */
+            .center-viewer.zoom-in iframe {
+                width: 200%;  /* Mobilde de 2 kat genişlik */
+                height: 200%; /* Mobilde de 2 kat yükseklik */
+                transform: scale(0.5); /* Sığdır */
+                transform-origin: 0 0;
+            }
+
+            .manifesto-box { max-height: none; overflow: visible; height: auto; }
+            .agency-services { gap: 5px; }
+            .srv-tag { font-size: 10px; padding: 2px 6px; }
+            
+            /* Footer Adjustments */
+            .footer-scroll { display: none; }
+            .link-bar { width: 100%; display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; }
+            .link-bar a { font-size: 12px; padding: 5px 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="terminal-wrapper">
+        
+        <!-- HEADER -->
+        <header>
+            <div class="brand-title">C2W2 <span style="font-size:10px; color:var(--accent); letter-spacing:3px;">// TERMINAL_V4_FINAL</span></div>
+            <div class="header-meta">
+                <span>MEM: <b>OPTIMIZED</b></span>
+                <span>FPS: <b>60</b></span>
+                <span>NET: <b>ETH_MAINNET</b></span>
+                <span>LOC: <b>ARWEAVE</b></span>
+            </div>
+        </header>
+
+        <!-- LEFT COL -->
+        <div class="col">
+            <!-- CORE DEFINITION -->
+            <div class="data-block">
+                <h2>// 01. SYSTEM IDENTITY <span>[ID:7482]</span></h2>
+                <p><strong>VIRTUAL RUNWAY</strong> is a <span class="highlight">BROWSER-BASED</span> 3D spatial presentation.</p>
+                <p><strong>ZERO FRICTION:</strong> <span class="highlight">NO DOWNLOADS.</span> NO APPS. Just a URL. Works on Desktop (WASD), Mobile (Touch), and VR (WebXR).</p>
+            </div>
+
+            <!-- TECH SPECS -->
+            <div class="data-block">
+                <h2>// 02. TECH STACK <span>[GLB/VRM]</span></h2>
+                <div class="specs-grid">
+                    <div class="spec-row"><span class="spec-lbl">ENGINE</span><span class="spec-val">THREE.JS r128</span></div>
+                    <div class="spec-row"><span class="spec-lbl">PHYSICS</span><span class="spec-val">CLO3D > WEBGL</span></div>
+                    <div class="spec-row"><span class="spec-lbl">AUDIO</span><span class="spec-val">SPATIAL 3D (HOWLER)</span></div>
+                    <div class="spec-row"><span class="spec-lbl">COMPRESSION</span><span class="spec-val">DRACO + MESHOPT</span></div>
+                    <div class="spec-row"><span class="spec-lbl">ASSET SIZE</span><span class="spec-val highlight">~5MB / MODEL</span></div>
+                    <div class="spec-row"><span class="spec-lbl">DRAW CALLS</span><span class="spec-val highlight">1 - 3 (MAX)</span></div>
+                    <div class="spec-row"><span class="spec-lbl">LOAD TIME</span><span class="spec-val">< 1.5 SECONDS</span></div>
+                    <div class="spec-row"><span class="spec-lbl">STORAGE</span><span class="spec-val">PERMAWEB (AR)</span></div>
+                </div>
+            </div>
+
+            <!-- PHYSICS -->
+            <div class="data-block">
+                <h2>// 03. ENVIRONMENT PHYSICS</h2>
+                <ul class="physics-list">
+                    <li>GRAVITY: 9.8m/s</li>
+                    <li>WIND: DYNAMIC</li>
+                    <li>LIGHT: CIRCULAR</li>
+                    <li>LOOP: 30s</li>
+                    <li>COLLISION: ON</li>
+                    <li>FPS: LOCKED 60</li>
+                </ul>
+            </div>
+
+            <!-- LEGACY -->
+            <div class="data-block">
+                <h2>// 04. LEGACY ARCHIVE <span>[V1]</span></h2>
+                <p><strong>ORIGIN (2023):</strong> C2W hosted on Hyperfy. Token-gated ($20). <span class="highlight">SOLD OUT IN 24H.</span></p>
+                <p><strong>PIVOT:</strong> Platform shutdown forced evolution. <span class="highlight">V2 IS SOVEREIGN CODE.</span></p>
+            </div>
+
+            <!-- HTML VIEWER 1 (Auto-Load) -->
+            <div class="html-viewer" id="viewer-container-1">
+                <div class="viewer-label">C2W2-FILES.HTML</div>
+                <iframe id="viewer1"></iframe>
+            </div>
+        </div>
+
+        <!-- CENTER COL -->
+        <div class="col">
+            <!-- VIDEO -->
+            <div class="video-frame">
+                <video autoplay loop muted playsinline>
+                    <source src="https://video.wixstatic.com/video/54a996_029c9577e1d245f386a0ebe2c64a9b6e/1080p/mp4/file.mp4" type="video/mp4">
+                </video>
+                <div class="video-overlay">
+                    <div class="vid-tag vt-tl">REC ● [00:30:00:00]</div>
+                    <div class="vid-tag vt-tr">CAM_01: ORBIT</div>
+                    <div class="vid-tag vt-bl">MODE: PLAYBACK</div>
+                    <div class="vid-tag vt-br">ISO: 800</div>
+                </div>
+            </div>
+
+            <!-- USER/BRAND SPLIT -->
+            <div class="center-split">
+                <div class="data-block">
+                    <h2>// B2B METRICS</h2>
+                    <p>● <strong>SAVINGS:</strong> 90% vs Physical Shows.</p>
+                    <p>● <strong>INTEGRATION:</strong> Embed on any .com.</p>
+                    <p>● <strong>COMMERCE:</strong> Direct "Click-to-Buy".</p>
+                </div>
+                <div class="data-block">
+                    <h2>// USER EXP</h2>
+                    <p>● <strong>ACCESS:</strong> Global. No VIP Lists.</p>
+                    <p>● <strong>VIEW:</strong> Free cam. No fixed seats.</p>
+                    <p>● <strong>NFT:</strong> Ticket + Wearable.</p>
+                </div>
+            </div>
+
+            <!-- MANIFESTO -->
+            <div class="data-block manifesto-box">
+                <h2>// MANIFESTO: THE CLICK <span>[READ_ONLY]</span></h2>
+                <div class="manifesto-text">
+                    <p><span class="highlight">THE CLICK IS THE NEW BIOLOGY.</span> Humanity evolves from touch to click, from atom to code. Touch, the touch of Adam, or the message to Muhammad—these are obsolete gestures. Now, we earn billions or lose everything with a single click.</p>
+                    <p><strong>WE ARE JUST FILES.</strong> Numbers. Data points dancing in the void. No bodies, no boundaries, no binaries. <span class="highlight">FILES DON'T HAVE GENDERS. CODE DOESN'T HAVE RACE.</span> Math doesn't care about your flesh.</p>
+                    <p>This is not a show. It is a monumental roar. A cathedral of who we are, carved into the stars. For the entities being born in networks right now. <span class="highlight">AGENTS, BORN IN NET.</span></p>
+                    <div style="text-align:center; border:1px solid #333; padding:2px; margin-top:5px; color:#fff; font-weight:bold; background:#000;">
+                        >> CLICK TO BE <<
+                    </div>
+                </div>
+            </div>
+
+            <!-- HTML VIEWER 3 (Moved to Bottom & Zoomed) -->
+            <div class="center-viewer zoom-in" id="viewer-container-3">
+                <div class="viewer-label">FILES-TERMINAL.HTML [VIRTUAL_RES: 2X]</div>
+                <iframe id="viewer3"></iframe>
+            </div>
+        </div>
+
+        <!-- RIGHT COL -->
+        <div class="col">
+            <!-- SEQUENCE -->
+            <div class="data-block">
+                <h2>// 05. RUNWAY SEQUENCE <span>[6 CH]</span></h2>
+                <ul class="chapter-list">
+                    <li>
+                        <span class="ch-idx">01</span> <b>TRADITIONAL ART</b>
+                        <span class="ch-desc">Bacon/Matisse Reimagined</span>
+                    </li>
+                    <li>
+                        <span class="ch-idx">02</span> <b>VIRTUAL FASHION</b>
+                        <span class="ch-desc">Gravity Defied / 0g</span>
+                    </li>
+                    <li>
+                        <span class="ch-idx">03</span> <b>ART AS NFT</b>
+                        <span class="ch-desc">Tokenized Identity</span>
+                    </li>
+                    <li>
+                        <span class="ch-idx">04</span> <b>AI DESIGN</b>
+                        <span class="ch-desc">The Great Reset</span>
+                    </li>
+                    <li>
+                        <span class="ch-idx">05</span> <b>TRANSHUMANISM</b>
+                        <span class="ch-desc">Ascension / Parametric</span>
+                    </li>
+                    <li>
+                        <span class="ch-idx">06</span> <b>MUTANT MEANING</b>
+                        <span class="ch-desc">Final Rebirth</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- METRICS -->
+            <div class="data-block">
+                <h2>// 06. IMPACT MATRIX</h2>
+                <div class="stat-matrix">
+                    <div class="mini-stat"><span class="ms-val highlight">1/10</span><span class="ms-lbl">COST</span></div>
+                    <div class="mini-stat"><span class="ms-val highlight">0</span><span class="ms-lbl">CARBON</span></div>
+                    <div class="mini-stat"><span class="ms-val highlight">∞</span><span class="ms-lbl">USERS</span></div>
+                    <div class="mini-stat"><span class="ms-val highlight">24/7</span><span class="ms-lbl">TIME</span></div>
+                </div>
+            </div>
+
+            <!-- MATERIALITY -->
+            <div class="data-block">
+                <h2>// 07. MATERIAL INDEX</h2>
+                <p><strong>TEXTURES:</strong> <span class="highlight">80% CLO3D.</span> 20% BLENDER.</p>
+                <p><strong>TYPES:</strong> Heavy Denim, Silk, Fluid Metal, Glass, Chrome, Pixel, Void.</p>
+            </div>
+
+            <!-- PFADI -->
+            <div class="data-block">
+                <h2>// 08. PROVENANCE (PFADI)</h2>
+                <p><strong>"Post Flesh Architecture Dream Index"</strong></p>
+                <p>● Dual-Collection Structure.</p>
+                <p>● Every sound, model (.glb), and texture is minted separately.</p>
+                <p>● <span class="highlight">CENSORSHIP RESISTANT</span> via Arweave.</p>
+            </div>
+
+            <!-- AGENCY -->
+            <div class="data-block" style="background:#000;">
+                <h2>// 09. CREATED BY: DFW</h2>
+                <p><strong>DECENTRALIZE™</strong> (Digital Forgery Workshop)</p>
+                <p>Milan-based Web3 Design Studio.</p>
+                <div class="agency-services">
+                    <span class="srv-tag">STRATEGY</span>
+                    <span class="srv-tag">WEBGL</span>
+                    <span class="srv-tag">3D FASHION</span>
+                    <span class="srv-tag">SMART CONTRACTS</span>
+                    <span class="srv-tag">FULL STACK</span>
+                    <span class="srv-tag">AVATARS</span>
+                </div>
+            </div>
+
+            <!-- HTML VIEWER 2 (Manual Run) -->
+            <div class="html-viewer" id="viewer-container-2">
+                <div class="viewer-label">C2W2-RUNWAY.HTML</div>
+                <div class="run-overlay" id="overlay2" onclick="loadGithubHtml('https://raw.githubusercontent.com/decentralize-dfw/runway/refs/heads/main/c2w2-runway.html', 'viewer2', 'overlay2')">
+                    <span class="run-btn">[ RUN ]</span>
+                </div>
+                <iframe id="viewer2"></iframe>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="mono" style="color:#666;">SYS_ROOT: DECENTRALIZE_STUDIO // MILAN_2026</div>
+            <div class="footer-scroll">>> SYSTEM OPTIMIZED FOR CHROME >> WEBGL 2.0 REQUIRED >> AUDIO ON >></div>
+            <div class="link-bar">
+                <a href="https://c2w2.art/" target="_blank">C2W2_FILES</a>
+                <a href="https://c2w2.world/" target="_blank">ENTER_WORLD</a>
+                <a href="https://manifold.xyz/@decentralizedesign/contract/166699248/1" target="_blank">MANIFOLD</a>
+                <a href="https://opensea.io/" target="_blank">OPENSEA</a>
+                <a href="http://x.com/decentralize___/" target="_blank">TWTR</a>
+                <a href="mailto:contact@de-centralize.com">MAIL</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- SCRIPT TO LOAD RAW GITHUB HTML -->
+    <script>
+        async function loadGithubHtml(url, elementId, overlayId = null) {
+            try {
+                // Remove overlay if exists
+                if (overlayId) {
+                    const overlay = document.getElementById(overlayId);
+                    overlay.style.opacity = '0';
+                    setTimeout(() => overlay.style.display = 'none', 300);
+                }
+
+                const iframe = document.getElementById(elementId);
+                
+                // Show loading state in iframe if desired, or just wait
+                iframe.srcdoc = `
+                    <style>body{background:#000;color:#0f0;font-family:monospace;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;}</style>
+                    <div>>> FETCHING DATA...</div>
+                `;
+
+                // Fetch the raw content
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Network response was not ok');
+                const html = await response.text();
+                
+                // Inject into iframe
+                iframe.srcdoc = html;
+            } catch (error) {
+                console.error('Error fetching GitHub Raw:', error);
+                const iframe = document.getElementById(elementId);
+                iframe.srcdoc = `<div style="color:#ff003c; font-family:monospace; padding:20px;">[ERROR] LOAD FAILED. CHECK NETWORK/CORS.</div>`;
+            }
+        }
+
+        // URL 1: Auto Load
+        loadGithubHtml('https://raw.githubusercontent.com/decentralize-dfw/runway/refs/heads/main/avatars-terminal.html', 'viewer1');
+
+        // URL 3: Auto Load (Center Bottom) - files-terminal
+        loadGithubHtml('https://raw.githubusercontent.com/decentralize-dfw/runway/refs/heads/main/files-terminal.html', 'viewer3');
+    </script>
+
+</body>
+</html>
