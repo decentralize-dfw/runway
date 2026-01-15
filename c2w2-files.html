@@ -31,17 +31,17 @@
             font-family: 'Share Tech Mono', monospace !important;
         }
 
-        /* Force black background everywhere */
-        body, html, div, section, header, footer, nav, aside, article, main {
+        /* Force black background on body only */
+        body, html {
             background: #000 !important;
             background-color: #000 !important;
             background-image: none !important;
-            color: #00ff00 !important;
         }
 
         body {
             overflow: hidden;
             position: relative;
+            color: #00ff00 !important;
         }
 
         /* CRT Scanlines Effect */
@@ -60,7 +60,7 @@
                 transparent 2px
             );
             pointer-events: none;
-            z-index: 999999;
+            z-index: 9999;
             animation: flicker 0.15s infinite;
         }
 
@@ -71,15 +71,25 @@
             100% { opacity: 0.97; }
         }
 
-        /* Override all Tailwind white backgrounds */
-        .bg-white,
-        [class*="bg-white"],
-        [class*="bg-gray"],
+        /* Override Tailwind white backgrounds - keep transparency where needed */
+        .bg-white {
+            background-color: #001100 !important;
+        }
+        [class*="bg-gray-50"],
+        [class*="bg-gray-100"],
+        [class*="bg-gray-200"] {
+            background-color: #001100 !important;
+        }
+        [class*="bg-gray-300"],
+        [class*="bg-gray-400"],
+        [class*="bg-gray-500"] {
+            background-color: #002200 !important;
+        }
         [class*="bg-blue"] {
-            background-color: #000 !important;
+            background-color: #003300 !important;
         }
 
-        /* Force terminal green text */
+        /* Force terminal green text on specific elements */
         .text-gray-900,
         .text-gray-800,
         .text-gray-700,
@@ -88,7 +98,13 @@
         .text-black,
         [class*="text-gray"],
         [class*="text-black"],
-        p, span, div, h1, h2, h3, h4, h5, h6, label, input, textarea, button {
+        [class*="text-blue"],
+        [class*="text-white"] {
+            color: #00ff00 !important;
+        }
+
+        /* Terminal green for text elements */
+        p, span, h1, h2, h3, h4, h5, h6, label, button {
             color: #00ff00 !important;
         }
 
@@ -99,13 +115,20 @@
             border-color: #00ff00 !important;
         }
 
-        /* Remove rounded corners - make everything sharp/square */
-        * {
+        /* Remove rounded corners on common elements */
+        [class*="rounded"],
+        .window-control,
+        button,
+        input,
+        .mobile-app-icon-image,
+        .mobile-dock-icon-image {
             border-radius: 0 !important;
         }
 
-        /* Remove shadows */
-        * {
+        /* Remove shadows on common elements */
+        [class*="shadow"],
+        .window-control,
+        button {
             box-shadow: none !important;
             text-shadow: none !important;
         }
