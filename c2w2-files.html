@@ -7,8 +7,8 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Fonts - Share Tech Mono -->
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <!-- Google Fonts - Futuristic 2269 -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- PDF.js Kütüphanesi -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -22,29 +22,35 @@
     <script src="https://unpkg.com/meshoptimizer@0.18.1/meshopt_decoder.js"></script>
 
     <style>
-        /* ====================================== */
-        /* ===== TERMINAL THEME - DARK MODE ===== */
-        /* ====================================== */
+        /* ========================================== */
+        /* ===== FUTURISTIC 2269 THEME - NEON ====== */
+        /* ========================================== */
 
-        /* Import Share Tech Mono as primary font */
+        /* Futuristic Font System */
         * {
-            font-family: 'Share Tech Mono', monospace !important;
+            font-family: 'Orbitron', 'Exo 2', sans-serif !important;
+            letter-spacing: 0.05em;
         }
 
-        /* Force black background on body only */
+        /* Deep Space Background with Holographic Grid */
         body, html {
-            background: #000 !important;
-            background-color: #000 !important;
-            background-image: none !important;
+            background: #0a0a1a !important;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(120, 0, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 0, 255, 0.08) 0%, transparent 50%),
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 255, 0.03) 2px, rgba(0, 255, 255, 0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0, 255, 255, 0.03) 2px, rgba(0, 255, 255, 0.03) 4px) !important;
+            background-size: 100% 100%, 100% 100%, 100% 100%, 50px 50px, 50px 50px !important;
         }
 
         body {
             overflow: hidden;
             position: relative;
-            color: #00ff00 !important;
+            color: #00ffff !important;
         }
 
-        /* CRT Scanlines Effect */
+        /* Holographic Scan Effect */
         body::before {
             content: '';
             position: fixed;
@@ -52,44 +58,51 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: repeating-linear-gradient(
+            background: linear-gradient(
                 0deg,
-                rgba(0, 0, 0, 0.15),
-                rgba(0, 0, 0, 0.15) 1px,
-                transparent 1px,
-                transparent 2px
+                transparent 0%,
+                rgba(0, 255, 255, 0.05) 50%,
+                transparent 100%
             );
+            background-size: 100% 200px;
             pointer-events: none;
             z-index: 9999;
-            animation: flicker 0.15s infinite;
+            animation: holographicScan 3s linear infinite;
         }
 
-        /* CRT Flicker Animation */
-        @keyframes flicker {
-            0% { opacity: 0.97; }
-            50% { opacity: 0.94; }
-            100% { opacity: 0.97; }
+        /* Holographic Scan Animation */
+        @keyframes holographicScan {
+            0% { background-position: 0 -200px; }
+            100% { background-position: 0 100vh; }
         }
 
-        /* Override Tailwind white backgrounds - keep transparency where needed */
+        /* Glassmorphism Backgrounds */
         .bg-white {
-            background-color: #001100 !important;
+            background: rgba(10, 10, 40, 0.4) !important;
+            backdrop-filter: blur(20px) !important;
+            border: 1px solid rgba(0, 255, 255, 0.2) !important;
         }
         [class*="bg-gray-50"],
         [class*="bg-gray-100"],
         [class*="bg-gray-200"] {
-            background-color: #001100 !important;
+            background: rgba(15, 15, 50, 0.3) !important;
+            backdrop-filter: blur(15px) !important;
+            border: 1px solid rgba(0, 255, 255, 0.15) !important;
         }
         [class*="bg-gray-300"],
         [class*="bg-gray-400"],
         [class*="bg-gray-500"] {
-            background-color: #002200 !important;
+            background: rgba(20, 20, 60, 0.5) !important;
+            backdrop-filter: blur(25px) !important;
+            border: 1px solid rgba(0, 255, 255, 0.25) !important;
         }
         [class*="bg-blue"] {
-            background-color: #003300 !important;
+            background: rgba(0, 100, 255, 0.2) !important;
+            backdrop-filter: blur(20px) !important;
+            border: 1px solid rgba(0, 150, 255, 0.4) !important;
         }
 
-        /* Force terminal green text on specific elements */
+        /* Neon Cyan/Magenta Text */
         .text-gray-900,
         .text-gray-800,
         .text-gray-700,
@@ -100,49 +113,64 @@
         [class*="text-black"],
         [class*="text-blue"],
         [class*="text-white"] {
-            color: #00ff00 !important;
+            color: #00ffff !important;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5) !important;
         }
 
-        /* Terminal green for text elements */
+        /* Neon Text with Glow */
         p, span, h1, h2, h3, h4, h5, h6, label, button {
-            color: #00ff00 !important;
+            color: #00ffff !important;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.6),
+                         0 0 20px rgba(0, 255, 255, 0.4),
+                         0 0 30px rgba(0, 255, 255, 0.2) !important;
         }
 
-        /* Terminal green borders */
+        /* Neon Borders with Glow */
         [class*="border-gray"],
         [class*="border-blue"],
         .border {
-            border-color: #00ff00 !important;
+            border-color: rgba(0, 255, 255, 0.6) !important;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3),
+                        inset 0 0 10px rgba(0, 255, 255, 0.1) !important;
         }
 
-        /* Remove rounded corners on common elements */
+        /* Futuristic Rounded Corners */
         [class*="rounded"],
         .window-control,
         button,
         input,
         .mobile-app-icon-image,
         .mobile-dock-icon-image {
-            border-radius: 0 !important;
+            border-radius: 15px !important;
         }
 
-        /* Remove shadows on common elements */
+        /* Neon Glow Shadows */
         [class*="shadow"],
         .window-control,
         button {
-            box-shadow: none !important;
-            text-shadow: none !important;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3),
+                        0 0 40px rgba(120, 0, 255, 0.2),
+                        0 5px 15px rgba(0, 0, 0, 0.5) !important;
         }
 
-        /* Green filter for all images, SVGs, and videos */
+        /* Holographic filter for all images, SVGs, and videos */
         img, svg, video, canvas, iframe,
         .mobile-app-icon-image img,
         .mobile-dock-icon-image img,
         [class*="icon"] img,
         [class*="icon"] svg {
-            filter: sepia(1) hue-rotate(60deg) saturate(5) brightness(0.8) !important;
+            filter:
+                hue-rotate(180deg)
+                saturate(2)
+                brightness(1.1)
+                contrast(1.2) !important;
+            box-shadow:
+                0 0 20px rgba(0, 255, 255, 0.4),
+                0 0 40px rgba(255, 0, 255, 0.2) !important;
+            border-radius: 10px !important;
         }
 
-        /* Force scanlines on media elements */
+        /* Holographic overlay on media elements */
         img::after, video::after, canvas::after, iframe::after {
             content: '';
             position: absolute;
@@ -150,58 +178,89 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0, 255, 0, 0.03),
-                rgba(0, 255, 0, 0.03) 1px,
-                transparent 1px,
-                transparent 2px
+            background: linear-gradient(
+                45deg,
+                rgba(0, 255, 255, 0.1) 0%,
+                transparent 25%,
+                rgba(255, 0, 255, 0.1) 50%,
+                transparent 75%,
+                rgba(0, 255, 255, 0.1) 100%
             );
+            background-size: 200% 200%;
             pointer-events: none;
             z-index: 1;
+            animation: hologramShift 5s ease-in-out infinite;
+            border-radius: 10px !important;
         }
 
-        /* Terminal green scrollbar */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #000 !important; }
-        ::-webkit-scrollbar-thumb { background: #00ff00 !important; border-radius: 0 !important; }
-        ::-webkit-scrollbar-thumb:hover { background: #00cc00 !important; }
+        @keyframes hologramShift {
+            0%, 100% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+        }
 
-        /* --- Seçim Stilleri - TERMINAL THEME --- */
+        /* Neon Cyan/Magenta Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track {
+            background: rgba(10, 10, 30, 0.5) !important;
+            border-radius: 10px !important;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #00ffff, #ff00ff) !important;
+            border-radius: 10px !important;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5) !important;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #00ffff, #8000ff) !important;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.8) !important;
+        }
+
+        /* --- Selection Styles - FUTURISTIC 2269 --- */
         /* Grid View */
         .file-item.selected > div {
-            background-color: #000 !important;
-            outline: 2px solid #00ff00 !important;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2)) !important;
+            outline: 2px solid #00ffff !important;
+            box-shadow:
+                0 0 20px rgba(0, 255, 255, 0.6),
+                0 0 40px rgba(255, 0, 255, 0.4),
+                inset 0 0 20px rgba(0, 255, 255, 0.2) !important;
         }
         .file-item.selected > p {
-            background-color: #003300 !important;
-            color: #00ff00 !important;
-            border-radius: 0 !important;
+            background: linear-gradient(90deg, rgba(0, 255, 255, 0.3), rgba(255, 0, 255, 0.3)) !important;
+            color: #ffffff !important;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8) !important;
+            border-radius: 10px !important;
         }
         /* List View */
         .list-view .file-item.selected {
-            background-color: #003300 !important;
+            background: linear-gradient(90deg, rgba(0, 255, 255, 0.2), rgba(120, 0, 255, 0.2)) !important;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5) !important;
         }
         .list-view .file-item.selected > p,
         .list-view .file-item.selected .get-icon-svg {
-            color: #00ff00 !important;
+            color: #ffffff !important;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8) !important;
         }
         /* Gallery View */
         .gallery-thumb-item.selected {
-            background-color: #000 !important;
-            outline: 2px solid #00ff00 !important;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.3), rgba(255, 0, 255, 0.3)) !important;
+            outline: 3px solid #00ffff !important;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.8) !important;
         }
         /* Desktop View */
         .desktop-item.selected > p {
-            background-color: #003300 !important;
-            color: #00ff00 !important;
-            text-shadow: none !important;
+            background: linear-gradient(90deg, #00ffff, #ff00ff) !important;
+            color: #000000 !important;
+            font-weight: 700 !important;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5) !important;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.8) !important;
         }
         /* Minimized Icon */
         #minimized-icon-container.selected > p {
-            background-color: #003300 !important;
-            color: #00ff00 !important;
-            text-shadow: none !important;
+            background: linear-gradient(90deg, #00ffff, #ff00ff) !important;
+            color: #000000 !important;
+            font-weight: 700 !important;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5) !important;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.8) !important;
         }
         
         /* --- Pencere Stilleri --- */
@@ -216,23 +275,39 @@
             transition: none !important;
         }
         .window-control {
-            width: 12px;
-            height: 12px;
-            border-radius: 0 !important;
+            width: 14px;
+            height: 14px;
+            border-radius: 50% !important;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #00ff00 !important;
+            border: 2px solid rgba(0, 255, 255, 0.6) !important;
+            transition: all 0.3s ease !important;
         }
-        .window-control.close { background-color: #003300 !important; }
-        .window-control.close:hover { background-color: #005500 !important; }
-        .window-control.maximize { background-color: #003300 !important; }
-        .window-control.maximize:hover { background-color: #005500 !important; }
+        .window-control.close {
+            background: linear-gradient(135deg, rgba(255, 0, 100, 0.5), rgba(255, 0, 255, 0.5)) !important;
+            box-shadow: 0 0 10px rgba(255, 0, 100, 0.5) !important;
+        }
+        .window-control.close:hover {
+            background: linear-gradient(135deg, #ff0066, #ff00ff) !important;
+            box-shadow: 0 0 20px rgba(255, 0, 100, 0.8), 0 0 40px rgba(255, 0, 255, 0.5) !important;
+            transform: scale(1.2) !important;
+        }
+        .window-control.maximize {
+            background: linear-gradient(135deg, rgba(0, 255, 200, 0.5), rgba(0, 150, 255, 0.5)) !important;
+            box-shadow: 0 0 10px rgba(0, 255, 200, 0.5) !important;
+        }
+        .window-control.maximize:hover {
+            background: linear-gradient(135deg, #00ffc8, #0096ff) !important;
+            box-shadow: 0 0 20px rgba(0, 255, 200, 0.8), 0 0 40px rgba(0, 150, 255, 0.5) !important;
+            transform: scale(1.2) !important;
+        }
         .window-control .icon {
             visibility: hidden;
             width: 8px;
             height: 8px;
-            color: #00ff00 !important;
+            color: #ffffff !important;
+            filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8)) !important;
         }
         .window-control:hover .icon {
             visibility: visible;
@@ -259,25 +334,28 @@
         ::-webkit-scrollbar-thumb { background: #a1a1aa; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #71717a; }
         
-        /* YENİ: PDF Canvas Stili - TERMINAL THEME */
+        /* PDF Canvas Style - FUTURISTIC 2269 */
         .pdf-canvas-container {
-            /* PDF'in renderlandığı alan için arka plan */
-            background-color: #000 !important;
+            background: radial-gradient(circle, rgba(10, 10, 40, 0.8), rgba(5, 5, 20, 0.9)) !important;
+            border: 1px solid rgba(0, 255, 255, 0.3) !important;
         }
         .pdf-canvas-container canvas {
-            /* PDF sayfası için terminal filter */
-            box-shadow: none !important;
-            filter: sepia(1) hue-rotate(60deg) saturate(5) brightness(0.8) !important;
+            box-shadow:
+                0 0 30px rgba(0, 255, 255, 0.3),
+                0 0 60px rgba(120, 0, 255, 0.2) !important;
+            filter: brightness(1.1) contrast(1.1) !important;
+            border-radius: 10px !important;
         }
 
-        /* Loading Indicator Stili - TERMINAL THEME */
+        /* Loading Indicator - FUTURISTIC 2269 */
         .loading-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #000 !important;
+            background: radial-gradient(circle, rgba(10, 10, 40, 0.95), rgba(0, 0, 0, 0.98)) !important;
+            backdrop-filter: blur(15px) !important;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -285,23 +363,46 @@
             z-index: 10;
         }
         .loading-text {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: #00ff00 !important;
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #00ffff !important;
+            text-shadow:
+                0 0 10px rgba(0, 255, 255, 0.8),
+                0 0 20px rgba(0, 255, 255, 0.5) !important;
+            font-weight: 600 !important;
+            letter-spacing: 0.15em !important;
+            animation: textPulse 2s ease-in-out infinite !important;
         }
+
+        @keyframes textPulse {
+            0%, 100% { opacity: 1; text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.5); }
+            50% { opacity: 0.7; text-shadow: 0 0 20px rgba(0, 255, 255, 1), 0 0 40px rgba(0, 255, 255, 0.7); }
+        }
+
         .loading-progress {
-            width: 200px;
-            height: 6px;
-            background-color: #003300 !important;
-            border-radius: 0 !important;
+            width: 250px;
+            height: 8px;
+            background: rgba(10, 10, 30, 0.8) !important;
+            border-radius: 20px !important;
             overflow: hidden;
-            border: 1px solid #00ff00 !important;
+            border: 2px solid rgba(0, 255, 255, 0.4) !important;
+            box-shadow:
+                0 0 15px rgba(0, 255, 255, 0.3),
+                inset 0 0 10px rgba(0, 255, 255, 0.1) !important;
         }
         .progress-bar {
             height: 100%;
-            background-color: #00ff00 !important;
+            background: linear-gradient(90deg, #00ffff, #ff00ff, #00ffff) !important;
+            background-size: 200% 100% !important;
             width: 0%;
             transition: width 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.8) !important;
+            animation: progressGlow 2s linear infinite !important;
+        }
+
+        @keyframes progressGlow {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
         }
 
         /* ============================================= */
@@ -328,7 +429,7 @@
             }
         }
 
-        /* Mobile Interface Container - TERMINAL THEME */
+        /* Mobile Interface - FUTURISTIC 2269 */
         #mobile-interface {
             display: none;
             position: fixed;
@@ -336,12 +437,16 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            height: 100dvh; /* Dynamic viewport height for mobile browsers */
+            height: 100dvh;
             flex-direction: column;
-            background: #000 !important;
+            background: #0a0a1a !important;
+            background-image:
+                radial-gradient(circle at 30% 40%, rgba(120, 0, 255, 0.15), transparent 40%),
+                radial-gradient(circle at 70% 70%, rgba(0, 255, 255, 0.15), transparent 40%),
+                repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0, 255, 255, 0.02) 3px, rgba(0, 255, 255, 0.02) 6px) !important;
             z-index: 9999;
             overflow: hidden;
-            font-family: 'Share Tech Mono', monospace !important;
+            font-family: 'Orbitron', 'Exo 2', sans-serif !important;
             /* iOS Safe Area support */
             padding-top: env(safe-area-inset-top);
             padding-bottom: env(safe-area-inset-bottom);
@@ -350,7 +455,7 @@
             box-sizing: border-box;
         }
 
-        /* Status Bar - TERMINAL THEME */
+        /* Status Bar - FUTURISTIC 2269 */
         #mobile-status-bar {
             flex-shrink: 0;
             height: 4%;
@@ -360,10 +465,13 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 5%;
-            color: #00ff00 !important;
+            color: #00ffff !important;
             font-size: clamp(10px, 2.5vw, 14px);
-            font-weight: 600;
-            text-shadow: none !important;
+            font-weight: 700 !important;
+            text-shadow:
+                0 0 10px rgba(0, 255, 255, 0.8),
+                0 0 20px rgba(0, 255, 255, 0.4) !important;
+            letter-spacing: 0.1em !important;
         }
 
         /* Main Screen Area */
@@ -427,49 +535,58 @@
             width: var(--icon-size);
             height: var(--icon-size);
             aspect-ratio: 1 / 1;
-            border-radius: 0 !important;
-            background: #000 !important;
-            backdrop-filter: none !important;
+            border-radius: 22% !important;
+            background: linear-gradient(135deg, rgba(10, 10, 50, 0.6), rgba(20, 20, 70, 0.4)) !important;
+            backdrop-filter: blur(15px) !important;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            box-shadow: none !important;
-            border: 1px solid #00ff00 !important;
-            transition: transform 0.15s ease;
+            box-shadow:
+                0 0 15px rgba(0, 255, 255, 0.3),
+                0 0 30px rgba(120, 0, 255, 0.2),
+                inset 0 0 15px rgba(0, 255, 255, 0.1) !important;
+            border: 2px solid rgba(0, 255, 255, 0.4) !important;
+            transition: all 0.3s ease !important;
             flex-shrink: 0;
         }
 
         .mobile-app-icon-image:active {
-            transform: scale(0.92);
+            transform: scale(0.9);
+            box-shadow:
+                0 0 25px rgba(0, 255, 255, 0.6),
+                0 0 50px rgba(255, 0, 255, 0.4) !important;
         }
 
         .mobile-app-icon-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: sepia(1) hue-rotate(60deg) saturate(5) brightness(0.8) !important;
+            filter: hue-rotate(180deg) saturate(1.5) brightness(1.1) !important;
         }
 
         .mobile-app-icon-image svg {
             width: 50%;
             height: 50%;
             flex-shrink: 0;
-            filter: sepia(1) hue-rotate(60deg) saturate(5) brightness(0.8) !important;
+            filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.6)) !important;
         }
 
         .mobile-app-icon-name {
-            margin-top: 3px;
+            margin-top: 5px;
             font-size: clamp(8px, 2vw, 11px);
-            color: #00ff00 !important;
+            color: #00ffff !important;
             text-align: center;
-            text-shadow: none !important;
+            text-shadow:
+                0 0 8px rgba(0, 255, 255, 0.8),
+                0 0 15px rgba(0, 255, 255, 0.4) !important;
             text-overflow: ellipsis;
             white-space: nowrap;
             width: var(--icon-size, 18vw);
-            font-weight: 500;
+            font-weight: 600 !important;
             line-height: 1.4;
             padding-bottom: 2px;
+            letter-spacing: 0.05em !important;
         }
 
         /* Page Dots - Hidden */
@@ -483,17 +600,19 @@
         }
 
         .mobile-page-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 0 !important;
-            background: #003300 !important;
-            border: 1px solid #00ff00 !important;
-            transition: all 0.2s ease;
+            width: 8px;
+            height: 8px;
+            border-radius: 50% !important;
+            background: rgba(0, 255, 255, 0.3) !important;
+            border: 1px solid rgba(0, 255, 255, 0.5) !important;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 5px rgba(0, 255, 255, 0.3) !important;
         }
 
         .mobile-page-dot.active {
-            background: #00ff00 !important;
-            transform: scale(1.2);
+            background: linear-gradient(135deg, #00ffff, #ff00ff) !important;
+            transform: scale(1.3);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.8), 0 0 25px rgba(255, 0, 255, 0.5) !important;
         }
 
         /* Bottom Dock */
@@ -509,19 +628,22 @@
         }
 
         #mobile-dock-container {
-            background: #000 !important;
-            backdrop-filter: none !important;
-            -webkit-backdrop-filter: none !important;
-            border-radius: 0 !important;
-            border: 2px solid #00ff00 !important;
-            padding: 8px 12px;
+            background: linear-gradient(135deg, rgba(10, 10, 50, 0.7), rgba(20, 20, 70, 0.5)) !important;
+            backdrop-filter: blur(25px) !important;
+            -webkit-backdrop-filter: blur(25px) !important;
+            border-radius: 28px !important;
+            border: 2px solid rgba(0, 255, 255, 0.5) !important;
+            padding: 10px 14px;
             display: flex;
             align-items: center;
             justify-content: space-evenly;
             width: 92%;
-            max-width: 380px;
-            box-shadow: none !important;
-            gap: 4px;
+            max-width: 400px;
+            box-shadow:
+                0 0 30px rgba(0, 255, 255, 0.4),
+                0 0 60px rgba(120, 0, 255, 0.3),
+                inset 0 0 20px rgba(0, 255, 255, 0.1) !important;
+            gap: 6px;
         }
 
         .mobile-dock-icon {
@@ -537,70 +659,78 @@
 
         .mobile-dock-icon-image {
             /* Square dock icon */
-            --dock-icon-size: min(14vw, 52px);
+            --dock-icon-size: min(14vw, 56px);
             width: var(--dock-icon-size);
             height: var(--dock-icon-size);
             aspect-ratio: 1 / 1;
-            border-radius: 0 !important;
-            background: #000 !important;
-            backdrop-filter: none !important;
-            transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-            border: 2px solid #00ff00 !important;
+            border-radius: 22% !important;
+            background: linear-gradient(135deg, rgba(10, 10, 50, 0.8), rgba(30, 30, 90, 0.6)) !important;
+            backdrop-filter: blur(15px) !important;
+            transition: all 0.3s ease !important;
+            border: 2px solid rgba(0, 255, 255, 0.4) !important;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            box-shadow: none !important;
+            box-shadow:
+                0 0 12px rgba(0, 255, 255, 0.3),
+                0 0 24px rgba(120, 0, 255, 0.2) !important;
             flex-shrink: 0;
         }
 
         /* Active dock icon styling */
         .mobile-dock-icon.active .mobile-dock-icon-image {
-            background: #003300 !important;
-            border-color: #00ff00 !important;
-            box-shadow: 0 0 8px #00ff00 !important;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.3), rgba(255, 0, 255, 0.3)) !important;
+            border-color: #00ffff !important;
+            box-shadow:
+                0 0 20px rgba(0, 255, 255, 0.8),
+                0 0 40px rgba(255, 0, 255, 0.6) !important;
+            transform: scale(1.05) !important;
         }
 
         .mobile-dock-icon-image:active {
-            transform: scale(0.9);
+            transform: scale(0.92);
         }
 
         .mobile-dock-icon-image svg {
             width: 55%;
             height: 55%;
             flex-shrink: 0;
-            filter: sepia(1) hue-rotate(60deg) saturate(5) brightness(0.8) !important;
+            filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.7)) !important;
         }
 
         .mobile-dock-icon-name {
-            margin-top: 3px;
-            font-size: clamp(7px, 1.8vw, 9px);
-            color: #00ff00 !important;
+            margin-top: 4px;
+            font-size: clamp(7px, 1.8vw, 10px);
+            color: #00ffff !important;
             text-align: center;
-            text-shadow: none !important;
+            text-shadow:
+                0 0 6px rgba(0, 255, 255, 0.8),
+                0 0 12px rgba(0, 255, 255, 0.4) !important;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
             width: 100%;
-            font-weight: 500;
+            font-weight: 600 !important;
+            letter-spacing: 0.05em !important;
         }
 
-        /* Folder Overlay - TERMINAL THEME */
+        /* Folder Overlay - FUTURISTIC 2269 */
         #mobile-folder-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.9) !important;
-            backdrop-filter: none !important;
-            -webkit-backdrop-filter: none !important;
+            background: radial-gradient(circle, rgba(10, 10, 40, 0.92), rgba(0, 0, 0, 0.95)) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
             display: none;
             align-items: center;
             justify-content: center;
             z-index: 10000;
             opacity: 0;
-            transition: opacity 0.25s ease;
+            transition: opacity 0.3s ease;
         }
 
         #mobile-folder-overlay.visible {
@@ -609,20 +739,24 @@
 
         #mobile-folder-container {
             /* Proportional folder popup */
-            width: 80%;
-            max-width: min(350px, 80vw);
+            width: 85%;
+            max-width: min(380px, 85vw);
             aspect-ratio: 1 / 1.1;
-            max-height: 70dvh;
-            background: #000 !important;
-            backdrop-filter: none !important;
-            -webkit-backdrop-filter: none !important;
-            border-radius: 0 !important;
-            border: 2px solid #00ff00 !important;
-            padding: 4%;
+            max-height: 75dvh;
+            background: linear-gradient(135deg, rgba(10, 10, 50, 0.85), rgba(20, 20, 70, 0.75)) !important;
+            backdrop-filter: blur(30px) !important;
+            -webkit-backdrop-filter: blur(30px) !important;
+            border-radius: 30px !important;
+            border: 3px solid rgba(0, 255, 255, 0.5) !important;
+            box-shadow:
+                0 0 40px rgba(0, 255, 255, 0.5),
+                0 0 80px rgba(120, 0, 255, 0.4),
+                inset 0 0 30px rgba(0, 255, 255, 0.1) !important;
+            padding: 5%;
             display: flex;
             flex-direction: column;
-            transform: scale(0.9);
-            transition: transform 0.25s ease;
+            transform: scale(0.85);
+            transition: all 0.3s ease;
             box-sizing: border-box;
             cursor: grab;
             user-select: none;
@@ -634,11 +768,15 @@
 
         #mobile-folder-title {
             flex-shrink: 0;
-            font-size: clamp(14px, 4vw, 18px);
-            font-weight: 600;
-            color: #00ff00 !important;
+            font-size: clamp(16px, 4.5vw, 20px);
+            font-weight: 700 !important;
+            color: #00ffff !important;
             text-align: center;
-            margin-bottom: 3%;
+            margin-bottom: 4%;
+            text-shadow:
+                0 0 15px rgba(0, 255, 255, 0.9),
+                0 0 30px rgba(0, 255, 255, 0.5) !important;
+            letter-spacing: 0.1em !important;
         }
 
         #mobile-folder-pages-wrapper {
