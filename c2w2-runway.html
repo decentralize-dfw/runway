@@ -10,19 +10,68 @@
 
     <style>
 
- 
+        /* ================================================ */
+        /* ===== PSYCHEDELIC CHAOS MODE ================== */
+        /* ===== CHROMATIC ABERRATION + ALL EFFECTS ====== */
+        /* ================================================ */
 
-        /* ================================================ */
-        /* ===== BRUTALIST CONCRETE - TADAO ANDO ========= */
-        /* ================================================ */
+        /* KEYFRAME ANIMATIONS */
+        @keyframes psychedelic-bg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes rainbow {
+            0% { filter: hue-rotate(0deg) saturate(3) contrast(1.5) brightness(1.2); }
+            25% { filter: hue-rotate(90deg) saturate(3.5) contrast(1.6) brightness(1.3); }
+            50% { filter: hue-rotate(180deg) saturate(3) contrast(1.5) brightness(1.2); }
+            75% { filter: hue-rotate(270deg) saturate(3.5) contrast(1.6) brightness(1.3); }
+            100% { filter: hue-rotate(360deg) saturate(3) contrast(1.5) brightness(1.2); }
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(2px, -2px); }
+            60% { transform: translate(-2px, -2px); }
+            80% { transform: translate(2px, 2px); }
+        }
+
+        @keyframes chromatic {
+            0%, 100% {
+                text-shadow:
+                    -1px 0 red,
+                    1px 0 cyan,
+                    0 0 10px #fff,
+                    0 0 20px #ff00ff,
+                    0 0 30px #00ffff;
+            }
+            33% {
+                text-shadow:
+                    -2px 0 red,
+                    2px 0 cyan,
+                    0 0 15px #ffff00,
+                    0 0 25px #00ff00,
+                    0 0 35px #ff0080;
+            }
+            66% {
+                text-shadow:
+                    -1px 0 cyan,
+                    1px 0 red,
+                    0 0 10px #0080ff,
+                    0 0 20px #ff8c00,
+                    0 0 30px #9370db;
+            }
+        }
 
         :root {
-            --fg: #1a1a1a;
-            --bg: #565656;
-            --muted: #808080;
-            --accent: #3a3a3a;
-            --panel: #4a4a4a;
-            --panelBlur: 0px;
+            --fg: #ffffff;
+            --bg: #ff0080;
+            --muted: #00ffff;
+            --accent: #ff00ff;
+            --panel: rgba(255,0,255,0.3);
+            --panelBlur: 20px;
         }
 
         * {
@@ -31,70 +80,116 @@
             font-weight: 500;
         }
 
-        body {
+        /* ULTRA RAINBOW BACKGROUND */
+        body, html {
             margin: 0;
             overflow: hidden;
-            color: var(--fg);
-            background: #565656;
-            background-image:
-                repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(0,0,0,0.03) 1px, rgba(0,0,0,0.03) 2px),
-                repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(0,0,0,0.03) 1px, rgba(0,0,0,0.03) 2px),
-                linear-gradient(180deg, #5a5a5a 0%, #565656 50%, #525252 100%);
+            background: linear-gradient(
+                45deg,
+                #ff0080, #ff8c00, #40e0d0, #9370db,
+                #ff1493, #00ff7f, #ff69b4, #ffd700
+            ) !important;
+            background-size: 400% 400% !important;
+            animation: psychedelic-bg 10s ease infinite !important;
             position: relative;
         }
 
-        /* Directional Light Effect (Tadao Ando Style) */
+        /* CHROMATIC ABERRATION OVERLAY + FILM GRAIN */
         body::before {
             content: '';
             position: fixed;
-            top: -10%;
-            left: -10%;
-            width: 40%;
-            height: 120%;
-            background: linear-gradient(120deg, rgba(255,255,255,0.15) 0%, transparent 70%);
+            inset: 0;
+            background:
+                repeating-linear-gradient(0deg, transparent 0, rgba(255,0,255,0.05) 2px, transparent 4px),
+                repeating-linear-gradient(90deg, transparent 0, rgba(0,255,255,0.05) 2px, transparent 4px),
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='6.5' numOctaves='6' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+            mix-blend-mode: screen;
             pointer-events: none;
-            z-index: 1;
-            transform: skewX(-15deg);
+            z-index: 9999;
+            animation: glitch 3s infinite;
         }
+
+        /* VIGNETTE EFFECT */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%);
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        /* CANVAS - PSYCHEDELIC FILTERS */
         canvas {
             display: block;
+            filter: saturate(2) contrast(1.3) brightness(1.1);
+            animation: rainbow 8s infinite;
         }
+
+        /* PSYCHEDELIC GLASSMORPHISM PANELS */
         .panel {
             position: fixed;
-            background: #6b6b6b;
-            border: 3px solid #404040;
-            border-radius: 0;
-            box-shadow: 8px 8px 0 rgba(0,0,0,0.3), inset 0 0 50px rgba(0,0,0,0.2);
+            background: linear-gradient(135deg, rgba(255,0,128,0.4), rgba(128,0,255,0.4)) !important;
+            backdrop-filter: blur(20px) saturate(3) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(3) !important;
+            border: 3px solid rgba(255,255,255,0.6) !important;
+            border-radius: 25px !important;
+            box-shadow:
+                0 0 40px rgba(255,0,255,0.8),
+                0 0 80px rgba(0,255,255,0.6),
+                inset 0 0 40px rgba(255,255,255,0.2) !important;
             z-index: 10;
+            animation: rainbow 6s infinite !important;
         }
+        /* PSYCHEDELIC LOADING SCREEN */
         #loading {
             position: fixed;
             inset: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #565656;
+            background: linear-gradient(45deg, #ff0080, #00ffff, #ff00ff, #ffff00) !important;
+            background-size: 400% 400% !important;
+            animation: psychedelic-bg 3s ease infinite !important;
             z-index: 1000;
+            color: #fff !important;
+            font-size: 32px !important;
+            font-weight: 900 !important;
+            text-shadow:
+                -2px 0 red,
+                2px 0 cyan,
+                0 0 20px #fff,
+                0 0 40px #ff00ff !important;
         }
+
+        /* PRISMATIC MEDIA */
         #loading img {
             position: absolute;
             inset: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: grayscale(0.9) contrast(1.3) brightness(0.85);
-            border: 4px solid #2a2a2a;
+            filter: hue-rotate(180deg) saturate(3.5) contrast(1.8) brightness(1.3) !important;
+            border: 6px solid rgba(255,0,255,0.8) !important;
+            box-shadow:
+                0 0 50px rgba(255,0,255,1),
+                0 0 100px rgba(0,255,255,0.8),
+                inset 0 0 60px rgba(255,255,0,0.3) !important;
+            animation: rainbow 5s infinite !important;
         }
+
         #backgroundImg {
             position: fixed;
             inset: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: grayscale(0.9) contrast(1.3) brightness(0.85);
+            filter: hue-rotate(180deg) saturate(3.5) contrast(1.8) brightness(1.3) !important;
             z-index: 5;
             display: none;
+            animation: rainbow 8s infinite !important;
         }
+        /* CHROMATIC TEXT ELEMENTS */
         #instructions {
             inset: auto;
             top: 15%;
@@ -105,26 +200,46 @@
             display: none;
             z-index: 15;
         }
+
         #instructions h1 {
             margin: 0 0 12px 0;
             font-size: 20px;
             font-weight: 800;
-            color: #1a1a1a;
+            color: #fff !important;
             text-transform: uppercase;
-            text-shadow: 1px 1px 0 rgba(255,255,255,0.1);
+            text-shadow:
+                -2px 0 red,
+                2px 0 cyan,
+                0 0 15px #fff,
+                0 0 30px #ff00ff,
+                0 0 45px #00ffff !important;
+            animation: chromatic 3s infinite !important;
         }
+
         #instructions h2 {
             margin: 0 0 10px 0;
             font-size: 14px;
             font-weight: 700;
-            color: #1a1a1a;
+            color: #fff !important;
             text-transform: uppercase;
+            text-shadow:
+                -1px 0 red,
+                1px 0 cyan,
+                0 0 10px #fff,
+                0 0 20px #ffff00 !important;
+            animation: chromatic 2.5s infinite !important;
         }
+
         #instructions p {
             margin: 6px 0;
             font-size: 10px;
-            color: #3a3a3a;
+            color: #fff !important;
             font-weight: 600;
+            text-shadow:
+                -1px 0 red,
+                1px 0 cyan,
+                0 0 8px #fff !important;
+            animation: chromatic 3s infinite !important;
         }
         #resume {
             inset: auto;
@@ -137,97 +252,148 @@
             display: none;
             font-weight: 700;
             text-transform: uppercase;
+            color: #fff !important;
+            text-shadow:
+                -1px 0 red,
+                1px 0 cyan,
+                0 0 10px #fff !important;
+            animation: chromatic 3s infinite !important;
         }
 
+        /* PSYCHEDELIC VR BUTTON */
         #VRButton {
-position: fixed;
-background: #5f5f5f;
-border: 4px solid #2a2a2a;
-border-radius: 0;
-box-shadow: 8px 8px 0 rgba(0,0,0,0.4), inset 2px 2px 0 rgba(255,255,255,0.05), inset -2px -2px 0 rgba(0,0,0,0.2);
-z-index: 15;
-inset: auto;
-top: 15%;
-left: 40%;
-width: 20%;
-transform: translate(0, -50%);
-text-align: center;
-padding: 12px 16px;
-font-size: 18px;
-font-weight: 800;
-color: #1a1a1a;
-cursor: pointer;
-overflow: hidden;
-max-height: 50px;
-white-space: nowrap;
-text-overflow: ellipsis;
-line-height: 26px;
-transition: all 0.1s ease;
-text-transform: uppercase;
-text-shadow: 1px 1px 0 rgba(255,255,255,0.1);
-}
-#VRButton:hover {
-background: #808080;
-box-shadow: 10px 10px 0 rgba(0,0,0,0.5), inset -2px -2px 0 rgba(255,255,255,0.1);
-transform: translate(-2px, -52%);
-}
+            position: fixed;
+            background: linear-gradient(135deg, #ff0080, #00ffff, #ff00ff) !important;
+            background-size: 200% 200% !important;
+            animation: psychedelic-bg 4s ease infinite !important;
+            backdrop-filter: blur(15px) saturate(3) !important;
+            border: 4px solid rgba(255,255,255,0.8) !important;
+            border-radius: 30px !important;
+            box-shadow:
+                0 0 40px rgba(255,0,255,1),
+                0 0 80px rgba(0,255,255,0.8),
+                inset 0 0 30px rgba(255,255,255,0.3) !important;
+            z-index: 15;
+            inset: auto;
+            top: 15%;
+            left: 40%;
+            width: 20%;
+            transform: translate(0, -50%);
+            text-align: center;
+            padding: 12px 16px;
+            font-size: 18px;
+            font-weight: 800;
+            color: #fff !important;
+            cursor: pointer;
+            overflow: hidden;
+            max-height: 50px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            line-height: 26px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            text-shadow:
+                -2px 0 red,
+                2px 0 cyan,
+                0 0 15px #fff,
+                0 0 30px #ffff00 !important;
+        }
+
+        #VRButton:hover {
+            background: linear-gradient(135deg, #00ffff, #ff00ff, #ff0080) !important;
+            box-shadow:
+                0 0 60px rgba(255,0,255,1),
+                0 0 120px rgba(0,255,255,1),
+                inset 0 0 50px rgba(255,255,255,0.5) !important;
+            transform: translate(-2px, -52%) scale(1.1) rotate(2deg) !important;
+        }
+        /* ULTRA CHROMATIC TEXT */
         #initiating {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: #1a1a1a;
+            color: #fff !important;
             font-size: 56px;
             font-weight: 900;
             display: none;
             text-transform: uppercase;
-            text-shadow: 2px 2px 0 rgba(255,255,255,0.15);
+            text-shadow:
+                -3px 0 red,
+                3px 0 cyan,
+                0 0 20px #fff,
+                0 0 40px #ff00ff,
+                0 0 60px #00ffff !important;
             letter-spacing: 0.02em;
+            animation: chromatic 2s infinite !important;
         }
+
         #ended {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: #1a1a1a;
+            color: #fff !important;
             font-size: 56px;
             font-weight: 900;
             display: none;
             text-transform: uppercase;
-            text-shadow: 2px 2px 0 rgba(255,255,255,0.15);
+            text-shadow:
+                -3px 0 red,
+                3px 0 cyan,
+                0 0 20px #fff,
+                0 0 40px #ff00ff,
+                0 0 60px #00ffff !important;
             letter-spacing: 0.02em;
+            animation: chromatic 2s infinite !important;
         }
+
         #description {
             position: absolute;
             letter-spacing: -0.02em;
             bottom: 16px;
             left: 50px;
             right: 50px;
-            color: #1a1a1a;
+            color: #fff !important;
             font-size: 16px;
             font-weight: 800;
             text-align: center;
             display: none;
             text-transform: uppercase;
-            text-shadow: 1px 1px 0 rgba(255,255,255,0.1);
+            text-shadow:
+                -2px 0 red,
+                2px 0 cyan,
+                0 0 15px #fff,
+                0 0 30px #ff00ff !important;
+            animation: chromatic 3s infinite !important;
         }
+
         #hoverText {
             position: absolute;
             bottom: 12px;
             left: 12px;
-            background: #6b6b6b;
-            border: 3px solid #404040;
-            border-radius: 0;
-            box-shadow: 6px 6px 0 rgba(0,0,0,0.3), inset 0 0 30px rgba(0,0,0,0.15);
+            background: linear-gradient(135deg, rgba(255,0,128,0.5), rgba(128,0,255,0.5)) !important;
+            backdrop-filter: blur(20px) saturate(3) !important;
+            border: 3px solid rgba(255,255,255,0.6) !important;
+            border-radius: 20px !important;
+            box-shadow:
+                0 0 30px rgba(255,0,255,0.8),
+                0 0 60px rgba(0,255,255,0.6) !important;
             z-index: 10;
             padding: 10px 14px;
-            color: #1a1a1a;
+            color: #fff !important;
             font-size: 13px;
             font-weight: 700;
             text-align: center;
             display: none;
             text-transform: uppercase;
+            text-shadow:
+                -1px 0 red,
+                1px 0 cyan,
+                0 0 10px #fff !important;
+            animation: chromatic 3s infinite !important;
         }
+        /* PSYCHEDELIC INFO PANELS */
         #projectInfoPanel, #studioInfoPanel, #hintPanel, #creatorsNotePanel {
             font-style: normal;
             position: fixed;
@@ -235,13 +401,20 @@ transform: translate(-2px, -52%);
             right: 12px;
             width: 380px;
             height: 750px;
-            background: #5f5f5f;
-            border: 4px solid #2a2a2a;
-            border-radius: 0;
-            box-shadow: 10px 10px 0 rgba(0,0,0,0.5), inset 0 0 40px rgba(0,0,0,0.25);
+            background: linear-gradient(135deg, rgba(255,0,128,0.4), rgba(0,255,255,0.4), rgba(255,0,255,0.4)) !important;
+            background-size: 200% 200% !important;
+            animation: psychedelic-bg 6s ease infinite !important;
+            backdrop-filter: blur(25px) saturate(3) !important;
+            -webkit-backdrop-filter: blur(25px) saturate(3) !important;
+            border: 4px solid rgba(255,255,255,0.7) !important;
+            border-radius: 30px !important;
+            box-shadow:
+                0 0 50px rgba(255,0,255,1),
+                0 0 100px rgba(0,255,255,0.8),
+                inset 0 0 60px rgba(255,255,255,0.2) !important;
             z-index: 20;
             padding: 16px;
-            color: #1a1a1a;
+            color: #fff !important;
             font-size: 13px;
             font-weight: 600;
             text-align: left;
@@ -250,28 +423,37 @@ transform: translate(-2px, -52%);
             box-sizing: border-box;
         }
 
+        /* PSYCHEDELIC SCROLLBARS */
         #projectInfoPanel::-webkit-scrollbar, #studioInfoPanel::-webkit-scrollbar, #hintPanel::-webkit-scrollbar, #creatorsNotePanel::-webkit-scrollbar {
             width: 12px;
-            background: #4a4a4a;
+            background: linear-gradient(180deg, #ff0080, #00ffff) !important;
+            border-radius: 10px !important;
         }
+
         #projectInfoPanel::-webkit-scrollbar-thumb, #studioInfoPanel::-webkit-scrollbar-thumb, #hintPanel::-webkit-scrollbar-thumb, #creatorsNotePanel::-webkit-scrollbar-thumb {
-            background: #6b6b6b;
-            border: 2px solid #404040;
-            border-radius: 0;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+            background: linear-gradient(180deg, #ff00ff, #ffff00) !important;
+            border: 2px solid rgba(255,255,255,0.6) !important;
+            border-radius: 10px !important;
+            box-shadow:
+                0 0 20px rgba(255,0,255,0.8),
+                inset 0 0 10px rgba(255,255,255,0.3) !important;
         }
+
         #projectInfoPanel::-webkit-scrollbar-track, #studioInfoPanel::-webkit-scrollbar-track, #hintPanel::-webkit-scrollbar-track, #creatorsNotePanel::-webkit-scrollbar-track {
-            background: #4a4a4a;
-            border: 2px solid #2a2a2a;
+            background: linear-gradient(180deg, rgba(255,0,128,0.3), rgba(0,255,255,0.3)) !important;
+            border: 2px solid rgba(255,255,255,0.3) !important;
+            border-radius: 10px !important;
             margin: 0;
         }
+        /* PSYCHEDELIC CLOSE BUTTONS - ROTATING HOVER */
         #closeButton, #studioCloseButton, #hintCloseButton, #creatorsCloseButton {
             position: absolute;
             top: 12px;
             right: 12px;
-            background: #3a3a3a;
-            border: 3px solid #1a1a1a;
-            color: #ffffff;
+            background: linear-gradient(135deg, #ff0066, #ff00ff) !important;
+            border: 3px solid rgba(255,255,255,0.8) !important;
+            border-radius: 50% !important;
+            color: #ffffff !important;
             font-size: 24px;
             cursor: pointer;
             width: 32px;
@@ -279,15 +461,22 @@ transform: translate(-2px, -52%);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 4px 4px 0 rgba(0,0,0,0.4);
+            box-shadow:
+                0 0 30px rgba(255,0,102,1),
+                0 0 60px rgba(255,0,255,0.8) !important;
             font-weight: 800;
-            transition: all 0.1s ease;
+            transition: all 0.3s ease;
+            animation: rainbow 2s infinite !important;
         }
+
         #closeButton:hover, #studioCloseButton:hover, #hintCloseButton:hover, #creatorsCloseButton:hover {
-            background: #2a2a2a;
-            box-shadow: 6px 6px 0 rgba(0,0,0,0.5);
-            transform: translate(-2px, -2px);
+            background: linear-gradient(135deg, #ff00ff, #ff0066) !important;
+            box-shadow:
+                0 0 50px rgba(255,0,102,1),
+                0 0 100px rgba(255,0,255,1) !important;
+            transform: scale(1.3) rotate(180deg) !important;
         }
+        /* CHROMATIC PANEL TEXT */
         #projectInfoPanel p, #studioInfoPanel p, #hintPanel p, #creatorsNotePanel p {
             margin: 12px 0;
             text-align: justify;
@@ -296,9 +485,14 @@ transform: translate(-2px, -52%);
             -webkit-hyphens: auto;
             -ms-hyphens: auto;
             font-weight: 600;
+            color: #fff !important;
+            text-shadow:
+                -1px 0 red,
+                1px 0 cyan,
+                0 0 8px #fff !important;
         }
 
-      #projectInfoPanel i, #studioInfoPanel i, #hintPanel i, #creatorsNotePanel i {
+        #projectInfoPanel i, #studioInfoPanel i, #hintPanel i, #creatorsNotePanel i {
             font-size: 11px !important;
             font-weight: 500;
             line-height: 1.5;
@@ -307,6 +501,11 @@ transform: translate(-2px, -52%);
             text-align-last: left;
             -webkit-hyphens: auto;
             -ms-hyphens: auto;
+            color: #fff !important;
+            text-shadow:
+                -1px 0 red,
+                1px 0 cyan,
+                0 0 6px #fff !important;
         }
 
         #projectInfoPanel i strong, #studioInfoPanel i strong, #hintPanel i strong, #creatorsNotePanel i strong {
@@ -315,24 +514,63 @@ transform: translate(-2px, -52%);
             display: inline-block;
             margin-bottom: 14px;
             text-transform: uppercase;
+            color: #fff !important;
+            text-shadow:
+                -2px 0 red,
+                2px 0 cyan,
+                0 0 12px #fff,
+                0 0 24px #ff00ff !important;
+            animation: chromatic 3s infinite !important;
+        }
+
+        #projectInfoPanel strong, #studioInfoPanel strong, #hintPanel strong, #creatorsNotePanel strong {
+            color: #fff !important;
+            text-shadow:
+                -1px 0 red,
+                1px 0 cyan,
+                0 0 10px #fff,
+                0 0 20px #00ffff !important;
         }
 
         #projectInfoPanel a, #studioInfoPanel a, #hintPanel a, #creatorsNotePanel a {
-            color: #2a2a2a;
+            color: #ffff00 !important;
             text-decoration: underline;
             font-weight: 700;
+            text-shadow:
+                -1px 0 red,
+                1px 0 cyan,
+                0 0 10px #ffff00 !important;
+            transition: all 0.3s ease;
         }
 
+        #projectInfoPanel a:hover, #studioInfoPanel a:hover, #hintPanel a:hover, #creatorsNotePanel a:hover {
+            color: #ff00ff !important;
+            text-shadow:
+                -2px 0 red,
+                2px 0 cyan,
+                0 0 20px #ff00ff,
+                0 0 40px #00ffff !important;
+        }
+
+        /* PSYCHEDELIC SELECTION STATE */
         .selected {
-            background: #3a3a3a !important;
-            border-color: #1a1a1a !important;
-            box-shadow: 8px 8px 0 rgba(0,0,0,0.5), inset 0 0 20px rgba(0,0,0,0.3) !important;
+            background: linear-gradient(45deg, #ff0080, #00ffff, #ff00ff, #ffff00) !important;
+            background-size: 400% 400% !important;
+            animation: psychedelic-bg 3s ease infinite !important;
+            border-color: rgba(255,255,255,0.9) !important;
+            box-shadow:
+                0 0 40px rgba(255,0,255,1),
+                0 0 80px rgba(0,255,255,0.8),
+                inset 0 0 40px rgba(255,255,255,0.3) !important;
         }
 
-#scrollingTextContainer {
+        /* PSYCHEDELIC SCROLLING TEXT */
+        #scrollingTextContainer {
             position: fixed;
             inset: 0;
-            background: rgba(86, 86, 86, 0.95);
+            background: linear-gradient(180deg, #ff0080, #00ffff, #ff00ff, #ffff00) !important;
+            background-size: 400% 400% !important;
+            animation: psychedelic-bg 8s ease infinite !important;
             display: none;
             opacity: 0;
             z-index: 2000;
@@ -344,7 +582,7 @@ transform: translate(-2px, -52%);
             width: 50%;
             left: 25%;
             transform: translateY(100vh);
-            color: #1a1a1a;
+            color: #fff !important;
             font-family: 'Space Grotesk', 'Inter', monospace;
             font-size: min(0.7vw, 15px);
             line-height: 1.8;
@@ -352,7 +590,44 @@ transform: translate(-2px, -52%);
             transition: transform 68s linear;
             white-space: pre;
             font-weight: 600;
-            text-shadow: 1px 1px 0 rgba(255,255,255,0.1);
+            text-shadow:
+                -1px 0 red,
+                1px 0 cyan,
+                0 0 10px #fff,
+                0 0 20px #ff00ff !important;
+            animation: chromatic 4s infinite !important;
+        }
+
+        /* GLOBAL TEXT CHROMATIC ABERRATION */
+        p, span, h1, h2, h3, h4, h5, h6, label, button {
+            color: #fff !important;
+            text-shadow:
+                -1px 0 red,
+                1px 0 cyan,
+                0 0 10px #fff,
+                0 0 20px #ff00ff,
+                0 0 30px #00ffff !important;
+        }
+
+        /* PSYCHEDELIC BUTTONS */
+        button {
+            background: linear-gradient(135deg, rgba(255,0,128,0.6), rgba(128,0,255,0.6)) !important;
+            backdrop-filter: blur(15px) saturate(3) !important;
+            border: 2px solid rgba(255,255,255,0.6) !important;
+            border-radius: 20px !important;
+            box-shadow:
+                0 0 20px rgba(255,0,255,0.8),
+                0 0 40px rgba(0,255,255,0.6) !important;
+            transition: all 0.3s ease;
+            cursor: pointer !important;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, rgba(128,0,255,0.8), rgba(255,0,128,0.8)) !important;
+            box-shadow:
+                0 0 40px rgba(255,0,255,1),
+                0 0 80px rgba(0,255,255,1) !important;
+            transform: scale(1.05) !important;
         }
 
 
