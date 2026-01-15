@@ -247,7 +247,95 @@
             display: block;
         }
 
-        /* OVERLAY */
+        /* FULLSCREEN MEDIA */
+        .fullscreen-media {
+            width: 100%;
+            max-width: 1800px;
+            height: 700px;
+            margin: 3rem auto;
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.1);
+            overflow: hidden;
+            cursor: pointer;
+            transition: border-color 0.3s;
+            position: relative;
+        }
+
+        .fullscreen-media:hover {
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .fullscreen-media video,
+        .fullscreen-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .fullscreen-media::after {
+            content: 'CLICK TO PLAY';
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            color: rgba(255,255,255,0.6);
+            pointer-events: none;
+        }
+
+        /* MEDIA OVERLAY */
+        .media-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 9999;
+            display: none;
+        }
+
+        .media-overlay.active {
+            display: block;
+        }
+
+        .media-overlay-close {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            width: 60px;
+            height: 60px;
+            background: rgba(0,0,0,0.8);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 300;
+        }
+
+        .media-overlay-close:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.6);
+        }
+
+        .media-overlay video,
+        .media-overlay img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* OVERLAY (для iframe) */
         .overlay {
             position: fixed;
             top: 0;
@@ -415,6 +503,19 @@
             .spacer-40 { height: 20vh; }
             .spacer-30 { height: 15vh; }
             .spacer-20 { height: 10vh; }
+
+            .fullscreen-media {
+                height: 100vh;
+                margin: 2rem 0;
+            }
+
+            .media-overlay-close {
+                top: 1rem;
+                left: 1rem;
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -443,6 +544,12 @@
         <div class="spacer-5"></div>
         <div class="body-text">
             From desktop, you use WASD keys to walk around and mouse to look. In VR mode, hand controllers for locomotion. On mobile, touch controls. The experience is identical across all platforms—same assets, same quality, same choreography.
+        </div>
+        <div class="spacer-10"></div>
+        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_029c9577e1d245f386a0ebe2c64a9b6e/1080p/mp4/file.mp4', 'video')">
+            <video muted loop playsinline>
+                <source src="https://video.wixstatic.com/video/54a996_029c9577e1d245f386a0ebe2c64a9b6e/1080p/mp4/file.mp4" type="video/mp4">
+            </video>
         </div>
     </section>
 
@@ -473,6 +580,12 @@
                 <div class="card-text">Track user movement through 3D space, identify which garments attract attention, measure engagement time per section. Data-driven fashion presentation.</div>
             </div>
         </div>
+        <div class="spacer-10"></div>
+        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_06faa3498bf146b5aa739b4c1012aadd/1080p/mp4/file.mp4', 'video')">
+            <video muted loop playsinline>
+                <source src="https://video.wixstatic.com/video/54a996_06faa3498bf146b5aa739b4c1012aadd/1080p/mp4/file.mp4" type="video/mp4">
+            </video>
+        </div>
     </section>
 
     <!-- FOR USERS -->
@@ -501,6 +614,12 @@
                 <div class="card-title">Interactive Ownership</div>
                 <div class="card-text">With token-gated events, your ticket becomes proof of attendance. You own participation, not just a memory. NFT tickets can include exclusive wearables for your avatars.</div>
             </div>
+        </div>
+        <div class="spacer-10"></div>
+        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_21a2c46e200b4c8d872f84bc1ae72f48/1080p/mp4/file.mp4', 'video')">
+            <video muted loop playsinline>
+                <source src="https://video.wixstatic.com/video/54a996_21a2c46e200b4c8d872f84bc1ae72f48/1080p/mp4/file.mp4" type="video/mp4">
+            </video>
         </div>
     </section>
 
@@ -549,6 +668,12 @@
                 <div class="card-title">Sustainability</div>
                 <div class="card-text">Zero physical waste, no travel emissions, no single-use set construction. Everything exists as code, infinitely replicable without resource consumption.</div>
             </div>
+        </div>
+        <div class="spacer-10"></div>
+        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_029c9577e1d245f386a0ebe2c64a9b6e/1080p/mp4/file.mp4', 'video')">
+            <video muted loop playsinline>
+                <source src="https://video.wixstatic.com/video/54a996_029c9577e1d245f386a0ebe2c64a9b6e/1080p/mp4/file.mp4" type="video/mp4">
+            </video>
         </div>
     </section>
 
@@ -633,6 +758,12 @@
         <div class="spacer-5"></div>
         <div class="body-text">
             The runway is a minted .html application on Ethereum. Through its animation URL, the show can be experienced in three different ways: a marketplace version with 3 fixed cameras, a desktop version that allows users to move freely during the show, and a VR version. All three are packed into the same link.
+        </div>
+        <div class="spacer-10"></div>
+        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_029c9577e1d245f386a0ebe2c64a9b6e/1080p/mp4/file.mp4', 'video')">
+            <video muted loop playsinline>
+                <source src="https://video.wixstatic.com/video/54a996_029c9577e1d245f386a0ebe2c64a9b6e/1080p/mp4/file.mp4" type="video/mp4">
+            </video>
         </div>
     </section>
 
@@ -780,6 +911,12 @@
                 <div class="stat-label">RENDERING</div>
             </div>
         </div>
+        <div class="spacer-10"></div>
+        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_06faa3498bf146b5aa739b4c1012aadd/1080p/mp4/file.mp4', 'video')">
+            <video muted loop playsinline>
+                <source src="https://video.wixstatic.com/video/54a996_06faa3498bf146b5aa739b4c1012aadd/1080p/mp4/file.mp4" type="video/mp4">
+            </video>
+        </div>
     </section>
 
     <!-- C2W2 OPTIMIZATION -->
@@ -893,6 +1030,12 @@
         <div class="monologue-text" style="font-weight: 700; font-size: clamp(1.2rem, 2vw, 1.8rem);">
             Welcome to the existence. Click to be.
         </div>
+        <div class="spacer-10"></div>
+        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_029c9577e1d245f386a0ebe2c64a9b6e/1080p/mp4/file.mp4', 'video')">
+            <video muted loop playsinline>
+                <source src="https://video.wixstatic.com/video/54a996_029c9577e1d245f386a0ebe2c64a9b6e/1080p/mp4/file.mp4" type="video/mp4">
+            </video>
+        </div>
     </section>
 
     <!-- C2W2 LINKS -->
@@ -929,6 +1072,12 @@
         <div class="spacer-10"></div>
         <div class="body-text">
             60 avatars were designed. 16 were selected for the launch runway and New Codes exhibition at Royal Institution, London. The event was token-gated—$20 tickets purchased between November 1-2, show on November 9. Attendees received "The Viewer," a complimentary avatar they could showcase during the event.
+        </div>
+        <div class="spacer-10"></div>
+        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_ec462c493fd541a6801a7b1e1ccd59fb/1080p/mp4/file.mp4', 'video')">
+            <video muted loop playsinline>
+                <source src="https://video.wixstatic.com/video/54a996_ec462c493fd541a6801a7b1e1ccd59fb/1080p/mp4/file.mp4" type="video/mp4">
+            </video>
         </div>
     </section>
 
@@ -975,6 +1124,12 @@
         <div class="body-text-large">
             16 selected avatars were showcased at the New Codes exhibition at Royal Institution, London. Bridging virtual and physical spaces, demonstrating that digital fashion has real-world cultural presence.
         </div>
+        <div class="spacer-10"></div>
+        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_0232a6790a7647ef862d91e3f8e7a223/1080p/mp4/file.mp4', 'video')">
+            <video muted loop playsinline>
+                <source src="https://video.wixstatic.com/video/54a996_0232a6790a7647ef862d91e3f8e7a223/1080p/mp4/file.mp4" type="video/mp4">
+            </video>
+        </div>
     </section>
 
     <!-- C2W ACHIEVEMENTS -->
@@ -1011,6 +1166,12 @@
         <div class="spacer-5"></div>
         <div class="body-text">
             Each avatar design explored different themes—some inspired by traditional art mediums transformed into digital beings, others purely experimental virtual fashion pushing the boundaries of what clothing could mean in digital space. The show wasn't just about displaying garments. It was a proof of concept: fashion shows don't need physical venues, exclusive guest lists, or million-dollar budgets. They need vision, technology, and accessibility. C2W demonstrated all three.
+        </div>
+        <div class="spacer-10"></div>
+        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_008a92463e2c490bae5c5176ccd0fa13/1080p/mp4/file.mp4', 'video')">
+            <video muted loop playsinline>
+                <source src="https://video.wixstatic.com/video/54a996_008a92463e2c490bae5c5176ccd0fa13/1080p/mp4/file.mp4" type="video/mp4">
+            </video>
         </div>
     </section>
 
@@ -1094,7 +1255,40 @@
         <div class="overlay-content" id="overlay-content"></div>
     </div>
 
+    <!-- MEDIA OVERLAY -->
+    <div class="media-overlay" id="mediaOverlay">
+        <button class="media-overlay-close" onclick="closeMediaOverlay()">×</button>
+        <div id="mediaOverlayContent"></div>
+    </div>
+
     <script>
+        // Fullscreen Media Functions
+        function openFullscreenMedia(src, type) {
+            const overlay = document.getElementById('mediaOverlay');
+            const content = document.getElementById('mediaOverlayContent');
+
+            if (type === 'video') {
+                content.innerHTML = `<video autoplay loop style="width: 100%; height: 100%; object-fit: contain;"><source src="${src}" type="video/mp4"></video>`;
+                // Unmute after a brief delay to allow autoplay
+                setTimeout(() => {
+                    const video = content.querySelector('video');
+                    if (video) video.muted = false;
+                }, 100);
+            } else if (type === 'image') {
+                content.innerHTML = `<img src="${src}" style="width: 100%; height: 100%; object-fit: contain;">`;
+            }
+
+            overlay.classList.add('active');
+        }
+
+        function closeMediaOverlay() {
+            const overlay = document.getElementById('mediaOverlay');
+            const content = document.getElementById('mediaOverlayContent');
+            overlay.classList.remove('active');
+            content.innerHTML = '';
+        }
+
+        // Iframe Overlay Functions
         function openOverlay(src, type) {
             const overlay = document.getElementById('overlay');
             const content = document.getElementById('overlay-content');
@@ -1115,8 +1309,12 @@
             content.innerHTML = '';
         }
 
+        // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeOverlay();
+            if (e.key === 'Escape') {
+                closeOverlay();
+                closeMediaOverlay();
+            }
         });
 
         document.getElementById('overlay').addEventListener('click', (e) => {
