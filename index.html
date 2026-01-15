@@ -6,7 +6,7 @@
     <title>VIRTUAL RUNWAY — C2W2 × C2W × DECENTRALIZE</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Coral+Pixels&family=Share+Tech+Mono&family=Reenie+Beanie&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -15,11 +15,12 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Share Tech Mono', monospace;
             background: #000 url('https://raw.githubusercontent.com/decentralize-dfw/runway/main/beton.jpg') repeat;
             background-size: 100% auto;
             color: #00ff00;
             overflow-x: hidden;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         /* SPACERS */
@@ -32,7 +33,7 @@
 
         /* TYPOGRAPHY */
         .page-number {
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'Share Tech Mono', monospace;
             font-size: 11px;
             font-weight: 500;
             letter-spacing: 0.2em;
@@ -40,10 +41,11 @@
             text-align: center;
             opacity: 0.8;
             margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         .section-label {
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'Share Tech Mono', monospace;
             font-size: 11px;
             font-weight: 600;
             letter-spacing: 0.25em;
@@ -51,63 +53,68 @@
             text-align: center;
             opacity: 0.9;
             margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         .title-massive {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Coral Pixels', sans-serif;
             font-size: clamp(3rem, 12vw, 12rem);
-            font-weight: 900;
+            font-weight: 400;
             line-height: 0.9;
-            letter-spacing: -0.03em;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
             text-align: center;
             margin: 0 auto;
             max-width: 1400px;
             padding: 0 2rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.9);
         }
 
         .title-large {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Coral Pixels', sans-serif;
             font-size: clamp(2.5rem, 8vw, 8rem);
-            font-weight: 900;
+            font-weight: 400;
             line-height: 1;
-            letter-spacing: -0.02em;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
             text-align: center;
             margin: 0 auto;
             max-width: 1200px;
             padding: 0 2rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.9);
         }
 
         .title-medium {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Coral Pixels', sans-serif;
             font-size: clamp(2rem, 5vw, 5rem);
-            font-weight: 800;
+            font-weight: 400;
             line-height: 1.1;
-            letter-spacing: -0.01em;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
             text-align: center;
             margin: 0 auto;
             max-width: 1000px;
             padding: 0 2rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.9);
         }
 
         .subtitle {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: clamp(0.9rem, 1.5vw, 1.2rem);
-            font-weight: 500;
-            line-height: 1.6;
-            letter-spacing: 0.05em;
+            font-family: 'Reenie Beanie', cursive;
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            font-weight: 400;
+            line-height: 1.4;
+            letter-spacing: 0.02em;
             text-align: center;
             margin: 0.5rem auto 0;
             max-width: 800px;
             padding: 0 2rem;
             opacity: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         .body-text {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(1rem, 1.8vw, 1.4rem);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: clamp(0.9rem, 1.5vw, 1.2rem);
             font-weight: 400;
             line-height: 1.8;
             text-align: center;
@@ -115,22 +122,24 @@
             max-width: 900px;
             padding: 0 2rem;
             opacity: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         .body-text-large {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(1.1rem, 2vw, 1.6rem);
-            font-weight: 500;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: clamp(1rem, 1.8vw, 1.4rem);
+            font-weight: 400;
             line-height: 1.7;
             text-align: center;
             margin: 0 auto;
             max-width: 1000px;
             padding: 0 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         .monologue-text {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(1rem, 1.6vw, 1.3rem);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: clamp(0.9rem, 1.5vw, 1.2rem);
             font-weight: 400;
             line-height: 1.9;
             text-align: center;
@@ -138,6 +147,7 @@
             max-width: 900px;
             padding: 0 2rem;
             opacity: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         /* STATS GRID */
@@ -155,20 +165,22 @@
         }
 
         .stat-number {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Coral Pixels', sans-serif;
             font-size: clamp(3rem, 8vw, 7rem);
-            font-weight: 900;
+            font-weight: 400;
             line-height: 1;
             margin-bottom: 0.3rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.9);
         }
 
         .stat-label {
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'Share Tech Mono', monospace;
             font-size: 11px;
             font-weight: 600;
             letter-spacing: 0.2em;
             text-transform: uppercase;
             opacity: 0.9;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         /* CHAPTER BLOCKS */
@@ -190,33 +202,36 @@
         }
 
         .chapter-number {
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'Share Tech Mono', monospace;
             font-size: 10px;
             font-weight: 600;
             letter-spacing: 0.3em;
             text-transform: uppercase;
             opacity: 0.8;
             margin-bottom: 0.3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         .chapter-title {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(1.5rem, 3vw, 2.5rem);
-            font-weight: 800;
+            font-family: 'Reenie Beanie', cursive;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 400;
             line-height: 1.2;
-            letter-spacing: -0.01em;
-            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            text-transform: none;
             margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         .chapter-description {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(1rem, 1.6vw, 1.3rem);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: clamp(0.9rem, 1.5vw, 1.2rem);
             font-weight: 400;
             line-height: 1.8;
             max-width: 800px;
             margin: 0 auto;
             opacity: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         /* FEATURED MEDIA */
@@ -254,36 +269,62 @@
             max-width: 1800px;
             height: 700px;
             margin: 1rem auto;
-            background: #111;
+            background: #000;
             border: 1px solid rgba(0,255,0,0.2);
             overflow: hidden;
             cursor: pointer;
             transition: border-color 0.3s;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .fullscreen-media:hover {
             border-color: rgba(0,255,0,0.5);
         }
 
-        .fullscreen-media video,
-        .fullscreen-media img {
-            width: 100%;
+        .fullscreen-media video {
             height: 100%;
-            object-fit: cover;
+            width: auto;
+            max-width: 100%;
             display: block;
+            object-fit: contain;
         }
 
-        .fullscreen-media::after {
-            content: 'CLICK TO PLAY';
+        .fullscreen-media .play-button {
             position: absolute;
-            bottom: 2rem;
-            right: 2rem;
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 10px;
-            font-weight: 600;
-            letter-spacing: 0.2em;
-            color: rgba(0,255,0,0.8);
+            width: 80px;
+            height: 80px;
+            background: rgba(0,255,0,0.2);
+            border: 3px solid #00ff00;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(0,255,0,0.4);
+        }
+
+        .fullscreen-media:hover .play-button {
+            background: rgba(0,255,0,0.3);
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0,255,0,0.6);
+        }
+
+        .fullscreen-media .play-button::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 24px solid #00ff00;
+            border-top: 14px solid transparent;
+            border-bottom: 14px solid transparent;
+            margin-left: 6px;
+        }
+
+        .fullscreen-media.playing .play-button {
+            opacity: 0;
             pointer-events: none;
         }
 
@@ -417,20 +458,22 @@
         }
 
         .card-title {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(1.2rem, 2vw, 1.6rem);
-            font-weight: 700;
-            letter-spacing: -0.01em;
-            text-transform: uppercase;
+            font-family: 'Reenie Beanie', cursive;
+            font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            text-transform: none;
             margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         .card-text {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: clamp(0.85rem, 1.3vw, 1rem);
             font-weight: 400;
             line-height: 1.7;
             opacity: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         /* SECTION */
@@ -457,7 +500,7 @@
             background: transparent;
             border: 2px solid rgba(0,255,0,0.3);
             color: #00ff00;
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'Share Tech Mono', monospace;
             font-size: 11px;
             font-weight: 600;
             letter-spacing: 0.2em;
@@ -466,6 +509,7 @@
             cursor: pointer;
             transition: all 0.3s;
             display: inline-block;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         .btn:hover {
@@ -482,12 +526,13 @@
         }
 
         .parts-list-item {
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'Share Tech Mono', monospace;
             font-size: clamp(0.85rem, 1.2vw, 1rem);
             font-weight: 500;
             letter-spacing: 0.05em;
             line-height: 2;
             opacity: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         /* RESPONSIVE */
@@ -548,10 +593,11 @@
             From desktop, you use WASD keys to walk around and mouse to look. In VR mode, hand controllers for locomotion. On mobile, touch controls. The experience is identical across all platforms—same assets, same quality, same choreography.
         </div>
         <div class="spacer-10"></div>
-        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_029c9577e1d245f386a0ebe2c64a9b6e/1080p/mp4/file.mp4', 'video')">
+        <div class="fullscreen-media">
             <video muted loop playsinline>
                 <source src="https://video.wixstatic.com/video/54a996_029c9577e1d245f386a0ebe2c64a9b6e/1080p/mp4/file.mp4" type="video/mp4">
             </video>
+            <div class="play-button"></div>
         </div>
     </section>
 
@@ -583,10 +629,19 @@
             </div>
         </div>
         <div class="spacer-10"></div>
-        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_18ce69160dc64eaa88c1343afa08cd43/1080p/mp4/file.mp4', 'video')">
+        <div class="fullscreen-media">
             <video muted loop playsinline>
                 <source src="https://video.wixstatic.com/video/54a996_18ce69160dc64eaa88c1343afa08cd43/1080p/mp4/file.mp4" type="video/mp4">
             </video>
+            <div class="play-button"></div>
+        </div>
+    </section>
+
+    <!-- FOR USERS -->
+    <section>
+        <div class="page-number">PAGE 04 — FOR USERS</div>https://video.wixstatic.com/video/54a996_18ce69160dc64eaa88c1343afa08cd43/1080p/mp4/file.mp4" type="video/mp4">
+            </video>
+            <div class="play-button"></div>
         </div>
     </section>
 
@@ -618,10 +673,19 @@
             </div>
         </div>
         <div class="spacer-10"></div>
-        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_21a2c46e200b4c8d872f84bc1ae72f48/1080p/mp4/file.mp4', 'video')">
+        <div class="fullscreen-media">
             <video muted loop playsinline>
                 <source src="https://video.wixstatic.com/video/54a996_21a2c46e200b4c8d872f84bc1ae72f48/1080p/mp4/file.mp4" type="video/mp4">
             </video>
+            <div class="play-button"></div>
+        </div>
+    </section>
+
+    <!-- FOR USERS -->
+    <section>
+        <div class="page-number">PAGE 04 — FOR USERS</div>https://video.wixstatic.com/video/54a996_21a2c46e200b4c8d872f84bc1ae72f48/1080p/mp4/file.mp4" type="video/mp4">
+            </video>
+            <div class="play-button"></div>
         </div>
     </section>
 
@@ -672,10 +736,19 @@
             </div>
         </div>
         <div class="spacer-10"></div>
-        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_716b93f1589a442fb9d65b8ed68aa803/1080p/mp4/file.mp4', 'video')">
+        <div class="fullscreen-media">
             <video muted loop playsinline>
                 <source src="https://video.wixstatic.com/video/54a996_716b93f1589a442fb9d65b8ed68aa803/1080p/mp4/file.mp4" type="video/mp4">
             </video>
+            <div class="play-button"></div>
+        </div>
+    </section>
+
+    <!-- FOR USERS -->
+    <section>
+        <div class="page-number">PAGE 04 — FOR USERS</div>https://video.wixstatic.com/video/54a996_716b93f1589a442fb9d65b8ed68aa803/1080p/mp4/file.mp4" type="video/mp4">
+            </video>
+            <div class="play-button"></div>
         </div>
     </section>
 
@@ -762,10 +835,19 @@
             The runway is a minted .html application on Ethereum. Through its animation URL, the show can be experienced in three different ways: a marketplace version with 3 fixed cameras, a desktop version that allows users to move freely during the show, and a VR version. All three are packed into the same link.
         </div>
         <div class="spacer-10"></div>
-        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_a5d98402ce57459fa2c3448998051112/1080p/mp4/file.mp4', 'video')">
+        <div class="fullscreen-media">
             <video muted loop playsinline>
                 <source src="https://video.wixstatic.com/video/54a996_a5d98402ce57459fa2c3448998051112/1080p/mp4/file.mp4" type="video/mp4">
             </video>
+            <div class="play-button"></div>
+        </div>
+    </section>
+
+    <!-- FOR USERS -->
+    <section>
+        <div class="page-number">PAGE 04 — FOR USERS</div>https://video.wixstatic.com/video/54a996_a5d98402ce57459fa2c3448998051112/1080p/mp4/file.mp4" type="video/mp4">
+            </video>
+            <div class="play-button"></div>
         </div>
     </section>
 
@@ -914,10 +996,19 @@
             </div>
         </div>
         <div class="spacer-10"></div>
-        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_061edf32058b42298197ed0ce603f18a/1080p/mp4/file.mp4', 'video')">
+        <div class="fullscreen-media">
             <video muted loop playsinline>
                 <source src="https://video.wixstatic.com/video/54a996_061edf32058b42298197ed0ce603f18a/1080p/mp4/file.mp4" type="video/mp4">
             </video>
+            <div class="play-button"></div>
+        </div>
+    </section>
+
+    <!-- FOR USERS -->
+    <section>
+        <div class="page-number">PAGE 04 — FOR USERS</div>https://video.wixstatic.com/video/54a996_061edf32058b42298197ed0ce603f18a/1080p/mp4/file.mp4" type="video/mp4">
+            </video>
+            <div class="play-button"></div>
         </div>
     </section>
 
@@ -1033,10 +1124,19 @@
             Welcome to the existence. Click to be.
         </div>
         <div class="spacer-10"></div>
-        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_054e886262bf41e0bef2cbe7bf171cb2/1080p/mp4/file.mp4', 'video')">
+        <div class="fullscreen-media">
             <video muted loop playsinline>
                 <source src="https://video.wixstatic.com/video/54a996_054e886262bf41e0bef2cbe7bf171cb2/1080p/mp4/file.mp4" type="video/mp4">
             </video>
+            <div class="play-button"></div>
+        </div>
+    </section>
+
+    <!-- FOR USERS -->
+    <section>
+        <div class="page-number">PAGE 04 — FOR USERS</div>https://video.wixstatic.com/video/54a996_054e886262bf41e0bef2cbe7bf171cb2/1080p/mp4/file.mp4" type="video/mp4">
+            </video>
+            <div class="play-button"></div>
         </div>
     </section>
 
@@ -1076,10 +1176,19 @@
             60 avatars were designed. 16 were selected for the launch runway and New Codes exhibition at Royal Institution, London. The event was token-gated—$20 tickets purchased between November 1-2, show on November 9. Attendees received "The Viewer," a complimentary avatar they could showcase during the event.
         </div>
         <div class="spacer-10"></div>
-        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_ec462c493fd541a6801a7b1e1ccd59fb/1080p/mp4/file.mp4', 'video')">
+        <div class="fullscreen-media">
             <video muted loop playsinline>
                 <source src="https://video.wixstatic.com/video/54a996_ec462c493fd541a6801a7b1e1ccd59fb/1080p/mp4/file.mp4" type="video/mp4">
             </video>
+            <div class="play-button"></div>
+        </div>
+    </section>
+
+    <!-- FOR USERS -->
+    <section>
+        <div class="page-number">PAGE 04 — FOR USERS</div>https://video.wixstatic.com/video/54a996_ec462c493fd541a6801a7b1e1ccd59fb/1080p/mp4/file.mp4" type="video/mp4">
+            </video>
+            <div class="play-button"></div>
         </div>
     </section>
 
@@ -1127,10 +1236,19 @@
             16 selected avatars were showcased at the New Codes exhibition at Royal Institution, London. Bridging virtual and physical spaces, demonstrating that digital fashion has real-world cultural presence.
         </div>
         <div class="spacer-10"></div>
-        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_0232a6790a7647ef862d91e3f8e7a223/1080p/mp4/file.mp4', 'video')">
+        <div class="fullscreen-media">
             <video muted loop playsinline>
                 <source src="https://video.wixstatic.com/video/54a996_0232a6790a7647ef862d91e3f8e7a223/1080p/mp4/file.mp4" type="video/mp4">
             </video>
+            <div class="play-button"></div>
+        </div>
+    </section>
+
+    <!-- FOR USERS -->
+    <section>
+        <div class="page-number">PAGE 04 — FOR USERS</div>https://video.wixstatic.com/video/54a996_0232a6790a7647ef862d91e3f8e7a223/1080p/mp4/file.mp4" type="video/mp4">
+            </video>
+            <div class="play-button"></div>
         </div>
     </section>
 
@@ -1170,10 +1288,19 @@
             Each avatar design explored different themes—some inspired by traditional art mediums transformed into digital beings, others purely experimental virtual fashion pushing the boundaries of what clothing could mean in digital space. The show wasn't just about displaying garments. It was a proof of concept: fashion shows don't need physical venues, exclusive guest lists, or million-dollar budgets. They need vision, technology, and accessibility. C2W demonstrated all three.
         </div>
         <div class="spacer-10"></div>
-        <div class="fullscreen-media" onclick="openFullscreenMedia('https://video.wixstatic.com/video/54a996_008a92463e2c490bae5c5176ccd0fa13/1080p/mp4/file.mp4', 'video')">
+        <div class="fullscreen-media">
             <video muted loop playsinline>
                 <source src="https://video.wixstatic.com/video/54a996_008a92463e2c490bae5c5176ccd0fa13/1080p/mp4/file.mp4" type="video/mp4">
             </video>
+            <div class="play-button"></div>
+        </div>
+    </section>
+
+    <!-- FOR USERS -->
+    <section>
+        <div class="page-number">PAGE 04 — FOR USERS</div>https://video.wixstatic.com/video/54a996_008a92463e2c490bae5c5176ccd0fa13/1080p/mp4/file.mp4" type="video/mp4">
+            </video>
+            <div class="play-button"></div>
         </div>
     </section>
 
@@ -1264,14 +1391,51 @@
     </div>
 
     <script>
-        // Fullscreen Media Functions
+        // Inline Video Player System
+        document.addEventListener('DOMContentLoaded', function() {
+            const videoContainers = document.querySelectorAll('.fullscreen-media');
+
+            videoContainers.forEach(container => {
+                const video = container.querySelector('video');
+                const playButton = container.querySelector('.play-button');
+
+                if (!video) return;
+
+                // Click to play/pause
+                container.addEventListener('click', function() {
+                    if (video.paused) {
+                        video.play();
+                        video.muted = false;
+                        container.classList.add('playing');
+                    } else {
+                        video.pause();
+                        container.classList.remove('playing');
+                    }
+                });
+
+                // Reset on scroll (when out of view)
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (!entry.isIntersecting && !video.paused) {
+                            video.pause();
+                            video.currentTime = 0;
+                            video.muted = true;
+                            container.classList.remove('playing');
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                observer.observe(container);
+            });
+        });
+
+        // Fullscreen Media Functions (for overlays)
         function openFullscreenMedia(src, type) {
             const overlay = document.getElementById('mediaOverlay');
             const content = document.getElementById('mediaOverlayContent');
 
             if (type === 'video') {
                 content.innerHTML = `<video autoplay loop style="width: 100%; height: 100%; object-fit: contain;"><source src="${src}" type="video/mp4"></video>`;
-                // Unmute after a brief delay to allow autoplay
                 setTimeout(() => {
                     const video = content.querySelector('video');
                     if (video) video.muted = false;
