@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Coral+Pixels&family=Share+Tech+Mono&family=Reenie+Beanie&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Jersey+25+Charted&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Jacquarda+Bastarda+9+Charted&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,16 +16,16 @@
             box-sizing: border-box;
         }
 .pixel-yazi {
-      font-family: "Jersey 25 Charted", sans-serif;
+      font-family: "IBM Plex Sans Condensed", sans-serif;//"Jersey 25 Charted", sans-serif;
       font-size: 50px;
     }
         body {
             font-family: 'Share Tech Mono', monospace;
-            background: #000; //url('https://raw.githubusercontent.com/decentralize-dfw/runway/main/beton.jpg') repeat;
+            background: white; //#000 url('https://raw.githubusercontent.com/decentralize-dfw/runway/main/beton.jpg') repeat;
             background-size: 100% auto;
-            color: #00ff00;
+            color: black; //#00ff00;
             overflow-x: hidden;
-            text-shadow: 10px 10px 4px rgba(0,0,0,1);
+            //text-shadow: 10px 10px 4px rgba(0,0,0,1);
         }
 
         /* SPACERS */
@@ -38,7 +38,7 @@
 
         /* TYPOGRAPHY */
         .page-number {
-            font-family: 'Share Tech Mono', monospace;
+            font-family: "IBM Plex Sans Condensed", sans-serif;//'Share Tech Mono', monospace;
             font-size: 11px;
             font-weight: 500;
             letter-spacing: 0.2em;
@@ -46,11 +46,11 @@
             text-align: center;
             opacity: 0.8;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+            //text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         .section-label {
-            font-family: 'Share Tech Mono', monospace;
+            font-family: "IBM Plex Sans Condensed", sans-serif;//'Share Tech Mono', monospace;
             font-size: 11px;
             font-weight: 600;
             letter-spacing: 0.25em;
@@ -58,11 +58,11 @@
             text-align: center;
             opacity: 0.9;
             margin-bottom: 0.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+            //text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         .title-massive {
-            font-family: 'Coral Pixels', sans-serif;
+            font-family: "IBM Plex Sans Condensed", sans-serif;//'Coral Pixels', sans-serif;
             font-size: clamp(3rem, 12vw, 12rem);
             font-weight: 400;
             line-height: 0.9;
@@ -72,11 +72,11 @@
             margin: 0 auto;
             max-width: 1400px;
             padding: 0 2rem;
-            text-shadow: 10px 10px 4px rgba(0,0,0,1);
+           //text-shadow:     4px 4px 4px rgba(0,0,0,1),     8px 8px 10px rgba(0,0,0,0.7); /* İkinci, daha geniş bir katman */
         }
 
         .title-large {
-            font-family: 'Coral Pixels', sans-serif;
+            font-family: "IBM Plex Sans Condensed", sans-serif;//'Coral Pixels', sans-serif;
             font-size: clamp(2.5rem, 8vw, 8rem);
             font-weight: 400;
             line-height: 1;
@@ -86,11 +86,11 @@
             margin: 0 auto;
             max-width: 1200px;
             padding: 0 2rem;
-            text-shadow: 10px 10px 4px rgba(0,0,0,1);
+           //text-shadow:     4px 4px 4px rgba(0,0,0,1),     8px 8px 10px rgba(0,0,0,0.7); /* İkinci, daha geniş bir katman */
         }
 
         .title-medium {
-            font-family: 'Coral Pixels', sans-serif;
+            font-family: "IBM Plex Sans Condensed", sans-serif;//'Coral Pixels', sans-serif;
             font-size: clamp(2rem, 5vw, 5rem);
             font-weight: 400;
             line-height: 1.1;
@@ -100,11 +100,11 @@
             margin: 0 auto;
             max-width: 1000px;
             padding: 0 2rem;
-            text-shadow: 10px 10px 4px rgba(0,0,0,1);
+            //text-shadow:     4px 4px 4px rgba(0,0,0,1),     8px 8px 10px rgba(0,0,0,0.7); /* İkinci, daha geniş bir katman */
         }
 
         .subtitle {
-            font-family: Helvetica, Arial, sans-serif;
+            font-family: "IBM Plex Sans Condensed", sans-serif;//Helvetica, Arial, sans-serif;
             font-size: clamp(1.5rem, 2.5vw, 2rem);
             font-weight: 700;
             line-height: 1.4;
@@ -114,11 +114,11 @@
             max-width: 800px;
             padding: 0 2rem;
             opacity: 1;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+            //text-shadow:     4px 4px 4px rgba(0,0,0,1),     8px 8px 10px rgba(0,0,0,0.7); /* İkinci, daha geniş bir katman */
         }
 
         .body-text {
-            font-family: Helvetica, Arial, sans-serif;
+            font-family: "IBM Plex Sans Condensed", sans-serif;//Helvetica, Arial, sans-serif;
             font-size: clamp(0.9rem, 1.5vw, 1.2rem);
             font-weight: 400;
             line-height: 1.8;
@@ -128,25 +128,23 @@
             padding: 0 2rem;
             opacity: 1;
             /* Virgül ile ayırarak üst üste iki katman gölge ekledik */
-text-shadow: 
-    4px 4px 4px rgba(0,0,0,1), 
-    8px 8px 10px rgba(0,0,0,0.7); /* İkinci, daha geniş bir katman */
+//text-shadow:     4px 4px 4px rgba(0,0,0,1),     8px 8px 10px rgba(0,0,0,0.7); /* İkinci, daha geniş bir katman */
         }
 
         .body-text-large {
-            font-family: Helvetica, Arial, sans-serif;
+            font-family: "IBM Plex Sans Condensed", sans-serif;//Helvetica, Arial, sans-serif;
             font-size: clamp(1rem, 1.8vw, 1.4rem);
-            font-weight: 800;
+            font-weight: 400;
             line-height: 1.7;
             text-align: center;
             margin: 0 auto;
             max-width: 1000px;
             padding: 0 2rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+           //text-shadow:     4px 4px 4px rgba(0,0,0,1),     8px 8px 10px rgba(0,0,0,0.7); /* İkinci, daha geniş bir katman */
         }
 
         .monologue-text {
-            font-family: Helvetica, Arial, sans-serif;
+            font-family: "IBM Plex Sans Condensed", sans-serif;//Helvetica, Arial, sans-serif;
             font-size: clamp(0.9rem, 1.5vw, 1.2rem);
             font-weight: 400;
             line-height: 1.9;
@@ -155,7 +153,7 @@ text-shadow:
             max-width: 900px;
             padding: 0 2rem;
             opacity: 1;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+            //text-shadow:     4px 4px 4px rgba(0,0,0,1),     8px 8px 10px rgba(0,0,0,0.7); /* İkinci, daha geniş bir katman */
         }
 
         /* STATS GRID */
@@ -178,7 +176,7 @@ text-shadow:
             font-weight: 400;
             line-height: 1;
             margin-bottom: 0.3rem;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.9);
+            //text-shadow: 3px 3px 6px rgba(0,0,0,0.9);
         }
 
         .stat-label {
@@ -188,7 +186,7 @@ text-shadow:
             letter-spacing: 0.2em;
             text-transform: uppercase;
             opacity: 0.9;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+           // text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         /* CHAPTER BLOCKS */
@@ -217,7 +215,7 @@ text-shadow:
             text-transform: uppercase;
             opacity: 0.8;
             margin-bottom: 0.3rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+           // text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         .chapter-title {
@@ -228,7 +226,7 @@ text-shadow:
             letter-spacing: 0;
             text-transform: none;
             margin-bottom: 0.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+            //text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         .chapter-description {
@@ -239,7 +237,7 @@ text-shadow:
             max-width: 800px;
             margin: 0 auto;
             opacity: 1;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+            //text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         /* FEATURED MEDIA */
@@ -305,7 +303,7 @@ text-shadow:
             width: 80px;
             height: 80px;
             background: rgba(0,255,0,0.2);
-            border: 3px solid #00ff00;
+            border: 3px solid black; //#00ff00;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -325,7 +323,7 @@ text-shadow:
             content: '';
             width: 0;
             height: 0;
-            border-left: 24px solid #00ff00;
+            border-left: 24px solid black; // #00ff00;
             border-top: 14px solid transparent;
             border-bottom: 14px solid transparent;
             margin-left: 6px;
@@ -360,7 +358,7 @@ text-shadow:
             height: 60px;
             background: rgba(0,0,0,0.8);
             border: 2px solid rgba(0,255,0,0.3);
-            color: #00ff00;
+            color: black; //#00ff00;
             font-size: 2rem;
             cursor: pointer;
             z-index: 10000;
@@ -419,7 +417,7 @@ text-shadow:
             height: 50px;
             background: rgba(0,255,0,0.1);
             border: 1px solid rgba(0,255,0,0.3);
-            color: #00ff00;
+            color: black; //#00ff00;
             font-size: 1.5rem;
             cursor: pointer;
             z-index: 10;
@@ -455,14 +453,14 @@ text-shadow:
         .content-card {
             text-align: center;
             padding: 1.5rem 1rem;
-            border: 1px solid rgba(0,255,0,0.15);
-            background: rgba(0,255,0,0.02);
+            border: 1px solid rgba(0,0,0,0.15);
+            background: rgba(0,0,0,0.02);
             transition: all 0.3s;
         }
 
         .content-card:hover {
-            border-color: rgba(0,255,0,0.4);
-            background: rgba(0,255,0,0.05);
+            border-color: rgba(0,0,0,0.4);
+            background: rgba(0,0,0,0.05);
         }
 
         .card-title {
@@ -472,7 +470,7 @@ text-shadow:
             letter-spacing: 0;
             text-transform: none;
             margin-bottom: 0.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+            //text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         .card-text {
@@ -481,7 +479,7 @@ text-shadow:
             font-weight: 400;
             line-height: 1.7;
             opacity: 1;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+           // text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         /* SECTION */
@@ -506,8 +504,8 @@ text-shadow:
         .btn {
             padding: 1rem 2rem;
             background: transparent;
-            border: 2px solid rgba(0,255,0,0.3);
-            color: #00ff00;
+            border: 2px solid rgba(0,0,0,0.3);
+            color: black; //#00ff00;
             font-family: 'Share Tech Mono', monospace;
             font-size: 11px;
             font-weight: 600;
@@ -517,12 +515,12 @@ text-shadow:
             cursor: pointer;
             transition: all 0.3s;
             display: inline-block;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+           // text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         .btn:hover {
-            background: rgba(0,255,0,0.1);
-            border-color: rgba(0,255,0,0.8);
+            background: rgba(0,0,0,0.1);
+            border-color: rgba(0,0,0,0.8);
         }
 
         /* LIST STYLE */
@@ -540,7 +538,7 @@ text-shadow:
             letter-spacing: 0.05em;
             line-height: 2;
             opacity: 1;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+           // text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         /* RESPONSIVE */
