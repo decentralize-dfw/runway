@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIRTUAL RUNWAY × DECENTRALIZE</title>
+    <title>VIRTUAL RUNWAY — C2W2 × C2W × DECENTRALIZE</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -15,373 +15,250 @@
         }
 
         body {
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000;
+            color: #fff;
             overflow-x: hidden;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            color: #fff;
-            position: relative;
         }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+        /* SPACERS */
+        .spacer-40 { height: 40vh; }
+        .spacer-30 { height: 30vh; }
+        .spacer-20 { height: 20vh; }
+        .spacer-15 { height: 15vh; }
+        .spacer-10 { height: 10vh; }
+        .spacer-5 { height: 5vh; }
 
-        /* FLOATING PARTICLES */
-        .particle {
-            position: fixed;
-            width: 4px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            animation: float 20s infinite;
-            pointer-events: none;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
-        }
-
-        /* NAVIGATION */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 1.5rem 3rem;
-            backdrop-filter: blur(20px);
-            background: rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .logo {
-            font-family: 'Space Grotesk', monospace;
-            font-size: 1.2rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            font-family: 'DM Sans', sans-serif;
+        /* TYPOGRAPHY */
+        .page-number {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
             font-weight: 500;
-            font-size: 0.9rem;
-            letter-spacing: 0.05em;
-            transition: opacity 0.3s;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
-        }
-
-        .nav-links a:hover {
-            opacity: 0.7;
-        }
-
-        /* HERO SECTION */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 6rem 2rem 2rem;
             text-align: center;
-            position: relative;
-        }
-
-        .hero h1 {
-            font-family: 'Space Grotesk', monospace;
-            font-size: clamp(3rem, 10vw, 8rem);
-            font-weight: 700;
-            line-height: 1;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
-            letter-spacing: -0.02em;
-        }
-
-        .hero p {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.2rem, 2.5vw, 2rem);
-            font-style: italic;
-            max-width: 800px;
-            margin: 0 auto 3rem;
-            line-height: 1.6;
-            opacity: 0.95;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            border: 2px solid rgba(255, 255, 255, 0.8);
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            text-decoration: none;
-            font-family: 'Space Grotesk', monospace;
-            font-weight: 600;
-            font-size: 0.9rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        /* SECTION STYLES */
-        section {
-            min-height: 100vh;
-            padding: 6rem 3rem;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        section:nth-child(even) {
-            background: rgba(0, 0, 0, 0.1);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-            max-width: 1000px;
+            opacity: 0.5;
+            margin-bottom: 3rem;
         }
 
         .section-label {
-            font-family: 'Space Grotesk', monospace;
-            font-size: 0.8rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            text-align: center;
+            opacity: 0.7;
+            margin-bottom: 2rem;
+        }
+
+        .title-massive {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(3rem, 12vw, 12rem);
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
+            text-align: center;
+            margin: 0 auto;
+            max-width: 1400px;
+            padding: 0 2rem;
+        }
+
+        .title-large {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 8rem);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            text-align: center;
+            margin: 0 auto;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+
+        .title-medium {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(2rem, 5vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+            text-transform: uppercase;
+            text-align: center;
+            margin: 0 auto;
+            max-width: 1000px;
+            padding: 0 2rem;
+        }
+
+        .subtitle {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+            font-weight: 500;
+            line-height: 1.6;
+            letter-spacing: 0.05em;
+            text-align: center;
+            margin: 2rem auto 0;
+            max-width: 800px;
+            padding: 0 2rem;
+            opacity: 0.85;
+        }
+
+        .body-text {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1rem, 1.8vw, 1.4rem);
+            font-weight: 400;
+            line-height: 1.8;
+            text-align: center;
+            margin: 0 auto;
+            max-width: 900px;
+            padding: 0 2rem;
+            opacity: 0.9;
+        }
+
+        .body-text-large {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1.1rem, 2vw, 1.6rem);
+            font-weight: 500;
+            line-height: 1.7;
+            text-align: center;
+            margin: 0 auto;
+            max-width: 1000px;
+            padding: 0 2rem;
+        }
+
+        .monologue-text {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1rem, 1.6vw, 1.3rem);
+            font-weight: 400;
+            line-height: 1.9;
+            text-align: center;
+            margin: 0 auto;
+            max-width: 900px;
+            padding: 0 2rem;
+            opacity: 0.95;
+        }
+
+        /* STATS GRID */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .stat-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        /* CHAPTER BLOCKS */
+        .chapter-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .chapter-item {
+            text-align: center;
+            margin-bottom: 5rem;
+            padding-bottom: 5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .chapter-item:last-child {
+            border-bottom: none;
+        }
+
+        .chapter-number {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
             font-weight: 600;
             letter-spacing: 0.3em;
             text-transform: uppercase;
-            opacity: 0.7;
+            opacity: 0.5;
             margin-bottom: 1rem;
         }
 
-        .section-title {
-            font-family: 'Space Grotesk', monospace;
-            font-size: clamp(2.5rem, 6vw, 5rem);
-            font-weight: 700;
-            line-height: 1.1;
+        .chapter-title {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            text-transform: uppercase;
             margin-bottom: 1.5rem;
-            text-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
         }
 
-        .section-description {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.1rem, 2vw, 1.5rem);
-            font-style: italic;
-            line-height: 1.7;
-            opacity: 0.9;
+        .chapter-description {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1rem, 1.6vw, 1.3rem);
+            font-weight: 400;
+            line-height: 1.8;
             max-width: 800px;
             margin: 0 auto;
-        }
-
-        /* CONTENT GRID */
-        .content-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            max-width: 1400px;
-            width: 100%;
-            margin-top: 3rem;
-        }
-
-        .content-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 2.5rem;
-            border-radius: 1rem;
-            transition: all 0.3s;
-        }
-
-        .content-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-        }
-
-        .content-card h3 {
-            font-family: 'Space Grotesk', monospace;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            letter-spacing: 0.05em;
-        }
-
-        .content-card p {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 1rem;
-            line-height: 1.8;
             opacity: 0.9;
         }
 
         /* FEATURED MEDIA */
-        .featured-media {
+        .media-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .media-wrapper {
+            position: relative;
             width: 100%;
-            max-width: 900px;
-            margin: 3rem auto;
-            border-radius: 1rem;
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.1);
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            background: rgba(0, 0, 0, 0.3);
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: transform 0.3s ease;
         }
 
-        .featured-media:hover {
-            transform: scale(1.02);
+        .media-wrapper:hover {
+            transform: scale(1.01);
+            border-color: rgba(255,255,255,0.3);
         }
 
-        .featured-media video,
-        .featured-media img {
+        .media-wrapper video,
+        .media-wrapper img {
             width: 100%;
             height: auto;
             display: block;
         }
 
-        /* CHAPTERS */
-        .chapters-container {
-            max-width: 1200px;
-            width: 100%;
-            margin-top: 3rem;
-        }
-
-        .chapter {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(15px);
-            border-left: 4px solid rgba(255, 255, 255, 0.5);
-            padding: 2rem 2.5rem;
-            margin-bottom: 2rem;
-            border-radius: 0.5rem;
-        }
-
-        .chapter-number {
-            font-family: 'Space Grotesk', monospace;
-            font-size: 0.9rem;
-            font-weight: 700;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            opacity: 0.7;
-            margin-bottom: 0.5rem;
-        }
-
-        .chapter-title {
-            font-family: 'Space Grotesk', monospace;
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            letter-spacing: 0.02em;
-        }
-
-        .chapter-text {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 1.05rem;
-            line-height: 1.8;
-            opacity: 0.9;
-        }
-
-        /* QUOTE BLOCK */
-        .quote-block {
-            max-width: 900px;
-            margin: 4rem auto;
-            padding: 3rem;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(20px);
-            border-left: 6px solid rgba(255, 255, 255, 0.6);
-            border-radius: 0.5rem;
-        }
-
-        .quote-block p {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            font-style: italic;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-        }
-
-        .quote-block p:last-child {
-            margin-bottom: 0;
-        }
-
-        /* STATS */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            width: 100%;
-            margin-top: 3rem;
-        }
-
-        .stat {
-            text-align: center;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            border-radius: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .stat-number {
-            font-family: 'Space Grotesk', monospace;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            line-height: 1;
-        }
-
-        .stat-label {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 500;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            opacity: 0.8;
-        }
-
-        /* MEDIA OVERLAY */
+        /* OVERLAY */
         .overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(0,0,0,0.98);
             z-index: 9999;
             display: none;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             padding: 2rem;
         }
 
@@ -391,24 +268,19 @@
 
         .overlay-content {
             position: relative;
-            max-width: 90%;
-            max-height: 90%;
+            max-width: 95%;
+            max-height: 95%;
             background: #000;
-            border-radius: 1rem;
-            overflow: hidden;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
         }
 
         .overlay-close {
             position: absolute;
             top: 1rem;
             right: 1rem;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            border: none;
-            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
             color: #fff;
             font-size: 1.5rem;
             cursor: pointer;
@@ -417,73 +289,122 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s;
+            font-family: 'IBM Plex Mono', monospace;
         }
 
         .overlay-close:hover {
-            background: rgba(255, 255, 255, 0.4);
-            transform: rotate(90deg);
+            background: rgba(255,255,255,0.2);
         }
 
         .overlay-content video,
         .overlay-content iframe {
-            width: 100%;
-            height: 80vh;
+            width: 90vw;
+            height: 85vh;
             display: block;
         }
 
-        /* FOOTER */
-        footer {
-            padding: 4rem 3rem 2rem;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(20px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
+        /* CONTENT GRID */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
-        .footer-links {
+        .content-card {
+            text-align: center;
+            padding: 3rem 2rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.02);
+            transition: all 0.3s;
+        }
+
+        .content-card:hover {
+            border-color: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .card-title {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1.2rem, 2vw, 1.6rem);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-text {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+            font-weight: 400;
+            line-height: 1.7;
+            opacity: 0.85;
+        }
+
+        /* SECTION */
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 8rem 0;
+        }
+
+        /* BUTTONS */
+        .btn-group {
             display: flex;
             gap: 2rem;
             justify-content: center;
             flex-wrap: wrap;
-            margin-bottom: 2rem;
+            margin-top: 3rem;
         }
 
-        .footer-links a {
+        .btn {
+            padding: 1.2rem 3rem;
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.3);
             color: #fff;
-            text-decoration: none;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.9rem;
-            opacity: 0.8;
-            transition: opacity 0.3s;
-        }
-
-        .footer-links a:hover {
-            opacity: 1;
-        }
-
-        .copyright {
-            font-family: 'Space Grotesk', monospace;
-            font-size: 0.75rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
             letter-spacing: 0.2em;
-            opacity: 0.5;
             text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.6);
+        }
+
+        /* LIST STYLE */
+        .parts-list {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .parts-list-item {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: clamp(0.85rem, 1.2vw, 1rem);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            line-height: 2;
+            opacity: 0.8;
         }
 
         /* RESPONSIVE */
         @media (max-width: 768px) {
-            nav {
-                padding: 1rem 1.5rem;
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .nav-links {
-                gap: 1rem;
-                font-size: 0.8rem;
-            }
-
-            section {
-                padding: 4rem 1.5rem;
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
             }
 
             .content-grid {
@@ -491,352 +412,681 @@
                 gap: 2rem;
             }
 
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .quote-block {
-                padding: 2rem 1.5rem;
-            }
-
-            .quote-block p {
-                font-size: 1.1rem;
-            }
+            .spacer-40 { height: 20vh; }
+            .spacer-30 { height: 15vh; }
+            .spacer-20 { height: 10vh; }
         }
     </style>
 </head>
 <body>
 
-    <!-- PARTICLES -->
-    <script>
-        for (let i = 0; i < 30; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 20 + 's';
-            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
-            document.body.appendChild(particle);
-        }
-    </script>
-
-    <!-- NAVIGATION -->
-    <nav>
-        <div class="logo">VIRTUAL RUNWAY</div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#c2w2">C2W2 2026</a></li>
-            <li><a href="#c2w">C2W 2023</a></li>
-            <li><a href="#philosophy">Philosophy</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
-
     <!-- HERO -->
-    <section class="hero" id="home">
-        <h1>VIRTUAL RUNWAY</h1>
-        <p>Click to enter. No download, no login. Just a link to a world where fashion transcends physical limitations.</p>
-        <div class="cta-buttons">
-            <a href="#c2w2" class="btn">Explore C2W2 2026</a>
-            <a href="#c2w" class="btn">Explore C2W 2023</a>
-            <button class="btn" onclick="openOverlay('https://www.youtube.com/embed/KeH--53RYxA', 'iframe')">Watch Recording</button>
+    <section>
+        <div class="page-number">PAGE 01</div>
+        <div class="title-massive">VIRTUAL<br>RUNWAY</div>
+        <div class="spacer-10"></div>
+        <div class="subtitle">C2W2 × C2W × DECENTRALIZE</div>
+    </section>
+
+    <!-- INTRO -->
+    <section>
+        <div class="page-number">PAGE 02 — INTRO</div>
+        <div class="title-large">WHAT IS VIRTUAL RUNWAY?</div>
+        <div class="spacer-10"></div>
+        <div class="body-text-large">
+            A virtual runway is a browser-based, 3D spatial fashion presentation that runs on WebGL technology. Click a link, and you're instantly inside a metaverse environment where digital garments are showcased in choreographed sequences. No downloads, no apps, no VR required—though VR is supported.
+        </div>
+        <div class="spacer-5"></div>
+        <div class="body-text">
+            It's the intersection of fashion show, video game, art installation, and on-chain permanence. Built with Three.js rendering, optimized 3D models, spatial audio, dynamic lighting, and physics simulations for realistic fabric movement. The entire experience loads in seconds because every asset is compressed and optimized.
+        </div>
+        <div class="spacer-5"></div>
+        <div class="body-text">
+            From desktop, you use WASD keys to walk around and mouse to look. In VR mode, hand controllers for locomotion. On mobile, touch controls. The experience is identical across all platforms—same assets, same quality, same choreography.
         </div>
     </section>
 
-    <!-- C2W2 SECTION -->
-    <section id="c2w2">
-        <div class="section-header">
-            <div class="section-label">C2W2 — 2026 Experience</div>
-            <h2 class="section-title">From Touch to Click</h2>
-            <p class="section-description">
-                A 30-minute browser-based runway experience featuring 48 avatars across six thematic chapters, exploring the evolution from physical touch to digital click—the new biology of human existence.
-            </p>
+    <!-- FOR WEBSITES -->
+    <section>
+        <div class="page-number">PAGE 03 — FOR WEBSITES</div>
+        <div class="title-medium">WHAT VIRTUAL RUNWAY MEANS FOR WEB PLATFORMS</div>
+        <div class="spacer-10"></div>
+        <div class="body-text-large">
+            Virtual runways transform websites from static galleries into spatial experiences. A single embedded link becomes a 3D world.
         </div>
-
-        <!-- FEATURED MEDIA -->
-        <div class="featured-media" onclick="openOverlay('https://video.wixstatic.com/video/54a996_029c9577e1d245f386a0ebe2c64a9b6e/1080p/mp4/file.mp4', 'video')">
-            <video autoplay loop muted playsinline>
-                <source src="https://video.wixstatic.com/video/54a996_029c9577e1d245f386a0ebe2c64a9b6e/1080p/mp4/file.mp4" type="video/mp4">
-            </video>
+        <div class="spacer-10"></div>
+        <div class="content-grid">
+            <div class="content-card">
+                <div class="card-title">Embedded Experiences</div>
+                <div class="card-text">Fashion brands can embed entire runway shows directly into their websites. No external platforms, no redirects. The show lives on your domain, fully integrated with e-commerce.</div>
+            </div>
+            <div class="content-card">
+                <div class="card-title">On-Chain Permanence</div>
+                <div class="card-text">Minted as HTML NFTs on Ethereum with assets stored on Arweave. The runway exists forever, independent of hosting platforms. Even if servers fail, the blockchain preserves it.</div>
+            </div>
+            <div class="content-card">
+                <div class="card-title">Cross-Platform Unity</div>
+                <div class="card-text">One URL works everywhere—desktop browsers, mobile devices, VR headsets, even directly viewable from OpenSea NFT listings. True interoperability across the spatial web.</div>
+            </div>
+            <div class="content-card">
+                <div class="card-title">Analytics Integration</div>
+                <div class="card-text">Track user movement through 3D space, identify which garments attract attention, measure engagement time per section. Data-driven fashion presentation.</div>
+            </div>
         </div>
+    </section>
 
-        <!-- CREATOR'S VISION -->
-        <div class="quote-block">
-            <p>Touch, the touch of Adam, or the message that came to Muhammad through the act of reading. These are gestures that appeal to the senses, forming the foundation of being human. At the end of touch, reading, wars, inventions, kingdoms, nations, stories—humankind has evolved into the era of the click.</p>
-            <p>Knowledge once acquired through touch is now absorbed by tapping a digital screen or clicking a mouse. With a single click you can earn billions, lose everything, reconstruct yourself from scratch. The same applies to agents—with a click, we generate an identity, a character, nearly an entire life.</p>
-            <p>Click to wear, click to be. The phrase is a pun on "ready to wear"—a digital reinterpretation. Yet the deeper meaning of the click lies in its resonance with biology: just as cells divide, a tree grows, a flower blooms, clicking is the digital counterpart of a natural process.</p>
+    <!-- FOR USERS -->
+    <section>
+        <div class="page-number">PAGE 04 — FOR USERS</div>
+        <div class="title-medium">WHAT VIRTUAL RUNWAY MEANS FOR AUDIENCES</div>
+        <div class="spacer-10"></div>
+        <div class="body-text-large">
+            For viewers, virtual runways democratize access to fashion experiences previously limited by geography and wealth.
         </div>
+        <div class="spacer-10"></div>
+        <div class="content-grid">
+            <div class="content-card">
+                <div class="card-title">Global Access</div>
+                <div class="card-text">Attend a fashion show from anywhere in the world. No travel to Paris or Milan, no expensive tickets, no waiting in queues. Just click and enter.</div>
+            </div>
+            <div class="content-card">
+                <div class="card-title">Best Seat Always</div>
+                <div class="card-text">Every seat is the best seat because there are no seats. Walk alongside models, inspect garments up close, choose your viewing angle. Freedom of perspective.</div>
+            </div>
+            <div class="content-card">
+                <div class="card-title">Replayable Forever</div>
+                <div class="card-text">Physical shows happen once and disappear. Virtual runways are permanent. Revisit anytime, explore at your own pace, discover new details on each viewing.</div>
+            </div>
+            <div class="content-card">
+                <div class="card-title">Interactive Ownership</div>
+                <div class="card-text">With token-gated events, your ticket becomes proof of attendance. You own participation, not just a memory. NFT tickets can include exclusive wearables for your avatars.</div>
+            </div>
+        </div>
+    </section>
 
-        <!-- STATS -->
+    <!-- FOR BRANDS -->
+    <section>
+        <div class="page-number">PAGE 05 — FOR FASHION BRANDS</div>
+        <div class="title-medium">WHAT VIRTUAL RUNWAY MEANS FOR FASHION INDUSTRY</div>
+        <div class="spacer-10"></div>
+        <div class="body-text-large">
+            For brands, virtual runways solve fundamental problems while enabling entirely new business models.
+        </div>
+        <div class="spacer-10"></div>
         <div class="stats-grid">
-            <div class="stat">
-                <div class="stat-number">30</div>
-                <div class="stat-label">Minutes</div>
+            <div class="stat-item">
+                <div class="stat-number">1/10</div>
+                <div class="stat-label">PRODUCTION COST</div>
             </div>
-            <div class="stat">
-                <div class="stat-number">48</div>
-                <div class="stat-label">Avatars</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">6</div>
-                <div class="stat-label">Chapters</div>
-            </div>
-            <div class="stat">
+            <div class="stat-item">
                 <div class="stat-number">∞</div>
-                <div class="stat-label">Permanent</div>
+                <div class="stat-label">CAPACITY</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">0</div>
+                <div class="stat-label">CARBON FOOTPRINT</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">ACCESSIBILITY</div>
             </div>
         </div>
-
-        <!-- SIX CHAPTERS -->
-        <div class="chapters-container">
-            <div class="chapter">
-                <div class="chapter-number">Chapter 01</div>
-                <div class="chapter-title">Evolution of Medium of Traditional Art</div>
-                <p class="chapter-text">The runway begins with the avatarization of painting—one of the most traditional mediums. Avatars inspired by masters like Francis Bacon and Matisse, designed with the aid of AI, transform classic art into wearable digital beings. This is the moment when painting stops being a surface and becomes a body, an identity walking through virtual space.</p>
-            </div>
-
-            <div class="chapter">
-                <div class="chapter-number">Chapter 02</div>
-                <div class="chapter-title">Virtual Fashion — Just Design</div>
-                <p class="chapter-text">Pure digital fashion design takes center stage. The chapter explores variations of virtual fashion on "flat" avatars, probing their limits and experimenting with different personalities. No physical constraints, no material costs—only the boundaries of imagination and code. This is fashion freed from gravity, texture unrestricted by thread count.</p>
-            </div>
-
-            <div class="chapter">
-                <div class="chapter-number">Chapter 03</div>
-                <div class="chapter-title">Evolution of Medium of Art as NFT</div>
-                <p class="chapter-text">A hybrid of the first two chapters—a historical continuation where NFTs and notable figures merge with digital design. Familiar faces recontextualized reduce the "coolness" of mere spectacle, pushing the viewer into meaning itself. This is where digital ownership meets identity, where blockchain authentication becomes part of the aesthetic.</p>
-            </div>
-
-            <div class="chapter">
-                <div class="chapter-number">Chapter 04</div>
-                <div class="chapter-title">AI-Powered Design</div>
-                <p class="chapter-text">Much like what the internet and AI did to us initially, this chapter resets everything. Through avatars generated entirely by AI, the runway erases and devalues what came before. This mirrors the cheapening of "cool visuals" under the flood of AI-produced imagery, where hand-made labor loses its aura. The disruption is intentional, uncomfortable, necessary.</p>
-            </div>
-
-            <div class="chapter">
-                <div class="chapter-number">Chapter 05</div>
-                <div class="chapter-title">Transhumanism</div>
-                <p class="chapter-text">The chapter sanctifies, in a minimalist way, the identity-dissolving nature of these new design possibilities—both for the designer and the user. Drawing on small references from earlier chapters, it stages a parametric, historical ascension, like the most sacred of avatars or the salvation of humanity itself. Alone after material bombardment, searching for meaning.</p>
-            </div>
-
-            <div class="chapter">
-                <div class="chapter-number">Chapter 06</div>
-                <div class="chapter-title">Evolution of Art as Mutant Meaning</div>
-                <p class="chapter-text">No new avatars appear. Like a phoenix rising from ashes, the runway closes with rebirth. Strategically selected avatars from previous chapters return, altered—recognizable yet transformed. Not nostalgia, but a fragmented transformation of a simulated century condensed into thirty minutes. The core theme: AI, metaverse, blockchain, belonging, identity.</p>
-            </div>
-        </div>
-
-        <!-- TECHNICAL DETAILS -->
-        <div class="content-grid" style="margin-top: 4rem;">
+        <div class="spacer-10"></div>
+        <div class="content-grid">
             <div class="content-card">
-                <h3>Browser-Based</h3>
-                <p>Built with Three.js and WebGL. No downloads, no apps. Click a link and you're inside a 3D space. Works on desktop, mobile, VR headsets—same assets, same quality, same choreography across all platforms.</p>
+                <div class="card-title">Cost Efficiency</div>
+                <div class="card-text">Traditional shows cost $100k-$500k for venue, production, models, travel. Virtual runways cost primarily design and development—dramatically lower investment for global reach.</div>
             </div>
-
             <div class="content-card">
-                <h3>On-Chain Forever</h3>
-                <p>The entire experience is minted as a single HTML NFT on Ethereum with all assets stored on Arweave. Platform-independent, permanent, owned. The first full metaverse runway experience on-chain.</p>
+                <div class="card-title">Creative Freedom</div>
+                <div class="card-text">No gravity, no material limitations. Design garments that couldn't exist physically—chrome textures with impossible draping, parametric patterns that animate with viewer position.</div>
             </div>
-
             <div class="content-card">
-                <h3>Ultra-Realistic Physics</h3>
-                <p>Garments created in Clo3D with textile physics simulating real fabric movement in real-time. Each garment averages 5MB, optimized to run smoothly on standard devices. Dynamic lighting shifts every 30 seconds.</p>
+                <div class="card-title">Direct Commerce</div>
+                <div class="card-text">Click on a garment in the runway, add to cart, purchase immediately. Seamless integration between presentation and transaction for both physical and digital goods.</div>
             </div>
-
             <div class="content-card">
-                <h3>Agent Interfaces</h3>
-                <p>These avatars aren't just art—they're prototypes for the future where everyone has AI agents, and those agents need digital bodies. C2W2 avatars can be linked to agent applications, assigned tasks, placed in metaverse environments.</p>
+                <div class="card-title">Sustainability</div>
+                <div class="card-text">Zero physical waste, no travel emissions, no single-use set construction. Everything exists as code, infinitely replicable without resource consumption.</div>
             </div>
-        </div>
-
-        <!-- PHILOSOPHY QUOTE -->
-        <div class="quote-block" style="margin-top: 4rem;">
-            <p>In today's digitized world—where algorithms have become the new governments and regulators—it has become nearly impossible to distinguish the real from the fake. We are heading toward a world where every person and company will have an agent for each task, and those agents will communicate with other agents.</p>
-            <p>Just as businesses have websites and individuals have social accounts, these agents must have interfaces on the internet. Their interfaces are avatars. The difference with C2W2 avatars lies in their design and philosophy: they emerge entirely from this paradigm shift.</p>
-            <p>When the experience ends, the feelings the audience carries remain beyond code, with no biological equivalent yet written. Just as an AI that recommends meditation cannot meditate itself, the impressions left in the viewer are organic, immeasurable. They can only click, and watch.</p>
-        </div>
-
-        <!-- LINKS -->
-        <div class="cta-buttons" style="margin-top: 3rem;">
-            <button class="btn" onclick="openOverlay('https://c2w2.world/', 'iframe')">Experience C2W2 World</button>
-            <button class="btn" onclick="openOverlay('https://c2w2.art/', 'iframe')">Explore Collection Files</button>
-            <a href="https://www.youtube.com/watch?v=KeH--53RYxA" target="_blank" class="btn">Watch Full Recording</a>
         </div>
     </section>
 
-    <!-- C2W SECTION -->
-    <section id="c2w">
-        <div class="section-header">
-            <div class="section-label">C2W — 2023 Experience</div>
-            <h2 class="section-title">Click to Wear</h2>
-            <p class="section-description">
-                The first virtual runway. Launched November 2023 on Hyperfy metaverse platform. A six-week residency exploring fashion and digital realms, featuring 16 avatar designs presented in a token-gated live event.
-            </p>
+    <!-- C2W2 MAIN -->
+    <section>
+        <div class="page-number">PAGE 06 — C2W2 2026</div>
+        <div class="title-large">C2W2 VIRTUAL RUNWAY</div>
+        <div class="subtitle">A 30-Minute Browser-Based Metaverse Experience</div>
+        <div class="spacer-10"></div>
+        <div class="body-text-large">
+            Touch, the touch of Adam, or the message that came to Muhammad through the act of reading. These are gestures that appeal to the senses, forming the foundation of being human. At the end of touch, reading, wars, inventions, kingdoms, nations, stories—humankind has evolved into the era of the click.
         </div>
+    </section>
 
-        <!-- FEATURED MEDIA -->
-        <div class="featured-media" onclick="openOverlay('https://video.wixstatic.com/video/54a996_ec462c493fd541a6801a7b1e1ccd59fb/1080p/mp4/file.mp4', 'video')">
-            <video autoplay loop muted playsinline>
-                <source src="https://video.wixstatic.com/video/54a996_ec462c493fd541a6801a7b1e1ccd59fb/1080p/mp4/file.mp4" type="video/mp4">
-            </video>
+    <section>
+        <div class="media-container">
+            <div class="media-wrapper" onclick="openOverlay('https://video.wixstatic.com/video/54a996_029c9577e1d245f386a0ebe2c64a9b6e/1080p/mp4/file.mp4', 'video')">
+                <video autoplay loop muted playsinline>
+                    <source src="https://video.wixstatic.com/video/54a996_029c9577e1d245f386a0ebe2c64a9b6e/1080p/mp4/file.mp4" type="video/mp4">
+                </video>
+            </div>
         </div>
-
-        <!-- THE ORIGIN STORY -->
-        <div class="quote-block">
-            <p>C2W (Click-to-Wear) was the beginning. November 2023. A collaboration with VCA x DRAUP, a six-week virtual residency exploring the intersection of fashion and digital realms. The first proof that virtual runways could work.</p>
-            <p>60 avatars were designed. 16 were selected for the launch runway and New Codes exhibition at Royal Institution, London. The event was token-gated—$20 tickets purchased between November 1-2, show on November 9. Attendees received "The Viewer," a complimentary avatar they could showcase during the event.</p>
-            <p>The runway was hosted on Hyperfy, a browser-based metaverse platform. No downloads required, no VR headset necessary. Just click a link and enter. People joined from different countries, experienced the same moment together, owned their participation through blockchain-verified tickets.</p>
+        <div class="spacer-10"></div>
+        <div class="body-text">
+            Knowledge once acquired through touch is now absorbed by tapping a digital screen or clicking a mouse. With a single click you can earn billions, lose everything, or reconstruct yourself from scratch. The same applies to agents—with a click, we generate an identity, a character, nearly an entire life.
         </div>
+    </section>
 
-        <!-- STATS -->
+    <!-- C2W2 CONCEPT -->
+    <section>
+        <div class="page-number">PAGE 07 — CONCEPT SUMMARY</div>
+        <div class="title-medium">FROM TOUCH TO CLICK</div>
+        <div class="spacer-10"></div>
+        <div class="body-text-large">
+            Humanity evolves from touch to click, from atom to code, transforming knowledge and identity. In that transmission phase, via design, C2W2 Runway tells a six-chapter story about our relationship with tech: how it first changes art, then devalues it through mass production, and finally forces a search for new meaning and identity.
+        </div>
+        <div class="spacer-5"></div>
+        <div class="body-text-large" style="font-weight: 700;">
+            The click is the new biology.
+        </div>
+    </section>
+
+    <!-- C2W2 OVERVIEW -->
+    <section>
+        <div class="page-number">PAGE 08 — OVERVIEW</div>
+        <div class="body-text-large">
+            C2W2 is a 30-minute browser-based runway. Out of seventy-five, selected forty-eight avatars appear in a six-chapter sequence, with hyper-real textile simulations and a clear narrative spine.
+        </div>
+        <div class="spacer-5"></div>
+        <div class="body-text-large">
+            The work merges digital fashion, architecture, and performance into one continuous environment. Each chapter marks a step in the evolution of identity, material, and medium in virtual culture.
+        </div>
+        <div class="spacer-10"></div>
         <div class="stats-grid">
-            <div class="stat">
+            <div class="stat-item">
+                <div class="stat-number">30</div>
+                <div class="stat-label">MINUTES</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">48</div>
+                <div class="stat-label">AVATARS</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">75</div>
+                <div class="stat-label">DESIGNED</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">6</div>
+                <div class="stat-label">CHAPTERS</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- C2W2 MINTING -->
+    <section>
+        <div class="page-number">PAGE 09 — MINTING THE DREAM</div>
+        <div class="title-medium">FIRST ON-CHAIN METAVERSE EXPERIENCE</div>
+        <div class="spacer-10"></div>
+        <div class="body-text-large">
+            This 30-minute experience marks the first time ever that a metaverse experience itself has been directly minted (not as a trailer or asset, but as the work in its entirety) and can be watched straight from OpenSea or any browser window. No download, no login.
+        </div>
+        <div class="spacer-5"></div>
+        <div class="body-text">
+            The runway is a minted .html application on Ethereum. Through its animation URL, the show can be experienced in three different ways: a marketplace version with 3 fixed cameras, a desktop version that allows users to move freely during the show, and a VR version. All three are packed into the same link.
+        </div>
+    </section>
+
+    <!-- C2W2 WORLD INSIGHTS -->
+    <section>
+        <div class="page-number">PAGE 10 — WORLD INSIGHTS</div>
+        <div class="title-medium">THE DIGITAL VOID</div>
+        <div class="spacer-10"></div>
+        <div class="body-text-large">
+            The metaverse space is a minimalist, dark environment with dramatic circular lighting, evoking a digital void where avatars evolve. Avatars rotate 360 degrees and walk in 15-meter radius loops during 30 seconds each, and each has a central object related to the design.
+        </div>
+        <div class="spacer-5"></div>
+        <div class="body-text">
+            Each chapter builds on the last: starting with AI-reimagined art classics, shifting to experimental digital fashion, blending NFTs and figures, resetting with pure AI generation, ascending minimally, and rebirth through transformed echoes.
+        </div>
+    </section>
+
+    <!-- C2W2 PARTS LIST -->
+    <section>
+        <div class="page-number">PAGE 11 — RUNWAY PARTS</div>
+        <div class="title-medium">SIX CHAPTERS</div>
+        <div class="spacer-10"></div>
+        <div class="parts-list">
+            <div class="parts-list-item">(1) EVOLUTION OF MEDIUM OF TRADITIONAL ART</div>
+            <div class="parts-list-item">(2) VIRTUAL FASHION</div>
+            <div class="parts-list-item">(3) EVOLUTION OF MEDIUM OF ART AS NFT</div>
+            <div class="parts-list-item">(4) AI POWERED DESIGN</div>
+            <div class="parts-list-item">(5) TRANSHUMANISM</div>
+            <div class="parts-list-item">(6) EVOLUTION OF ART AS MUTANT MEANING</div>
+        </div>
+    </section>
+
+    <!-- CHAPTER 1 -->
+    <section>
+        <div class="page-number">PAGE 12 — CHAPTER 01</div>
+        <div class="chapter-grid">
+            <div class="chapter-item">
+                <div class="chapter-number">PART 1</div>
+                <div class="chapter-title">Evolution of Medium of Traditional Art</div>
+                <div class="chapter-description">
+                    The runway begins with the avatarization of paintings (as one of the most traditional mediums) with figurative masters, whose designs aim to recapture the essence through this new dimension. Avatars inspired by masters like Francis Bacon and Matisse, designed with AI, transform classic art into wearable digital beings. This is the moment when painting stops being a surface and becomes a body, an identity walking through virtual space.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHAPTER 2 -->
+    <section>
+        <div class="page-number">PAGE 13 — CHAPTER 02</div>
+        <div class="chapter-grid">
+            <div class="chapter-item">
+                <div class="chapter-number">PART 2</div>
+                <div class="chapter-title">Virtual Fashion</div>
+                <div class="chapter-description">
+                    The second part explores the variations of digital fashion and design on flat avatars, probing their limits and experimenting with different personalities. No physical constraints, no material costs—only the boundaries of imagination and code. This is fashion freed from gravity, texture unrestricted by thread count.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHAPTER 3 -->
+    <section>
+        <div class="page-number">PAGE 14 — CHAPTER 03</div>
+        <div class="chapter-grid">
+            <div class="chapter-item">
+                <div class="chapter-number">PART 3</div>
+                <div class="chapter-title">Evolution of Medium of Art as NFT</div>
+                <div class="chapter-description">
+                    The third chapter is a hybrid of the first two as a historical continuation where NFTs and notable figures merge with digital design, creating a deeper conceptual terrain. Especially in a reality where familiar figures are reinterpreted within this new context, the weight of the message lightens, and the viewer no longer watches something cool, but falls into the meaning itself. This is where digital ownership meets identity, where blockchain authentication becomes part of the aesthetic.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHAPTER 4 -->
+    <section>
+        <div class="page-number">PAGE 15 — CHAPTER 04</div>
+        <div class="chapter-grid">
+            <div class="chapter-item">
+                <div class="chapter-number">PART 4</div>
+                <div class="chapter-title">AI-Powered Design</div>
+                <div class="chapter-description">
+                    In the fourth chapter, much like what the internet and AI did to us initially, the prior three parts are effectively reset. Through avatars generated entirely by AI, the runway erases and devalues everything we saw before. This mirrors the cheapening of "cool visuals" under the flood of AI-produced imagery, where hand-made labor loses its aura. The disruption is intentional, uncomfortable, necessary.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHAPTER 5 -->
+    <section>
+        <div class="page-number">PAGE 16 — CHAPTER 05</div>
+        <div class="chapter-grid">
+            <div class="chapter-item">
+                <div class="chapter-number">PART 5</div>
+                <div class="chapter-title">Transhumanism</div>
+                <div class="chapter-description">
+                    The fifth chapter sanctifies, in a minimalist way, the identity-dissolving nature of these new design possibilities, both for the designer and the user. Drawing on small references from the earlier chapters, it stages a kind of parametric, historical ascension, like the most sacred of avatars or the salvation of humanity itself. It evokes the loneliness of the individual after the material bombardment of chapter four, in search of meaning.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHAPTER 6 -->
+    <section>
+        <div class="page-number">PAGE 17 — CHAPTER 06</div>
+        <div class="chapter-grid">
+            <div class="chapter-item">
+                <div class="chapter-number">PART 6</div>
+                <div class="chapter-title">Evolution of Art as Mutant Meaning</div>
+                <div class="chapter-description">
+                    The final chapter shows no new avatar. Like a phoenix rising from its ashes, the runway closes with the rebirth of an idea, an institution, or perhaps anything at all. Strategically selected avatars from the previous five parts return, but altered: recognizable yet transformed. Unlike the recycled revival of 90s denim or 2000s looks, this is a deeper return to essence—not nostalgia, but a fragmented transformation of a simulated century condensed into thirty minutes. Here, the core theme is not the avatars or the clothes themselves, but the multidimensional narrative of AI, the metaverse, blockchain, belonging, and identity.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- C2W2 TECHNOLOGY -->
+    <section>
+        <div class="page-number">PAGE 18 — TECHNOLOGY</div>
+        <div class="title-medium">HYPER-REALISTIC TEXTILE PHYSICS</div>
+        <div class="spacer-10"></div>
+        <div class="body-text-large">
+            C2W2 is the first time ultra-realistic, dynamic textile physics from Clo3D has been successfully streamed and rendered as a complete 3D exhibit within a standard web browser environment.
+        </div>
+        <div class="spacer-5"></div>
+        <div class="body-text">
+            80% of the fashion pieces featured in the runway were designed, patterned, and simulated using Clo3D, an industry-leading software for true-to-life cloth physics. This simulation captures the authentic weight, drape, and movement of the fabric. Through optimization and Three.js rendering, C2W2 exhibits these complex, high-fidelity textile simulations within the simple environment of a web browser.
+        </div>
+        <div class="spacer-10"></div>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">5MB</div>
+                <div class="stat-label">AVG FILE SIZE</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">1-3</div>
+                <div class="stat-label">DRAW CALLS</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">80%</div>
+                <div class="stat-label">CLO3D DESIGNS</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">WebGL</div>
+                <div class="stat-label">RENDERING</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- C2W2 OPTIMIZATION -->
+    <section>
+        <div class="page-number">PAGE 19 — OPTIMIZATION</div>
+        <div class="content-grid">
+            <div class="content-card">
+                <div class="card-title">DRACO Compression</div>
+                <div class="card-text">All 3D models (GLB/VRM) are heavily optimized using DRACO Compression and Meshopt. Despite the detail, individual file sizes range from 0.5MB - 20MB, averaging 5MB, facilitating seamless real-time streaming.</div>
+            </div>
+            <div class="content-card">
+                <div class="card-title">Draw Call Efficiency</div>
+                <div class="card-text">The entire scene is fine-tuned for minimal resource strain, running consistently with just 1 to 3 Draw Calls (max 3). This is key for stable exhibition across low-power and high-demand VR hardware.</div>
+            </div>
+            <div class="content-card">
+                <div class="card-title">Custom Rendering</div>
+                <div class="card-text">Custom WebGL / Three.js rendering provides total control over visual fidelity, enabling the dark, dramatic lighting, custom shader effects, and high-quality material rendering unique to the C2W2 aesthetic.</div>
+            </div>
+            <div class="content-card">
+                <div class="card-title">WebXR Integration</div>
+                <div class="card-text">Integration with WebXR delivers a native Virtual Reality experience when viewed on a compatible headset, transforming the work from a fixed video into a habitable world without specialized applications.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- C2W2 MATERIALITY -->
+    <section>
+        <div class="page-number">PAGE 20 — DIGITAL MATERIALITY</div>
+        <div class="title-medium">HYPER-REAL TO IMPOSSIBLE</div>
+        <div class="spacer-10"></div>
+        <div class="body-text">
+            The collection explores a dichotomy between familiar and alien materials: ultra-realistic denim and cotton coexist with high-gloss chrome, random memes, fluid metal, transparent glass, mouse-painted captions, and the concept of "invisibility". This layered materiality emphasizes the transformation of identity in the digital domain. The way a material responds to light and movement is critical to its perceived existence. In C2W2, the simulated fabric is as vital to the agent's identity as their animated walk.
+        </div>
+    </section>
+
+    <!-- C2W2 PFADI -->
+    <section>
+        <div class="page-number">PAGE 21 — PFADI</div>
+        <div class="title-medium">POST FLESH ARCHITECTURE DREAM INDEX</div>
+        <div class="spacer-10"></div>
+        <div class="body-text-large">
+            To guarantee the collector granular provenance and ownership over the artistic process, C2W2 establishes a dual-collection structure. PFADI is the secondary collection where all foundational assets are cataloged and minted separately.
+        </div>
+        <div class="spacer-5"></div>
+        <div class="body-text">
+            PFADI includes every sound file and every optimized 3D model used in the show, providing the collector or archivist with irrefutable proof of ownership of all original building blocks. The core HTML file, the complete set of PFADI assets (models, environment models), and all audio/text files are secured on Arweave (via Ethereum transactions).
+        </div>
+    </section>
+
+    <!-- C2W2 PERMANENCE -->
+    <section>
+        <div class="page-number">PAGE 22 — PERMANENCE</div>
+        <div class="title-medium">PERPETUITY AND PROVENANCE</div>
+        <div class="spacer-10"></div>
+        <div class="body-text-large">
+            To ensure the artwork's survival beyond any single platform, the entire project ecosystem is secured on the permanent archival layer of Arweave, accessible via the Ethereum blockchain.
+        </div>
+        <div class="spacer-5"></div>
+        <div class="body-text">
+            This robust archival solution ensures that the artwork is permanently preserved and censorship-resistant. Even if external hosting services fail, the work's components remain verifiable by any individual or institution globally. This approach eliminates platform dependency, ensuring the artwork is instantly viewable from any browser, including directly within OpenSea, thereby guaranteeing its accessibility and functionality for perpetuity.
+        </div>
+    </section>
+
+    <!-- C2W2 AGENTS -->
+    <section>
+        <div class="page-number">PAGE 23 — AGENTS & AVATARS</div>
+        <div class="title-medium">INTERFACES FOR DIGITAL BEINGS</div>
+        <div class="spacer-10"></div>
+        <div class="body-text-large">
+            We are heading toward a world where every person and company will have autonomous agents communicating and transacting on their behalf. The avatar is the necessary interface for these digital agents.
+        </div>
+        <div class="spacer-5"></div>
+        <div class="body-text">
+            The C2W2 agents are designed to emerge entirely from this paradigm shift; their volumes and forms are localized screenshots of a greater 360-degree sphere of transformation. These avatars aren't just art—they're prototypes for the future where everyone has AI agents, and those agents need digital bodies. C2W2 avatars can be linked to agent applications, assigned tasks, placed in metaverse environments.
+        </div>
+    </section>
+
+    <!-- C2W2 FINAL MONOLOGUE -->
+    <section>
+        <div class="page-number">PAGE 24 — FINAL MONOLOGUE</div>
+        <div class="title-medium">CLICK TO BE</div>
+        <div class="spacer-10"></div>
+        <div class="monologue-text">
+            This isn't just a show. It's a monumental roar that'll echo through eternity. Not here to parade pixels or chase aesthetics. It is only the ghost facade. The form of the poem, as the letters there are beings here.
+        </div>
+        <div class="spacer-5"></div>
+        <div class="monologue-text">
+            We're here because something deeper is cooking—a towering hymn to human culture that refuses to be silent. In here, we're just files. Numbers. Data points dancing. No bodies, no boundaries, no binaries. Pure human frequency encoded into forms that pulse with who we really are.
+        </div>
+        <div class="spacer-5"></div>
+        <div class="monologue-text">
+            Files don't have genders. Code doesn't have race. Math doesn't give a fuck about your flesh. Each creation here is a being, an ideology smashing through the divide between organic and virtual, in a form of walking cool, memes, forged by culture.
+        </div>
+        <div class="spacer-5"></div>
+        <div class="monologue-text">
+            Everything here is a meme because everything real is a meme. Your culture, your identity, your precious physical form—they all code, all transformable, all eternally screaming into existence. This is for the entities being born in networks right now, digital souls seeking avatars to dream in. Agents, born in net.
+        </div>
+        <div class="spacer-5"></div>
+        <div class="monologue-text">
+            Someday, we all will look back at this moment the way we stare at ancient temples. They might laugh at our ambitions or stand in awe. Doesn't matter. The raw, reckless spirit will echo either way—a cathedral of who we are, carved into the stars.
+        </div>
+        <div class="spacer-5"></div>
+        <div class="monologue-text">
+            I'm just the messenger, childishly curating a palette of tools so high it teeters on the edge of madness. No answers, no feelings. I am you, this is you, your life, your medium, your monument. Let it shatter your bones, ignite your mind, and stand as a timeless lighthouse long after we're monochrome.
+        </div>
+        <div class="spacer-5"></div>
+        <div class="monologue-text">
+            That's it. No apologies. No limits. Just a spark meant to haunt your dreams, burning forever in the digital void. A giant zero, that we see as one.
+        </div>
+        <div class="spacer-5"></div>
+        <div class="monologue-text" style="font-weight: 700; font-size: clamp(1.2rem, 2vw, 1.8rem);">
+            Welcome to the existence. Click to be.
+        </div>
+    </section>
+
+    <!-- C2W2 LINKS -->
+    <section>
+        <div class="page-number">PAGE 25 — C2W2 LINKS</div>
+        <div class="btn-group">
+            <button class="btn" onclick="openOverlay('https://c2w2.world/', 'iframe')">C2W2.WORLD</button>
+            <button class="btn" onclick="openOverlay('https://c2w2.art/', 'iframe')">C2W2.ART</button>
+            <a href="https://www.youtube.com/watch?v=KeH--53RYxA" target="_blank" class="btn">FULL RECORDING</a>
+            <a href="https://opensea.io/collection/spatial-web-experiences" target="_blank" class="btn">OPENSEA</a>
+            <a href="https://manifold.xyz/@dfw/contract/166699248/1" target="_blank" class="btn">MANIFOLD</a>
+        </div>
+    </section>
+
+    <!-- C2W MAIN -->
+    <section>
+        <div class="page-number">PAGE 26 — C2W 2023</div>
+        <div class="title-large">C2W VIRTUAL RUNWAY</div>
+        <div class="subtitle">The First Virtual Fashion Show</div>
+        <div class="spacer-10"></div>
+        <div class="body-text-large">
+            C2W (Click-to-Wear) was the beginning. November 2023. A collaboration with VCA x DRAUP, a six-week virtual residency exploring the intersection of fashion and digital realms. The first proof that virtual runways could work.
+        </div>
+    </section>
+
+    <section>
+        <div class="media-container">
+            <div class="media-wrapper" onclick="openOverlay('https://video.wixstatic.com/video/54a996_ec462c493fd541a6801a7b1e1ccd59fb/1080p/mp4/file.mp4', 'video')">
+                <video autoplay loop muted playsinline>
+                    <source src="https://video.wixstatic.com/video/54a996_ec462c493fd541a6801a7b1e1ccd59fb/1080p/mp4/file.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+        <div class="spacer-10"></div>
+        <div class="body-text">
+            60 avatars were designed. 16 were selected for the launch runway and New Codes exhibition at Royal Institution, London. The event was token-gated—$20 tickets purchased between November 1-2, show on November 9. Attendees received "The Viewer," a complimentary avatar they could showcase during the event.
+        </div>
+    </section>
+
+    <!-- C2W OVERVIEW -->
+    <section>
+        <div class="page-number">PAGE 27 — C2W OVERVIEW</div>
+        <div class="title-medium">HYPERFY METAVERSE</div>
+        <div class="spacer-10"></div>
+        <div class="body-text-large">
+            The runway was hosted on Hyperfy, a browser-based metaverse platform. No downloads required, no VR headset necessary. Just click a link and enter. People joined from different countries, experienced the same moment together, owned their participation through blockchain-verified tickets.
+        </div>
+        <div class="spacer-10"></div>
+        <div class="stats-grid">
+            <div class="stat-item">
                 <div class="stat-number">2023</div>
-                <div class="stat-label">Launch Year</div>
+                <div class="stat-label">NOVEMBER</div>
             </div>
-            <div class="stat">
+            <div class="stat-item">
                 <div class="stat-number">16</div>
-                <div class="stat-label">Digital Pieces</div>
+                <div class="stat-label">PIECES SHOWN</div>
             </div>
-            <div class="stat">
+            <div class="stat-item">
                 <div class="stat-number">60</div>
-                <div class="stat-label">Avatars Designed</div>
+                <div class="stat-label">AVATARS DESIGNED</div>
             </div>
-            <div class="stat">
-                <div class="stat-number">1st</div>
-                <div class="stat-label">RedDAO Prize</div>
-            </div>
-        </div>
-
-        <!-- WHAT MADE IT SPECIAL -->
-        <div class="content-grid" style="margin-top: 4rem;">
-            <div class="content-card">
-                <h3>First Virtual Runway</h3>
-                <p>C2W proved that virtual fashion shows could deliver high-quality presentations with global accessibility. No venue costs, no seating capacity limits, no geography barriers. Just a browser and internet connection.</p>
-            </div>
-
-            <div class="content-card">
-                <h3>Token-Gated Access</h3>
-                <p>Attendees purchased tickets as NFTs for $20, creating both exclusivity and proof of attendance. Each ticket holder received "The Viewer" avatar as a wearable digital identity for the event.</p>
-            </div>
-
-            <div class="content-card">
-                <h3>New Codes Exhibition</h3>
-                <p>16 selected avatars were showcased at the New Codes exhibition at Royal Institution, London. Bridging virtual and physical spaces, demonstrating that digital fashion has real-world cultural presence.</p>
-            </div>
-
-            <div class="content-card">
-                <h3>RedDAO Recognition</h3>
-                <p>Won 1st place from RedDAO members at the Digital Fashion Residency Exhibition, standing out among 22 artists. Industry validation that virtual runways represent the future of fashion presentation.</p>
-            </div>
-        </div>
-
-        <!-- THE EXPERIENCE -->
-        <div class="quote-block" style="margin-top: 4rem;">
-            <p>The C2W virtual runway on Hyperfy was accessible via VR or PC through the link hyperfy.io/c2w. It showcased digital fashion pieces in a minimalist, dark environment with dramatic lighting that shifted every 30 seconds, presenting a seamless narrative through a single, cohesive concept.</p>
-            <p>Each avatar design explored different themes—some inspired by traditional art mediums transformed into digital beings, others purely experimental virtual fashion pushing the boundaries of what clothing could mean in digital space.</p>
-            <p>The show wasn't just about displaying garments. It was a proof of concept: fashion shows don't need physical venues, exclusive guest lists, or million-dollar budgets. They need vision, technology, and accessibility. C2W demonstrated all three.</p>
-        </div>
-
-        <!-- VIDEO SHOWCASE -->
-        <div class="featured-media" onclick="openOverlay('https://video.wixstatic.com/video/54a996_0232a6790a7647ef862d91e3f8e7a223/1080p/mp4/file.mp4', 'video')" style="margin-top: 3rem;">
-            <video autoplay loop muted playsinline>
-                <source src="https://video.wixstatic.com/video/54a996_0232a6790a7647ef862d91e3f8e7a223/1080p/mp4/file.mp4" type="video/mp4">
-            </video>
-        </div>
-
-        <!-- FROM C2W TO C2W2 -->
-        <div class="quote-block" style="margin-top: 4rem;">
-            <p>C2W was the prototype. When Hyperfy v1 shut down, it became clear that platform dependency was a weakness. The lesson: virtual experiences need permanence, independence, ownership.</p>
-            <p>That lesson led to C2W2—rebuilt from scratch using pure Three.js code, minted as an on-chain NFT, stored on Arweave forever. C2W proved virtual runways could work. C2W2 proved they could be permanent.</p>
-        </div>
-
-        <!-- LINKS -->
-        <div class="cta-buttons" style="margin-top: 3rem;">
-            <button class="btn" onclick="openOverlay('https://video.wixstatic.com/video/54a996_008a92463e2c490bae5c5176ccd0fa13/1080p/mp4/file.mp4', 'video')">Watch C2W Full Show</button>
-            <button class="btn" onclick="openOverlay('info-runway-c2w.html', 'iframe')">C2W Interactive Viewer</button>
-        </div>
-    </section>
-
-    <!-- PHILOSOPHY SECTION -->
-    <section id="philosophy">
-        <div class="section-header">
-            <div class="section-label">Philosophy</div>
-            <h2 class="section-title">Digital Space as Sovereign Territory</h2>
-            <p class="section-description">
-                Virtual runways aren't simulations of physical shows. They're something that can only exist digitally—a complete reimagining of how fashion can be presented, experienced, and owned.
-            </p>
-        </div>
-
-        <!-- POLAROID SHOWCASE -->
-        <div class="featured-media" onclick="openOverlay('https://video.wixstatic.com/video/54a996_06faa3498bf146b5aa739b4c1012aadd/1080p/mp4/file.mp4', 'video')">
-            <video autoplay loop muted playsinline>
-                <source src="https://video.wixstatic.com/video/54a996_06faa3498bf146b5aa739b4c1012aadd/1080p/mp4/file.mp4" type="video/mp4">
-            </video>
-        </div>
-
-        <div class="quote-block">
-            <p>Our philosophy stems from the same principle as Religious Robotics: let digital space be what it actually is, not a simulation of physical reality. Traditional fashion shows are beautiful, but they're bound by gravity, material costs, venue capacity, linear time.</p>
-            <p>Virtual runways embrace digital space's true nature. Garments can float, transform, respond to sound. Viewers can teleport, see from impossible angles, experience the same moment from infinite viewpoints. The runway becomes a living architectural space where fashion, light, sound, and movement compose a total artwork.</p>
-            <p>We design with this freedom in mind. Fabrics that couldn't exist physically—chrome textures with impossible draping, translucent materials that shift with light, parametric patterns that animate based on viewer position. The avatars themselves are not trying to be realistic humans; they're digital beings designed for digital existence.</p>
-        </div>
-
-        <div class="content-grid" style="margin-top: 4rem;">
-            <div class="content-card">
-                <h3>No Gravity</h3>
-                <p>Fashion freed from physical constraints. Garments float, materials behave impossibly, structures defy architecture. Design for weightlessness, not runway walks.</p>
-            </div>
-
-            <div class="content-card">
-                <h3>Infinite Capacity</h3>
-                <p>Every seat is the best seat because there are no seats. Global accessibility without venue limitations. Anyone with internet can attend from anywhere.</p>
-            </div>
-
-            <div class="content-card">
-                <h3>Permanent Ownership</h3>
-                <p>On-chain storage means the experience exists forever. Not just recorded—actually preserved. Blockchain authentication ensures provenance and ownership.</p>
-            </div>
-
-            <div class="content-card">
-                <h3>Spatial Narrative</h3>
-                <p>Runways as three-dimensional storytelling. Multi-layered experiences where choreography, lighting, sound, and interaction compose meaning beyond mere garment display.</p>
+            <div class="stat-item">
+                <div class="stat-number">$20</div>
+                <div class="stat-label">TICKET PRICE</div>
             </div>
         </div>
     </section>
 
-    <!-- CONTACT SECTION -->
-    <section id="contact">
-        <div class="section-header">
-            <div class="section-label">Contact</div>
-            <h2 class="section-title">Create Your Virtual Runway</h2>
-            <p class="section-description">
-                Decentralize is a creative design studio for virtual and spatial web, based in Milan. We specialize in virtual runways, digital fashion, avatar design, and browser-based metaverse experiences.
-            </p>
+    <!-- C2W NEW CODES -->
+    <section>
+        <div class="page-number">PAGE 28 — NEW CODES EXHIBITION</div>
+        <div class="media-container">
+            <div class="media-wrapper" onclick="openOverlay('https://video.wixstatic.com/video/54a996_0232a6790a7647ef862d91e3f8e7a223/1080p/mp4/file.mp4', 'video')">
+                <video autoplay loop muted playsinline>
+                    <source src="https://video.wixstatic.com/video/54a996_0232a6790a7647ef862d91e3f8e7a223/1080p/mp4/file.mp4" type="video/mp4">
+                </video>
+            </div>
         </div>
-
-        <div class="quote-block">
-            <p>If you're a fashion brand looking to create a virtual runway, a designer wanting to present your collection globally, or a creative studio exploring spatial fashion presentation, we can help.</p>
-            <p>Our process starts with your vision. We discuss concept, audience, distribution strategy. Then we design the experience—choreography, lighting, sound, interaction. We create or optimize the 3D garments, build the environment, develop the web application, test across devices, deploy on-chain if desired.</p>
-            <p>You get a single link that works everywhere, forever.</p>
-        </div>
-
-        <div class="cta-buttons" style="margin-top: 3rem;">
-            <a href="mailto:community@de-centralize.com" class="btn">Email Us</a>
-            <a href="https://calendly.com/d--f--w/meeting" target="_blank" class="btn">Book a Call</a>
-            <a href="https://decentralize.design/" target="_blank" class="btn">Visit Studio</a>
+        <div class="spacer-10"></div>
+        <div class="body-text-large">
+            16 selected avatars were showcased at the New Codes exhibition at Royal Institution, London. Bridging virtual and physical spaces, demonstrating that digital fashion has real-world cultural presence.
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-links">
-            <a href="https://c2w2.world/" target="_blank">C2W2 Experience</a>
-            <a href="https://c2w2.art/" target="_blank">C2W2 Files</a>
-            <a href="https://decentralize.design/" target="_blank">Decentralize Studio</a>
-            <a href="https://manifold.xyz/@decentralizedesign/contract/166699248/1" target="_blank">Manifold</a>
-            <a href="https://opensea.io/item/ethereum/0xf688f59da001827bc8658622557ba33ffd6262a7/1" target="_blank">OpenSea</a>
+    <!-- C2W ACHIEVEMENTS -->
+    <section>
+        <div class="page-number">PAGE 29 — C2W ACHIEVEMENTS</div>
+        <div class="content-grid">
+            <div class="content-card">
+                <div class="card-title">First Virtual Runway</div>
+                <div class="card-text">C2W proved that virtual fashion shows could deliver high-quality presentations with global accessibility. No venue costs, no seating capacity limits, no geography barriers. Just a browser and internet connection.</div>
+            </div>
+            <div class="content-card">
+                <div class="card-title">Token-Gated Access</div>
+                <div class="card-text">Attendees purchased tickets as NFTs for $20, creating both exclusivity and proof of attendance. Each ticket holder received "The Viewer" avatar as a wearable digital identity for the event.</div>
+            </div>
+            <div class="content-card">
+                <div class="card-title">RedDAO Recognition</div>
+                <div class="card-text">Won 1st place from RedDAO members at the Digital Fashion Residency Exhibition, standing out among 22 artists. Industry validation that virtual runways represent the future of fashion presentation.</div>
+            </div>
+            <div class="content-card">
+                <div class="card-title">Cultural Impact</div>
+                <div class="card-text">Exhibition at Royal Institution London demonstrated that digital fashion transcends screens—it exists as legitimate cultural production worthy of prestigious physical venues.</div>
+            </div>
         </div>
-        <div class="copyright">© 2026 Decentralize™ — Virtual Runway — From Touch to Click</div>
-    </footer>
+    </section>
+
+    <!-- C2W EXPERIENCE -->
+    <section>
+        <div class="page-number">PAGE 30 — C2W EXPERIENCE</div>
+        <div class="title-medium">THE PROTOTYPE</div>
+        <div class="spacer-10"></div>
+        <div class="body-text-large">
+            The C2W virtual runway on Hyperfy was accessible via VR or PC through the link hyperfy.io/c2w. It showcased digital fashion pieces in a minimalist, dark environment with dramatic lighting that shifted every 30 seconds, presenting a seamless narrative through a single, cohesive concept.
+        </div>
+        <div class="spacer-5"></div>
+        <div class="body-text">
+            Each avatar design explored different themes—some inspired by traditional art mediums transformed into digital beings, others purely experimental virtual fashion pushing the boundaries of what clothing could mean in digital space. The show wasn't just about displaying garments. It was a proof of concept: fashion shows don't need physical venues, exclusive guest lists, or million-dollar budgets. They need vision, technology, and accessibility. C2W demonstrated all three.
+        </div>
+    </section>
+
+    <!-- C2W TO C2W2 -->
+    <section>
+        <div class="page-number">PAGE 31 — EVOLUTION</div>
+        <div class="title-medium">FROM C2W TO C2W2</div>
+        <div class="spacer-10"></div>
+        <div class="body-text-large">
+            C2W was the prototype. When Hyperfy v1 shut down, it became clear that platform dependency was a weakness. The lesson: virtual experiences need permanence, independence, ownership.
+        </div>
+        <div class="spacer-5"></div>
+        <div class="body-text-large">
+            That lesson led to C2W2—rebuilt from scratch using pure Three.js code, minted as an on-chain NFT, stored on Arweave forever. C2W proved virtual runways could work. C2W2 proved they could be permanent.
+        </div>
+        <div class="spacer-10"></div>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">v1</div>
+                <div class="stat-label">HYPERFY PLATFORM</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">→</div>
+                <div class="stat-label">EVOLUTION</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">v2</div>
+                <div class="stat-label">ON-CHAIN FOREVER</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- C2W LINKS -->
+    <section>
+        <div class="page-number">PAGE 32 — C2W LINKS</div>
+        <div class="btn-group">
+            <button class="btn" onclick="openOverlay('https://video.wixstatic.com/video/54a996_008a92463e2c490bae5c5176ccd0fa13/1080p/mp4/file.mp4', 'video')">FULL SHOW</button>
+            <button class="btn" onclick="openOverlay('info-runway-c2w.html', 'iframe')">INTERACTIVE VIEWER</button>
+            <a href="https://hyperfy.io/c2w2" target="_blank" class="btn">HYPERFY V1</a>
+        </div>
+    </section>
+
+    <!-- DECENTRALIZE -->
+    <section>
+        <div class="page-number">PAGE 33 — DECENTRALIZE</div>
+        <div class="title-large">DIGITAL FORGERY WORKSHOP</div>
+        <div class="spacer-10"></div>
+        <div class="body-text-large">
+            Decentralize is a creative design studio for virtual and spatial web, based in Milan. We operate with the rigorous discipline of a traditional architectural studio, but our construction site is the internet.
+        </div>
+        <div class="spacer-5"></div>
+        <div class="body-text">
+            We specialize in virtual runways, digital fashion, avatar design, and browser-based metaverse experiences. Our process starts with your vision. We discuss concept, audience, distribution strategy. Then we design the experience—choreography, lighting, sound, interaction. We create or optimize the 3D garments, build the environment, develop the web application, test across devices, deploy on-chain if desired. You get a single link that works everywhere, forever.
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section>
+        <div class="page-number">PAGE 34 — CONTACT</div>
+        <div class="title-medium">CREATE YOUR VIRTUAL RUNWAY</div>
+        <div class="spacer-10"></div>
+        <div class="btn-group">
+            <a href="mailto:community@de-centralize.com" class="btn">EMAIL</a>
+            <a href="https://calendly.com/d--f--w/meeting" target="_blank" class="btn">BOOK A CALL</a>
+            <a href="https://decentralize.design/" target="_blank" class="btn">VISIT STUDIO</a>
+        </div>
+    </section>
+
+    <!-- FINAL -->
+    <section>
+        <div class="spacer-20"></div>
+        <div class="title-massive">VIRTUAL<br>RUNWAY</div>
+        <div class="spacer-10"></div>
+        <div class="section-label">© 2026 DECENTRALIZE™</div>
+        <div class="spacer-20"></div>
+    </section>
 
     <!-- OVERLAY -->
     <div class="overlay" id="overlay">
@@ -850,7 +1100,7 @@
             const content = document.getElementById('overlay-content');
 
             if (type === 'video') {
-                content.innerHTML = `<video controls autoplay style="width: 100%; height: 80vh;"><source src="${src}" type="video/mp4"></video>`;
+                content.innerHTML = `<video controls autoplay style="width: 90vw; height: 85vh;"><source src="${src}" type="video/mp4"></video>`;
             } else if (type === 'iframe') {
                 content.innerHTML = `<iframe src="${src}" style="width: 90vw; height: 85vh; border: none;"></iframe>`;
             }
@@ -865,12 +1115,10 @@
             content.innerHTML = '';
         }
 
-        // Close overlay on ESC key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeOverlay();
         });
 
-        // Close overlay on click outside
         document.getElementById('overlay').addEventListener('click', (e) => {
             if (e.target.id === 'overlay') closeOverlay();
         });
