@@ -6,7 +6,10 @@
     <title>C2W2 Files</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
+    <!-- Google Fonts - Share Tech Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
     <!-- PDF.js Kütüphanesi -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     
@@ -19,49 +22,163 @@
     <script src="https://unpkg.com/meshoptimizer@0.18.1/meshopt_decoder.js"></script>
 
     <style>
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            overflow: hidden;
-            background-image: url('https://raw.githubusercontent.com/decentralize-dfw/c2w2art/main/c2w2artcover.jpg');
-            background-size: cover;
-            background-position: center;
+        /* ====================================== */
+        /* ===== TERMINAL THEME - DARK MODE ===== */
+        /* ====================================== */
+
+        /* Import Share Tech Mono as primary font */
+        * {
+            font-family: 'Share Tech Mono', monospace !important;
         }
 
-        /* --- Seçim Stilleri --- */
+        /* Force black background everywhere */
+        body, html, div, section, header, footer, nav, aside, article, main {
+            background: #000 !important;
+            background-color: #000 !important;
+            background-image: none !important;
+            color: #00ff00 !important;
+        }
+
+        body {
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* CRT Scanlines Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 999999;
+            animation: flicker 0.15s infinite;
+        }
+
+        /* CRT Flicker Animation */
+        @keyframes flicker {
+            0% { opacity: 0.97; }
+            50% { opacity: 0.94; }
+            100% { opacity: 0.97; }
+        }
+
+        /* Override all Tailwind white backgrounds */
+        .bg-white,
+        [class*="bg-white"],
+        [class*="bg-gray"],
+        [class*="bg-blue"] {
+            background-color: #000 !important;
+        }
+
+        /* Force terminal green text */
+        .text-gray-900,
+        .text-gray-800,
+        .text-gray-700,
+        .text-gray-600,
+        .text-gray-500,
+        .text-black,
+        [class*="text-gray"],
+        [class*="text-black"],
+        p, span, div, h1, h2, h3, h4, h5, h6, label, input, textarea, button {
+            color: #00ff00 !important;
+        }
+
+        /* Terminal green borders */
+        [class*="border-gray"],
+        [class*="border-blue"],
+        .border {
+            border-color: #00ff00 !important;
+        }
+
+        /* Remove rounded corners - make everything sharp/square */
+        * {
+            border-radius: 0 !important;
+        }
+
+        /* Remove shadows */
+        * {
+            box-shadow: none !important;
+            text-shadow: none !important;
+        }
+
+        /* Green filter for all images, SVGs, and videos */
+        img, svg, video, canvas, iframe,
+        .mobile-app-icon-image img,
+        .mobile-dock-icon-image img,
+        [class*="icon"] img,
+        [class*="icon"] svg {
+            filter: sepia(1) hue-rotate(60deg) saturate(5) brightness(0.8) !important;
+        }
+
+        /* Force scanlines on media elements */
+        img::after, video::after, canvas::after, iframe::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 0, 0.03),
+                rgba(0, 255, 0, 0.03) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Terminal green scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #000 !important; }
+        ::-webkit-scrollbar-thumb { background: #00ff00 !important; border-radius: 0 !important; }
+        ::-webkit-scrollbar-thumb:hover { background: #00cc00 !important; }
+
+        /* --- Seçim Stilleri - TERMINAL THEME --- */
         /* Grid View */
         .file-item.selected > div {
-            background-color: #eff6ff; /* bg-blue-50 */
-            outline: 2px solid #3b82f6; /* border-blue-500 */
+            background-color: #000 !important;
+            outline: 2px solid #00ff00 !important;
         }
         .file-item.selected > p {
-            background-color: #3b82f6; /* bg-blue-600 */
-            color: white;
-            border-radius: 0.375rem;
+            background-color: #003300 !important;
+            color: #00ff00 !important;
+            border-radius: 0 !important;
         }
         /* List View */
         .list-view .file-item.selected {
-            background-color: #3b82f6; /* bg-blue-600 */
+            background-color: #003300 !important;
         }
         .list-view .file-item.selected > p,
         .list-view .file-item.selected .get-icon-svg {
-            color: white !important;
+            color: #00ff00 !important;
         }
         /* Gallery View */
         .gallery-thumb-item.selected {
-            background-color: #eff6ff;
-            outline: 2px solid #3b82f6;
+            background-color: #000 !important;
+            outline: 2px solid #00ff00 !important;
         }
         /* Desktop View */
         .desktop-item.selected > p {
-            background-color: #3b82f6;
-            color: white;
-            text-shadow: none;
+            background-color: #003300 !important;
+            color: #00ff00 !important;
+            text-shadow: none !important;
         }
         /* Minimized Icon */
         #minimized-icon-container.selected > p {
-            background-color: #3b82f6;
-            color: white;
-            text-shadow: none;
+            background-color: #003300 !important;
+            color: #00ff00 !important;
+            text-shadow: none !important;
         }
         
         /* --- Pencere Stilleri --- */
@@ -78,21 +195,21 @@
         .window-control {
             width: 12px;
             height: 12px;
-            border-radius: 9999px;
+            border-radius: 0 !important;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(0,0,0,0.1);
+            border: 1px solid #00ff00 !important;
         }
-        .window-control.close { background-color: #fecaca; }
-        .window-control.close:hover { background-color: #ef4444; }
-        .window-control.maximize { background-color: #bbf7d0; }
-        .window-control.maximize:hover { background-color: #22c55e; }
+        .window-control.close { background-color: #003300 !important; }
+        .window-control.close:hover { background-color: #005500 !important; }
+        .window-control.maximize { background-color: #003300 !important; }
+        .window-control.maximize:hover { background-color: #005500 !important; }
         .window-control .icon {
             visibility: hidden;
             width: 8px;
             height: 8px;
-            color: rgba(0,0,0,0.5);
+            color: #00ff00 !important;
         }
         .window-control:hover .icon {
             visibility: visible;
@@ -119,24 +236,25 @@
         ::-webkit-scrollbar-thumb { background: #a1a1aa; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #71717a; }
         
-        /* YENİ: PDF Canvas Stili */
+        /* YENİ: PDF Canvas Stili - TERMINAL THEME */
         .pdf-canvas-container {
             /* PDF'in renderlandığı alan için arka plan */
-            background-color: #e5e7eb; /* bg-gray-200 */
+            background-color: #000 !important;
         }
         .pdf-canvas-container canvas {
-            /* PDF sayfası için gölge */
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            /* PDF sayfası için terminal filter */
+            box-shadow: none !important;
+            filter: sepia(1) hue-rotate(60deg) saturate(5) brightness(0.8) !important;
         }
-        
-        /* Loading Indicator Stili */
+
+        /* Loading Indicator Stili - TERMINAL THEME */
         .loading-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: white;
+            background-color: #000 !important;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -146,17 +264,19 @@
         .loading-text {
             font-size: 18px;
             margin-bottom: 10px;
+            color: #00ff00 !important;
         }
         .loading-progress {
             width: 200px;
             height: 6px;
-            background-color: rgba(0, 0, 0, 0.1);
-            border-radius: 3px;
+            background-color: #003300 !important;
+            border-radius: 0 !important;
             overflow: hidden;
+            border: 1px solid #00ff00 !important;
         }
         .progress-bar {
             height: 100%;
-            background-color: #3b82f6;
+            background-color: #00ff00 !important;
             width: 0%;
             transition: width 0.3s ease;
         }
@@ -185,7 +305,7 @@
             }
         }
 
-        /* Mobile Interface Container */
+        /* Mobile Interface Container - TERMINAL THEME */
         #mobile-interface {
             display: none;
             position: fixed;
@@ -195,10 +315,10 @@
             height: 100vh;
             height: 100dvh; /* Dynamic viewport height for mobile browsers */
             flex-direction: column;
-            background: transparent;
+            background: #000 !important;
             z-index: 9999;
             overflow: hidden;
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
+            font-family: 'Share Tech Mono', monospace !important;
             /* iOS Safe Area support */
             padding-top: env(safe-area-inset-top);
             padding-bottom: env(safe-area-inset-bottom);
@@ -207,7 +327,7 @@
             box-sizing: border-box;
         }
 
-        /* Status Bar */
+        /* Status Bar - TERMINAL THEME */
         #mobile-status-bar {
             flex-shrink: 0;
             height: 4%;
@@ -217,10 +337,10 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 5%;
-            color: white;
+            color: #00ff00 !important;
             font-size: clamp(10px, 2.5vw, 14px);
             font-weight: 600;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            text-shadow: none !important;
         }
 
         /* Main Screen Area */
@@ -284,14 +404,15 @@
             width: var(--icon-size);
             height: var(--icon-size);
             aspect-ratio: 1 / 1;
-            border-radius: 22%;
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(10px);
+            border-radius: 0 !important;
+            background: #000 !important;
+            backdrop-filter: none !important;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: none !important;
+            border: 1px solid #00ff00 !important;
             transition: transform 0.15s ease;
             flex-shrink: 0;
         }
@@ -304,20 +425,22 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            filter: sepia(1) hue-rotate(60deg) saturate(5) brightness(0.8) !important;
         }
 
         .mobile-app-icon-image svg {
             width: 50%;
             height: 50%;
             flex-shrink: 0;
+            filter: sepia(1) hue-rotate(60deg) saturate(5) brightness(0.8) !important;
         }
 
         .mobile-app-icon-name {
             margin-top: 3px;
             font-size: clamp(8px, 2vw, 11px);
-            color: white;
+            color: #00ff00 !important;
             text-align: center;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            text-shadow: none !important;
             text-overflow: ellipsis;
             white-space: nowrap;
             width: var(--icon-size, 18vw);
@@ -339,13 +462,14 @@
         .mobile-page-dot {
             width: 6px;
             height: 6px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.4);
+            border-radius: 0 !important;
+            background: #003300 !important;
+            border: 1px solid #00ff00 !important;
             transition: all 0.2s ease;
         }
 
         .mobile-page-dot.active {
-            background: white;
+            background: #00ff00 !important;
             transform: scale(1.2);
         }
 
@@ -362,17 +486,18 @@
         }
 
         #mobile-dock-container {
-            background: rgba(255,255,255,0.25);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 28px;
+            background: #000 !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border-radius: 0 !important;
+            border: 2px solid #00ff00 !important;
             padding: 8px 12px;
             display: flex;
             align-items: center;
             justify-content: space-evenly;
             width: 92%;
             max-width: 380px;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+            box-shadow: none !important;
             gap: 4px;
         }
 
@@ -393,24 +518,24 @@
             width: var(--dock-icon-size);
             height: var(--dock-icon-size);
             aspect-ratio: 1 / 1;
-            border-radius: 22%;
-            background: rgba(255,255,255,0.3);
-            backdrop-filter: blur(5px);
+            border-radius: 0 !important;
+            background: #000 !important;
+            backdrop-filter: none !important;
             transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-            border: 2px solid transparent;
+            border: 2px solid #00ff00 !important;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: none !important;
             flex-shrink: 0;
         }
 
         /* Active dock icon styling */
         .mobile-dock-icon.active .mobile-dock-icon-image {
-            background: rgba(255,255,255,0.5);
-            border-color: rgba(255,255,255,0.8);
-            box-shadow: 0 0 15px rgba(255,255,255,0.4), 0 4px 12px rgba(0,0,0,0.2);
+            background: #003300 !important;
+            border-color: #00ff00 !important;
+            box-shadow: 0 0 8px #00ff00 !important;
         }
 
         .mobile-dock-icon-image:active {
@@ -421,14 +546,15 @@
             width: 55%;
             height: 55%;
             flex-shrink: 0;
+            filter: sepia(1) hue-rotate(60deg) saturate(5) brightness(0.8) !important;
         }
 
         .mobile-dock-icon-name {
             margin-top: 3px;
             font-size: clamp(7px, 1.8vw, 9px);
-            color: white;
+            color: #00ff00 !important;
             text-align: center;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            text-shadow: none !important;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -436,16 +562,16 @@
             font-weight: 500;
         }
 
-        /* Folder Overlay */
+        /* Folder Overlay - TERMINAL THEME */
         #mobile-folder-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.4);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background: rgba(0,0,0,0.9) !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
             display: none;
             align-items: center;
             justify-content: center;
@@ -464,10 +590,11 @@
             max-width: min(350px, 80vw);
             aspect-ratio: 1 / 1.1;
             max-height: 70dvh;
-            background: rgba(255,255,255,0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 24px;
+            background: #000 !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border-radius: 0 !important;
+            border: 2px solid #00ff00 !important;
             padding: 4%;
             display: flex;
             flex-direction: column;
@@ -486,7 +613,7 @@
             flex-shrink: 0;
             font-size: clamp(14px, 4vw, 18px);
             font-weight: 600;
-            color: #333;
+            color: #00ff00 !important;
             text-align: center;
             margin-bottom: 3%;
         }
