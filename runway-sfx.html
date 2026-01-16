@@ -1,0 +1,2422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>C2W2 VIRTUAL RUNWAY BY DECENTRALIZE</title>
+
+    <!-- Google Fonts - Brutalist Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+
+        /* ================================================ */
+        /* ===== PSYCHEDELIC CHAOS MODE ================== */
+        /* ===== CHROMATIC ABERRATION + ALL EFFECTS ====== */
+        /* ================================================ */
+
+        /* KEYFRAME ANIMATIONS */
+        @keyframes psychedelic-bg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes rainbow {
+            0% { filter: hue-rotate(0deg) saturate(3) contrast(1.5) brightness(1.2); }
+            25% { filter: hue-rotate(90deg) saturate(3.5) contrast(1.6) brightness(1.3); }
+            50% { filter: hue-rotate(180deg) saturate(3) contrast(1.5) brightness(1.2); }
+            75% { filter: hue-rotate(270deg) saturate(3.5) contrast(1.6) brightness(1.3); }
+            100% { filter: hue-rotate(360deg) saturate(3) contrast(1.5) brightness(1.2); }
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(2px, -2px); }
+            60% { transform: translate(-2px, -2px); }
+            80% { transform: translate(2px, 2px); }
+        }
+
+        @keyframes chromatic {
+            0%, 100% {
+                text-shadow:
+                    -1px 0 red,
+                    1px 0 cyan,
+                    0 0 10px #fff,
+                    0 0 20px #ff00ff,
+                    0 0 30px #00ffff;
+            }
+            33% {
+                text-shadow:
+                    -2px 0 red,
+                    2px 0 cyan,
+                    0 0 15px #ffff00,
+                    0 0 25px #00ff00,
+                    0 0 35px #ff0080;
+            }
+            66% {
+                text-shadow:
+                    -1px 0 cyan,
+                    1px 0 red,
+                    0 0 10px #0080ff,
+                    0 0 20px #ff8c00,
+                    0 0 30px #9370db;
+            }
+        }
+
+        :root {
+            --fg: #ffffff;
+            --bg: #ff0080;
+            --muted: #00ffff;
+            --accent: #ff00ff;
+            --panel: rgba(255,0,255,0.3);
+            --panelBlur: 20px;
+        }
+
+        * {
+            font-family: 'Space Grotesk', 'Inter', sans-serif !important;
+            letter-spacing: -0.02em;
+            font-weight: 500;
+        }
+
+        /* ULTRA RAINBOW BACKGROUND */
+        body, html {
+            margin: 0;
+            overflow: hidden;
+            background: linear-gradient(
+                45deg,
+                #ff0080, #ff8c00, #40e0d0, #9370db,
+                #ff1493, #00ff7f, #ff69b4, #ffd700
+            ) !important;
+            background-size: 400% 400% !important;
+            animation: psychedelic-bg 10s ease infinite !important;
+            position: relative;
+        }
+
+        /* CHROMATIC ABERRATION OVERLAY + FILM GRAIN */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                repeating-linear-gradient(0deg, transparent 0, rgba(255,0,255,0.05) 2px, transparent 4px),
+                repeating-linear-gradient(90deg, transparent 0, rgba(0,255,255,0.05) 2px, transparent 4px),
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='6.5' numOctaves='6' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+            mix-blend-mode: screen;
+            pointer-events: none;
+            z-index: 9999;
+            animation: glitch 3s infinite;
+        }
+
+        /* VIGNETTE EFFECT */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%);
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        /* CANVAS - PSYCHEDELIC FILTERS */
+        canvas {
+            display: block;
+            filter: saturate(2) contrast(1.3) brightness(1.1);
+            animation: rainbow 8s infinite;
+        }
+
+        /* PSYCHEDELIC GLASSMORPHISM PANELS */
+        .panel {
+            position: fixed;
+            background: linear-gradient(135deg, rgba(255,0,128,0.4), rgba(128,0,255,0.4)) !important;
+            backdrop-filter: blur(20px) saturate(3) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(3) !important;
+            border: 3px solid rgba(255,255,255,0.6) !important;
+            border-radius: 25px !important;
+            box-shadow:
+                0 0 40px rgba(255,0,255,0.8),
+                0 0 80px rgba(0,255,255,0.6),
+                inset 0 0 40px rgba(255,255,255,0.2) !important;
+            z-index: 10;
+            animation: rainbow 6s infinite !important;
+        }
+        /* PSYCHEDELIC LOADING SCREEN */
+        #loading {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #ff0080, #00ffff, #ff00ff, #ffff00) !important;
+            background-size: 400% 400% !important;
+            animation: psychedelic-bg 3s ease infinite !important;
+            z-index: 1000;
+            color: #fff !important;
+            font-size: 32px !important;
+            font-weight: 900 !important;
+            text-shadow:
+                -2px 0 red,
+                2px 0 cyan,
+                0 0 20px #fff,
+                0 0 40px #ff00ff !important;
+        }
+
+        /* PRISMATIC MEDIA */
+        #loading img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: hue-rotate(180deg) saturate(3.5) contrast(1.8) brightness(1.3) !important;
+            border: 6px solid rgba(255,0,255,0.8) !important;
+            box-shadow:
+                0 0 50px rgba(255,0,255,1),
+                0 0 100px rgba(0,255,255,0.8),
+                inset 0 0 60px rgba(255,255,0,0.3) !important;
+            animation: rainbow 5s infinite !important;
+        }
+
+        #backgroundImg {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: hue-rotate(180deg) saturate(3.5) contrast(1.8) brightness(1.3) !important;
+            z-index: 5;
+            display: none;
+            animation: rainbow 8s infinite !important;
+        }
+        /* CHROMATIC TEXT ELEMENTS */
+        #instructions {
+            inset: auto;
+            top: 15%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            padding: 12px 16px;
+            display: none;
+            z-index: 15;
+        }
+
+        #instructions h1 {
+            margin: 0 0 12px 0;
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff !important;
+            text-transform: uppercase;
+            text-shadow:
+                -2px 0 red,
+                2px 0 cyan,
+                0 0 15px #fff,
+                0 0 30px #ff00ff,
+                0 0 45px #00ffff !important;
+            animation: chromatic 3s infinite !important;
+        }
+
+        #instructions h2 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff !important;
+            text-transform: uppercase;
+            text-shadow:
+                -1px 0 red,
+                1px 0 cyan,
+                0 0 10px #fff,
+                0 0 20px #ffff00 !important;
+            animation: chromatic 2.5s infinite !important;
+        }
+
+        #instructions p {
+            margin: 6px 0;
+            font-size: 10px;
+            color: #fff !important;
+            font-weight: 600;
+            text-shadow:
+                -1px 0 red,
+                1px 0 cyan,
+                0 0 8px #fff !important;
+            animation: chromatic 3s infinite !important;
+        }
+        #resume {
+            inset: auto;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            padding: 12px 24px;
+            font-size: 10px;
+            display: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #fff !important;
+            text-shadow:
+                -1px 0 red,
+                1px 0 cyan,
+                0 0 10px #fff !important;
+            animation: chromatic 3s infinite !important;
+        }
+
+        /* PSYCHEDELIC VR BUTTON */
+        #VRButton {
+            position: fixed;
+            background: linear-gradient(135deg, #ff0080, #00ffff, #ff00ff) !important;
+            background-size: 200% 200% !important;
+            animation: psychedelic-bg 4s ease infinite !important;
+            backdrop-filter: blur(15px) saturate(3) !important;
+            border: 4px solid rgba(255,255,255,0.8) !important;
+            border-radius: 30px !important;
+            box-shadow:
+                0 0 40px rgba(255,0,255,1),
+                0 0 80px rgba(0,255,255,0.8),
+                inset 0 0 30px rgba(255,255,255,0.3) !important;
+            z-index: 15;
+            inset: auto;
+            top: 15%;
+            left: 40%;
+            width: 20%;
+            transform: translate(0, -50%);
+            text-align: center;
+            padding: 12px 16px;
+            font-size: 18px;
+            font-weight: 800;
+            color: #fff !important;
+            cursor: pointer;
+            overflow: hidden;
+            max-height: 50px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            line-height: 26px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            text-shadow:
+                -2px 0 red,
+                2px 0 cyan,
+                0 0 15px #fff,
+                0 0 30px #ffff00 !important;
+        }
+
+        #VRButton:hover {
+            background: linear-gradient(135deg, #00ffff, #ff00ff, #ff0080) !important;
+            box-shadow:
+                0 0 60px rgba(255,0,255,1),
+                0 0 120px rgba(0,255,255,1),
+                inset 0 0 50px rgba(255,255,255,0.5) !important;
+            transform: translate(-2px, -52%) scale(1.1) rotate(2deg) !important;
+        }
+        /* ULTRA CHROMATIC TEXT */
+        #initiating {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff !important;
+            font-size: 56px;
+            font-weight: 900;
+            display: none;
+            text-transform: uppercase;
+            text-shadow:
+                -3px 0 red,
+                3px 0 cyan,
+                0 0 20px #fff,
+                0 0 40px #ff00ff,
+                0 0 60px #00ffff !important;
+            letter-spacing: 0.02em;
+            animation: chromatic 2s infinite !important;
+        }
+
+        #ended {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff !important;
+            font-size: 56px;
+            font-weight: 900;
+            display: none;
+            text-transform: uppercase;
+            text-shadow:
+                -3px 0 red,
+                3px 0 cyan,
+                0 0 20px #fff,
+                0 0 40px #ff00ff,
+                0 0 60px #00ffff !important;
+            letter-spacing: 0.02em;
+            animation: chromatic 2s infinite !important;
+        }
+
+        #description {
+            position: absolute;
+            letter-spacing: -0.02em;
+            bottom: 16px;
+            left: 50px;
+            right: 50px;
+            color: #fff !important;
+            font-size: 16px;
+            font-weight: 800;
+            text-align: center;
+            display: none;
+            text-transform: uppercase;
+            text-shadow:
+                -2px 0 red,
+                2px 0 cyan,
+                0 0 15px #fff,
+                0 0 30px #ff00ff !important;
+            animation: chromatic 3s infinite !important;
+        }
+
+        #hoverText {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            background: linear-gradient(135deg, rgba(255,0,128,0.5), rgba(128,0,255,0.5)) !important;
+            backdrop-filter: blur(20px) saturate(3) !important;
+            border: 3px solid rgba(255,255,255,0.6) !important;
+            border-radius: 20px !important;
+            box-shadow:
+                0 0 30px rgba(255,0,255,0.8),
+                0 0 60px rgba(0,255,255,0.6) !important;
+            z-index: 10;
+            padding: 10px 14px;
+            color: #fff !important;
+            font-size: 13px;
+            font-weight: 700;
+            text-align: center;
+            display: none;
+            text-transform: uppercase;
+            text-shadow:
+                -1px 0 red,
+                1px 0 cyan,
+                0 0 10px #fff !important;
+            animation: chromatic 3s infinite !important;
+        }
+        /* PSYCHEDELIC INFO PANELS */
+        #projectInfoPanel, #studioInfoPanel, #hintPanel, #creatorsNotePanel {
+            font-style: normal;
+            position: fixed;
+            top: 70px;
+            right: 12px;
+            width: 380px;
+            height: 750px;
+            background: linear-gradient(135deg, rgba(255,0,128,0.4), rgba(0,255,255,0.4), rgba(255,0,255,0.4)) !important;
+            background-size: 200% 200% !important;
+            animation: psychedelic-bg 6s ease infinite !important;
+            backdrop-filter: blur(25px) saturate(3) !important;
+            -webkit-backdrop-filter: blur(25px) saturate(3) !important;
+            border: 4px solid rgba(255,255,255,0.7) !important;
+            border-radius: 30px !important;
+            box-shadow:
+                0 0 50px rgba(255,0,255,1),
+                0 0 100px rgba(0,255,255,0.8),
+                inset 0 0 60px rgba(255,255,255,0.2) !important;
+            z-index: 20;
+            padding: 16px;
+            color: #fff !important;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: left;
+            display: none;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        /* PSYCHEDELIC SCROLLBARS */
+        #projectInfoPanel::-webkit-scrollbar, #studioInfoPanel::-webkit-scrollbar, #hintPanel::-webkit-scrollbar, #creatorsNotePanel::-webkit-scrollbar {
+            width: 12px;
+            background: linear-gradient(180deg, #ff0080, #00ffff) !important;
+            border-radius: 10px !important;
+        }
+
+        #projectInfoPanel::-webkit-scrollbar-thumb, #studioInfoPanel::-webkit-scrollbar-thumb, #hintPanel::-webkit-scrollbar-thumb, #creatorsNotePanel::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #ff00ff, #ffff00) !important;
+            border: 2px solid rgba(255,255,255,0.6) !important;
+            border-radius: 10px !important;
+            box-shadow:
+                0 0 20px rgba(255,0,255,0.8),
+                inset 0 0 10px rgba(255,255,255,0.3) !important;
+        }
+
+        #projectInfoPanel::-webkit-scrollbar-track, #studioInfoPanel::-webkit-scrollbar-track, #hintPanel::-webkit-scrollbar-track, #creatorsNotePanel::-webkit-scrollbar-track {
+            background: linear-gradient(180deg, rgba(255,0,128,0.3), rgba(0,255,255,0.3)) !important;
+            border: 2px solid rgba(255,255,255,0.3) !important;
+            border-radius: 10px !important;
+            margin: 0;
+        }
+        /* PSYCHEDELIC CLOSE BUTTONS - ROTATING HOVER */
+        #closeButton, #studioCloseButton, #hintCloseButton, #creatorsCloseButton {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: linear-gradient(135deg, #ff0066, #ff00ff) !important;
+            border: 3px solid rgba(255,255,255,0.8) !important;
+            border-radius: 50% !important;
+            color: #ffffff !important;
+            font-size: 24px;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow:
+                0 0 30px rgba(255,0,102,1),
+                0 0 60px rgba(255,0,255,0.8) !important;
+            font-weight: 800;
+            transition: all 0.3s ease;
+            animation: rainbow 2s infinite !important;
+        }
+
+        #closeButton:hover, #studioCloseButton:hover, #hintCloseButton:hover, #creatorsCloseButton:hover {
+            background: linear-gradient(135deg, #ff00ff, #ff0066) !important;
+            box-shadow:
+                0 0 50px rgba(255,0,102,1),
+                0 0 100px rgba(255,0,255,1) !important;
+            transform: scale(1.3) rotate(180deg) !important;
+        }
+        /* CHROMATIC PANEL TEXT */
+        #projectInfoPanel p, #studioInfoPanel p, #hintPanel p, #creatorsNotePanel p {
+            margin: 12px 0;
+            text-align: justify;
+            text-align-last: left;
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            -ms-hyphens: auto;
+            font-weight: 600;
+            color: #fff !important;
+            text-shadow:
+                -1px 0 red,
+                1px 0 cyan,
+                0 0 8px #fff !important;
+        }
+
+        #projectInfoPanel i, #studioInfoPanel i, #hintPanel i, #creatorsNotePanel i {
+            font-size: 11px !important;
+            font-weight: 500;
+            line-height: 1.5;
+            font-style: italic;
+            text-align: justify;
+            text-align-last: left;
+            -webkit-hyphens: auto;
+            -ms-hyphens: auto;
+            color: #fff !important;
+            text-shadow:
+                -1px 0 red,
+                1px 0 cyan,
+                0 0 6px #fff !important;
+        }
+
+        #projectInfoPanel i strong, #studioInfoPanel i strong, #hintPanel i strong, #creatorsNotePanel i strong {
+            font-size: 14px !important;
+            font-weight: 800;
+            display: inline-block;
+            margin-bottom: 14px;
+            text-transform: uppercase;
+            color: #fff !important;
+            text-shadow:
+                -2px 0 red,
+                2px 0 cyan,
+                0 0 12px #fff,
+                0 0 24px #ff00ff !important;
+            animation: chromatic 3s infinite !important;
+        }
+
+        #projectInfoPanel strong, #studioInfoPanel strong, #hintPanel strong, #creatorsNotePanel strong {
+            color: #fff !important;
+            text-shadow:
+                -1px 0 red,
+                1px 0 cyan,
+                0 0 10px #fff,
+                0 0 20px #00ffff !important;
+        }
+
+        #projectInfoPanel a, #studioInfoPanel a, #hintPanel a, #creatorsNotePanel a {
+            color: #ffff00 !important;
+            text-decoration: underline;
+            font-weight: 700;
+            text-shadow:
+                -1px 0 red,
+                1px 0 cyan,
+                0 0 10px #ffff00 !important;
+            transition: all 0.3s ease;
+        }
+
+        #projectInfoPanel a:hover, #studioInfoPanel a:hover, #hintPanel a:hover, #creatorsNotePanel a:hover {
+            color: #ff00ff !important;
+            text-shadow:
+                -2px 0 red,
+                2px 0 cyan,
+                0 0 20px #ff00ff,
+                0 0 40px #00ffff !important;
+        }
+
+        /* PSYCHEDELIC SELECTION STATE */
+        .selected {
+            background: linear-gradient(45deg, #ff0080, #00ffff, #ff00ff, #ffff00) !important;
+            background-size: 400% 400% !important;
+            animation: psychedelic-bg 3s ease infinite !important;
+            border-color: rgba(255,255,255,0.9) !important;
+            box-shadow:
+                0 0 40px rgba(255,0,255,1),
+                0 0 80px rgba(0,255,255,0.8),
+                inset 0 0 40px rgba(255,255,255,0.3) !important;
+        }
+
+        /* PSYCHEDELIC SCROLLING TEXT */
+        #scrollingTextContainer {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(180deg, #ff0080, #00ffff, #ff00ff, #ffff00) !important;
+            background-size: 400% 400% !important;
+            animation: psychedelic-bg 8s ease infinite !important;
+            display: none;
+            opacity: 0;
+            z-index: 2000;
+            overflow: hidden;
+        }
+
+        #scrollingTextContent {
+            position: absolute;
+            width: 50%;
+            left: 25%;
+            transform: translateY(100vh);
+            color: #fff !important;
+            font-family: 'Space Grotesk', 'Inter', monospace;
+            font-size: min(0.7vw, 15px);
+            line-height: 1.8;
+            text-align: left;
+            transition: transform 68s linear;
+            white-space: pre;
+            font-weight: 600;
+            text-shadow:
+                -1px 0 red,
+                1px 0 cyan,
+                0 0 10px #fff,
+                0 0 20px #ff00ff !important;
+            animation: chromatic 4s infinite !important;
+        }
+
+        /* GLOBAL TEXT CHROMATIC ABERRATION */
+        p, span, h1, h2, h3, h4, h5, h6, label, button {
+            color: #fff !important;
+            text-shadow:
+                -1px 0 red,
+                1px 0 cyan,
+                0 0 10px #fff,
+                0 0 20px #ff00ff,
+                0 0 30px #00ffff !important;
+        }
+
+        /* PSYCHEDELIC BUTTONS */
+        button {
+            background: linear-gradient(135deg, rgba(255,0,128,0.6), rgba(128,0,255,0.6)) !important;
+            backdrop-filter: blur(15px) saturate(3) !important;
+            border: 2px solid rgba(255,255,255,0.6) !important;
+            border-radius: 20px !important;
+            box-shadow:
+                0 0 20px rgba(255,0,255,0.8),
+                0 0 40px rgba(0,255,255,0.6) !important;
+            transition: all 0.3s ease;
+            cursor: pointer !important;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, rgba(128,0,255,0.8), rgba(255,0,128,0.8)) !important;
+            box-shadow:
+                0 0 40px rgba(255,0,255,1),
+                0 0 80px rgba(0,255,255,1) !important;
+            transform: scale(1.05) !important;
+        }
+
+
+    </style>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.158.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.158.0/examples/jsm/"
+            }
+        }
+    </script>  
+</head>
+<body>
+    <div id="loading">Loading...<img src="https://arweave.net/N5f_y7_shF5xPYSCZ-Nreog5Uc1D_6AzBTIUL6Ez5kM"></div>
+    <img id="backgroundImg" src="https://arweave.net/HjOdRuOrcXN3FpuoYSERHzLo4GhbonvtnVYg49FAZvU">   
+    <div id="instructions" class="panel">
+        <h1>Click to Enter</h1>
+    </div>
+    <div id="resume" class="panel">
+        <h1>Click to Resume</h1>
+    </div>
+    <div id="initiating" style="position: absolute; top: 20%; left: 50%; transform: translate(-50%, -50%); backdrop-filter: blur(8px); background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.25); z-index: 10; padding: 8px 12px; color: #fff; font-size: 15px; font-weight: 400; text-align: center; margin: 0; font-family: Helvetica, Arial, sans-serif; display: none;">Initializing...</div>
+    <div id="ended" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); backdrop-filter: blur(8px); background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.25); z-index: 10; padding: 12px 12px; color: #fff; font-size: 20px; font-weight: 700; text-align: center; margin: 0; font-family: Helvetica, Arial, sans-serif; display: none;">Experience Ended</div>
+    <button id="startButton" style="position: absolute; left: 10px; bottom: 10px; backdrop-filter: blur(8px); background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.25); z-index: 10; padding: 8px 12px; color: #fff; font-size: 15px; font-weight: 700; text-align: center; margin: 0; font-family: Helvetica, Arial, sans-serif; display: none;">Start</button>
+    <button id="openInNewTab" style="position: absolute; left: -50px; top: -50px; backdrop-filter: blur(8px); background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.25); z-index: 10; padding: 8px 12px; color: #fff; font-size: 12px; font-weight: 500; text-align: center; margin: 0; font-family: Helvetica, Arial, sans-serif;">New tab</button>
+    <p id="iframeWarning" style="position: absolute; left: 10px; top: 50px; color: white; font-size: 15px; font-weight: 500; text-align: left; margin: 0; font-family: Helvetica, Arial, sans-serif; font-style: italic;display: none;"></p>
+    <p id="iframeWarning2" style="position: absolute; left: 10px; bottom: 10px; color: white; font-size: 14px; font-weight: 400; text-align: left; margin: 0; font-family: Helvetica, Arial, sans-serif; display: none;letter-spacing: -1px;">C2W2<br>Virtual<br>Runway</p>
+    <p id="dfw" style="position: absolute; right: 10px; bottom: 10px; color: white; font-size: 14px; font-weight: 400; text-align: left; margin: 0; font-family: Helvetica, Arial, sans-serif; display: none;letter-spacing: -1px;">DECENTRALIZE</p>
+
+<p id="cameraLabel" style="position: absolute; left: 10px; top: 10px; color: white; font-size: 8px; font-weight: 500; text-align: left; margin: 0; font-family: Helvetica, Arial, sans-serif; display: none;">Camera</p>
+<button id="cameraBtn1" style="position: absolute; left: 45px; top: 9px; backdrop-filter: blur(8px); background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.08); border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,.25); z-index: 10; padding: 1px 5px; color: #fff; font-size: 7px; font-weight: 500; text-align: center; margin: 0; font-family: Helvetica, Arial, sans-serif; display: none;">1</button>
+<button id="cameraBtn2" style="position: absolute; left: 65px; top: 9px; backdrop-filter: blur(8px); background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.08); border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,.25); z-index: 10; padding: 1px 5px; color: #fff; font-size: 7px; font-weight: 500; text-align: center; margin: 0; font-family: Helvetica, Arial, sans-serif; display: none;">2</button>
+<button id="cameraBtn3" style="position: absolute; left: 85px; top: 9px; backdrop-filter: blur(8px); background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.08); border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,.25); z-index: 10; padding: 1px 5px; color: #fff; font-size: 7px; font-weight: 500; text-align: center; margin: 0; font-family: Helvetica, Arial, sans-serif; display: none;">3</button>
+<p id="lensLabel" style="position: absolute; left: 10px; top: 30px; color: white; font-size: 8px; font-weight: 500; text-align: left; margin: 0; font-family: Helvetica, Arial, sans-serif; display: none;">Lens</p>
+<button id="lensBtn1" style="position: absolute; left: 45px; top: 29px; backdrop-filter: blur(8px); background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.08); border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,.25); z-index: 10; padding: 1px 5px; color: #fff; font-size: 7px; font-weight: 500; text-align: center; margin: 0; font-family: Helvetica, Arial, sans-serif; display: none;"">1</button>
+<button id="lensBtn2" style="position: absolute; left: 65px; top: 29px; backdrop-filter: blur(8px); background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.08); border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,.25); z-index: 10; padding: 1px 5px; color: #fff; font-size: 7px; font-weight: 500; text-align: center; margin: 0; font-family: Helvetica, Arial, sans-serif; display: none;">2</button>
+<button id="lensBtn3" style="position: absolute; left: 85px; top: 29px; backdrop-filter: blur(8px); background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.08); border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,.25); z-index: 10; padding: 1px 5px; color: #fff; font-size: 7px; font-weight: 500; text-align: center; margin: 0; font-family: Helvetica, Arial, sans-serif; display: none;">.5</button>
+
+
+    <button id="fullscreenButton" style="position: absolute; left: 10px; top: 10px; backdrop-filter: blur(8px); background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.25); z-index: 10; padding: 8px 12px; color: #fff; font-size: 12px; font-weight: 500; text-align: center; margin: 0; font-family: Helvetica, Arial, sans-serif;">Full Screen</button>
+    <button id="projectInfoButton" style="position: absolute; right: 300px; top: 10px; backdrop-filter: blur(8px); background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.25); z-index: 10; padding: 8px 12px; color: #fff; font-size: 12px; font-weight: 500; text-align: center; margin: 0; font-family: Helvetica, Arial, sans-serif;">Project Info</button>
+    <button id="studioInfoButton" style="position: absolute; right: 200px; top: 10px; backdrop-filter: blur(8px); background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.25); z-index: 10; padding: 8px 12px; color: #fff; font-size: 12px; font-weight: 500; text-align: center; margin: 0; font-family: Helvetica, Arial, sans-serif;">Studio Info</button>
+    <button id="hintButton" style="position: absolute; right: 10px; top: 10px; backdrop-filter: blur(8px); background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.25); z-index: 10; padding: 8px 12px; color: #fff; font-size: 12px; font-weight: 500; text-align: center; margin: 0; font-family: Helvetica, Arial, sans-serif;">Hint</button>
+    <button id="creatorsNoteButton" style="position: absolute; right: 80px; top: 10px; backdrop-filter: blur(8px); background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.25); z-index: 10; padding: 8px 12px; color: #fff; font-size: 12px; font-weight: 500; text-align: center; margin: 0; font-family: Helvetica, Arial, sans-serif;">Creators Note</button>
+    <div id="description"></div>
+    <div id="hoverText">Click to open link</div>
+    
+    <div id="projectInfoPanel">
+        <button id="closeButton">X</button>
+        <p><strong>Concept Summary:</strong><br><br>
+Humanity evolves from touch to clicks, from atoms to codes, transforming knowledge and identity. In that transmission phase, via design, C2W2 Runway tells a six-chapter story about our relationship with tech: how it first changes art, then devalues it through mass production, and finally forces a search for new meaning and identity. The click is the new biology.</p><br>
+<p><strong>Overview:</strong><br><br>
+C2W2 is a 30-minute browser-based runway. No downloads, no logins. Out of seventy-five, selected forty-eight avatars appear in a six-chapter sequence, with hyper-real textile simulations and a clear narrative spine.<br><br> The work merges digital fashion, architecture, and performance into one continuous environment. Each chapter marks a step in the evolution of identity, material, and medium in virtual culture.</p><br>
+<p><strong>Parts:</strong><br><br>
+1- Evoluti̇on Of Medium Of Traditional Art<br>
+2- Virtual Fashion<br>
+3- Evoluti̇on Of Medium Of Art As Nft<br>
+4- AI Powered Design<br>
+5- Transhumanism<br>
+6- Evolution Of Art As Mutant Meaning</p><br>
+
+ <i><strong>World Insights:</strong><br>
+ <i>This metaverse space is a minimalist, dark environment with dramatic circular lighting, evoking a digital void where avatars evolve. Each chapter builds on the last: starting with AI-reimagined art classics, shifting to experimental digital fashion, blending NFTs and figures, resetting with pure AI generation, ascending minimally, and rebirth through transformed echoes. Avatars aren't static—they rotate 360 degrees and walk in 15-unit radius loops, symbolizing endless cycles of identity and code. Click interactive elements (like certain objects) to uncover deeper layers, hinting at a world where agents handle real tasks via digital forms. Explore freely to discover hidden narratives in the shadows.</i><br>
+ <a href=" https://youtu.be/Ajep2N8Xna8" target="_blank">REVOFEV</a> → Collection Song<br>
+
+    </div>
+    <div id="studioInfoPanel">
+        <button id="studioCloseButton">X</button>
+        <i><strong>Decentralize Design</strong></i><br><br>
+            <p><strong>CREATIVE DESIGN STUDIO<br>FOR VIRTUAL / SPATIAL WEB</strong><br><br>
+            Decentralize Design operates as a design practice based in Milan. Functioning with the rigorous discipline of a traditional architectural studio, the primary site of construction is the internet. Here, spatial design is not applied to physical land, but is realized entirely within the web.</p><i>Situated at the critical intersection of architecture and the digital ether, the practice moves beyond the mere simulation of physical reality. Virtuality is approached as a sovereign territory, free from skeuomorphic constraints. The output encompasses a wide spectrum: from avatar and furniture design to fashion runways and dynamic museum systems. Within this framework, virtual theater is reinterpreted not as a performance on a stage, but as a complex composition of browser layers and file interactions. By integrating blockchain authentication with continuous research into digital materiality and psychology, the necessary scaffolding for a new mode of digital existence is constructed.</i>
+            <p><strong>LET'S FORGE THE FUTURE TOGETHER.</strong><br><br>
+            <i>community@de-centralize.com</i><br><br><br>
+            
+
+    </div>
+    <div id="hintPanel">
+        <button id="hintCloseButton">X</button>
+       <p><strong>Hints</strong><br>
+               <p><strong>Navigation: Use W, A, S, D to move around, and the mouse to look in different directions in PC.</strong><br>Click F for fullscreen.<br>Left Shift to run, Space to jump<br><br>
+
+       <p><strong>Links</strong><br>
+      
+ <a href="https://c2w2.world/" target="_blank">c2w2.world</a> → Experience World<br>
+
+  <a href="https://c2w2.art/" target="_blank">c2w2.art</a> → All Files<br><br>
+
+
+ <a href="https://manifold.xyz/@decentralizedesign/contract/166699248/1" target="_blank">Manifold</a> → Minted Experience<br>
+
+ <a href="https://opensea.io/item/ethereum/0xf688f59da001827bc8658622557ba33ffd6262a7/1" target="_blank">Opensea</a> → Minted Experience<br><br>
+
+      <a href="https://c2w2.world/avatars" target="_blank">world/avatars</a> → Avatar Viewer <br>
+
+<a href="https://c2w2.world/runwaymodelviewer" target="_blank">Runway Model Viewer</a> → Runway Simulation <br>
+
+<a href="https://c2w2.art/agentic" target="_blank">Agentic</a> → Gameboy Color Game<br>
+
+      <a href="https://hyperfy.io/c2w2" target="_blank">Hyperfy</a> → v1 Base Metaverse Experience<br><br><br>
+
+     
+
+    
+     <p><strong>What it is (at a glance)</strong></p>
+
+<p><strong>The Experience</strong><br>
+• 30-minute narrative runway <br>exploring the evolution from "Touch" to "Click."<br>
+• 6 distinct chapters featuring 48 avatars (selected from 75).<br>
+• Browser-based & On-chain: The first historical instance <br>of a full metaverse experience minted as a single, executable NFT.<br>
+• Multi-View: Single link includes Desktop (free roam), VR (WebXR), and Marketplace (cinematic) versions.</p>
+
+<p><strong>Technical Specifications</strong><br>
+• Engine: Rebuilt using Three.js with custom WebGL rendering.<br>
+• Assets: 48 garments created with Clo3D and AI generation.<br>
+• File Format: Optimized GLB files (VRM ready), averaging 5MB each, 2 draw calls avg.<br>
+• Physics: Features ultra-realistic, dynamic textile physics streamed in a standard browser (a technical first).</p>
+
+<p><strong>Storage & Provenance</strong><br>
+• Structure: Minted as an HTML-based NFT on Ethereum.<br>
+• PFADI (Archive): All source assets (models, sounds, environment) are stored permanently on Arweave to ensure independence from hosting platforms.</p>
+
+<i><a href="https://c2w2.world/pdf" target="_blank">Explore PDF</a></i><br>
+
+<i><a href="https://www.youtube.com/watch?v=acVopmUyAD8" target="_blank">Listen it here.</a></i><br><br>
+
+ <a href="https://decentralize.design/" target="_blank">decentralize.design</a> → Decentralize Website<br><br>
+
+
+
+</i>
+    </div>
+    <div id="creatorsNotePanel">
+        <button id="creatorsCloseButton">X</button>
+        <p><strong>C2W2 Virtual Runway, 2026</strong><br><br>
+For 60+ VRM avatars, 30 minutes. <br>Browser-based, on-chain. <br>No login, no download—just click.<br><br>
+Redefining Digital Art, Fashion, and the Metaverse by Decentralize.</p><i><a href="https://youtu.be/nyEjJ9KvnQc" target="_blank">Listen it here.</a></i>
+<p>Touch, the touch of Adam, or the message that came to Muhammad through the act of reading. These are gestures that appeal to the senses, forming the foundation of being human, and they are also the roots of the empirical knowledge we possess today. Touch, reading, wars, inventions, kingdoms, nations, stories—at the end of all of these, humankind has evolved into the era of the click. Knowledge once acquired through touch is now absorbed by tapping a digital screen or clicking a mouse. With a single click you can earn billions, lose everything, infect your computer with a virus and lose all your work, or—by clicking and scrolling through what you read—reconstruct yourself from scratch.</p>
+<p>The same applies to agents. With a click, we can generate an identity, a character, nearly an entire life. A human being is born, grows up, and until the age of eighteen their identity is considered unsettled by society; they attend schools, work, eventually get a job. Now, with a few clicks, all of this unfolds autonomously, in minutes, even seconds. You copy a piece of text, and that becomes someone’s role, their character, their life. All with a click.</p>
+<p>Click to wear, click to be. Since this is an avatar collection, the phrase is partly a pun on “ready to wear”—a digital reinterpretation. Yet the deeper meaning of the click lies in its resonance with biology: just as cells divide and multiply, a tree grows, a flower blooms, or the sun rises, sets, and turns into a full moon, clicking is the digital counterpart of a natural process. You click a link, and for thirty minutes you experience something three-dimensional and 360-degree. That click is equivalent to showering, putting on perfume, getting in the car, driving forty minutes, parking, leaving your coat at the cloakroom, buying a ticket, and finally experiencing a museum or performance. Or, it can be seen as the natural outcome of a generation that, after the plague of Covid, grew accustomed to the comfort of working from home and is now searching for new approaches to entertainment, art, and design.</p>
+<p>Meanwhile, in today’s digitized world—where nearly all tools and interactions are absorbed by the internet and by rendering, and where algorithms have become the new governments and regulators—it has become nearly impossible to distinguish the real from the fake. This is equally true for the population of the internet itself. Once called bots, now called agents, they are part of this newly emerged ecosystem. At present, only a minority live this way, but in the near future, perhaps everyone will have their flights, doctor’s appointments, emails, fridge temperature, and dinner plans handled autonomously. Social media accounts and trading bots are already part of this shift.</p>
+<p>I read a tweet that said: “Welcome to the hell of capitalism: people apply for jobs using AI, HR reviews those applications using AI, and therefore nobody gets a job.” Or another one: a California psychologist writes their patient’s words in real-time into a chat program and then relays only the safest suggestions back. This shows that agents and bots do not yet have seamless interfaces; they are still being manually patched and filtered. Solutions exist, and a small minority already use them daily. But mainstream tools are only ChatGPT or Grok—those are the “known” solutions. We are heading toward a world where every person and company will have an agent for each task, and those agents will communicate and transact with other agents. Just as businesses have websites and individuals have social accounts, these agents must also have interfaces on the internet. Their interfaces are avatars. Whether your own copy, someone else, or the C2W2 avatars. Even now this is entirely possible—by linking an avatar’s portrait to an agent application, or placing its 3D body in the metaverse, you can assign it tasks.</p>
+<p>The difference with C2W2 avatars lies in their design and philosophy: they emerge entirely from this paradigm shift. The volumes, textures, and bodies used in the collection are not random. Each can be thought of as a localized screenshot of a greater 360-degree sphere—multiple windows into the same moment of transformation.</p>
+<p>And just as the avatars themselves demanded a different mode of presentation, the way they are shown also had to break away from PDFs or websites lined with horizontal JPEGs. The nature of the object, and the destiny of these designs, required a new form. Avatars—and the ideas they reference—are multi-windowed, variable, yet singular, arranged into a 360-degree digital narrative skeleton. This collection and its runway, while digging into concepts of zeitgeist and the future, is also a three-dimensional reimagining of our daily habit of scrolling vertically through thirty-second social clips that pump us with dopamine. Videos appear endlessly, but the algorithm already knows what it will feed you. That very mathematics sits beneath the runway. I believe this format lays the foundation for new-generation fashion shows, but at the same time it is an early preview of how everything on the internet—including social media—will soon be experienced.</p>
+<p>The virtual runway consists of six chapters, thirty minutes in total. While originally staged on Hyperfy, the shutdown of v1 became a catalyst for permanence. The entire experience was rebuilt from scratch as a single, immutable, mintable code-free from platform dependency, sequentially presenting various segments of the C2W2 collection. In a minimalist and dark space, under a circle of dramatic lights, more than fifty designed avatars are revealed one by one every thirty seconds, arranged into a single narrative. Across these six chapters, both the medium itself and we—humans, and now a newly emerging species of agents—are curated in their process of evolution through avatars and interactive sounds.</p>
+<p>Narratively, the runway begins with the avatarization of painting—one of the most traditional mediums, with avatars inspired by masters like Francis Bacon and Matisse, designed with the aid of AI. In the second part, it explores the variations of digital fashion and design on “flat” avatars, probing their limits and experimenting with different personalities.</p>
+<p>The third chapter is a hybrid of the first two—a historical continuation—where NFTs and notable figures merge with digital design, creating a deeper conceptual terrain. Here, familiar faces recontextualized reduce the “coolness” of mere spectacle, pushing the viewer into meaning itself.</p>
+<p>In the fourth chapter, much like what the internet and AI did to us initially, the prior three parts are effectively reset. Through avatars generated entirely by AI, the runway erases and devalues everything we saw before. This mirrors the cheapening of “cool visuals” under the flood of AI-produced imagery, where hand-made labor loses its aura.</p>
+<p>The fifth chapter sanctifies, in a minimalist way, the identity-dissolving nature of these new design possibilities—both for the designer and the user. Drawing on small references from the earlier chapters, it stages a kind of parametric, historical ascension, like the most sacred of avatars or the salvation of humanity itself. It evokes the loneliness of the individual after the material bombardment of chapter four, in search of meaning.</p>
+<p>The final chapter shows no new avatar. Like a phoenix rising from its ashes, the runway closes with the rebirth of an idea, an institution, or perhaps anything at all. Strategically selected avatars from the previous five parts return, but altered—recognizable yet transformed. Unlike the recycled revival of 90s denim or 2000s looks, this is a deeper return to essence: not nostalgia, but a fragmented transformation of a simulated century condensed into thirty minutes. Here, the core theme is not the avatars or the clothes themselves, but the multidimensional narrative of AI, the metaverse, blockchain, belonging, and identity.</p>
+<p><strong>Final Note</strong><br>
+All these transformations, these ideas, are not presented as neat “10 new concepts for your runway” after a ChatGPT session. They are observations, echoes of voices in the mind—organic transmissions of the human-digital metamorphosis, told first-hand. Just like this very text—begun in October 2024, carried into 2026, and still awaiting the moment of its release—scattered and fragmented at times. Because in the end, neither the avatars nor the experience will be reduced by the viewer to “a quick summary” asked from a chat program. When the experience ends, the feelings the audience carries remain beyond code, with no biological equivalent yet written. Just as an AI that recommends meditation cannot meditate itself, the impressions left in the viewer are organic, immeasurable. They can only click, and watch.</p>
+<p>This text, likewise, is nothing more than what the creator’s mind recorded while following the trail of their own pen.<br>
+<strong>Enjoy the show.</strong></p>
+<i><a href="https://youtu.be/nyEjJ9KvnQc" target="_blank">Listen it here.</a></i>
+    </div>
+
+<div id="scrollingTextContainer">
+        <div id="scrollingTextContent">
+            </div>
+    </div>
+
+    <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+    import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
+    import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
+    import { PointerLockControls } from 'three/addons/controls/PointerLockControls.js';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+    import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+    import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+    import { VRButton } from 'three/addons/webxr/VRButton.js';
+    import { XRControllerModelFactory } from 'three/addons/webxr/XRControllerModelFactory.js';
+    
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 0.3;
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.physicallyCorrectLights = true;
+
+    renderer.xr.enabled = true;
+
+    document.body.appendChild(renderer.domElement);
+
+    const playerRig = new THREE.Group();
+    playerRig.position.set(15, 1.6, 0);
+    scene.add(playerRig);
+    playerRig.add(camera);
+
+    const composer = new EffectComposer(renderer);
+    const renderPass = new RenderPass(scene, camera);
+    composer.addPass(renderPass);
+    const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.1, 0.4, 0.85);
+    composer.addPass(bloomPass);
+    
+    const audioListener = new THREE.AudioListener();
+    camera.add(audioListener);
+    
+    let controls;
+    let vrControlsActive = false;
+    let vrControllers = [];
+    let experienceRunning = false;
+    let isInIframe = false;
+    let orbitControls;
+    let isExperienceRunning = false;
+    let stopInIframe = false;
+
+    const backgroundImg = document.getElementById('backgroundImg');
+    let bootShown = false;
+
+function setupDesktopControls() {
+    isInIframe = window.self !== window.top;
+    const blocker = document.getElementById('instructions');
+    const resume = document.getElementById('resume');
+    const startButton = document.getElementById('startButton');
+    const iframeWarning = document.getElementById('iframeWarning');
+    const iframeWarning2 = document.getElementById('iframeWarning2');
+    const dfw = document.getElementById('dfw');
+    const openInNewTab = document.getElementById('openInNewTab');
+
+    if (isInIframe) {
+        console.log('Iframe detected, using OrbitControls for mouse rotation');
+        blocker.style.display = 'none';
+        resume.style.display = 'none';
+        startButton.style.display = 'none';
+        backgroundImg.style.display = 'none';
+        document.getElementById('fullscreenButton').style.display = 'none';
+        document.getElementById('projectInfoButton').style.display = 'none';
+        document.getElementById('studioInfoButton').style.display = 'none';
+        document.getElementById('creatorsNoteButton').style.display = 'none';
+        iframeWarning.style.display = 'block';
+        iframeWarning2.style.display = 'block';
+        dfw.style.display = 'block';
+        openInNewTab.style.display = 'block';
+        document.getElementById('cameraLabel').style.display = 'block';
+        document.getElementById('cameraBtn1').style.display = 'block';
+        document.getElementById('cameraBtn2').style.display = 'block';
+        document.getElementById('cameraBtn3').style.display = 'block';
+        document.getElementById('lensLabel').style.display = 'block';
+        document.getElementById('lensBtn1').style.display = 'block';
+        document.getElementById('lensBtn2').style.display = 'block';
+        document.getElementById('lensBtn3').style.display = 'block';
+        scene.remove(playerRig);
+        scene.add(camera);
+        camera.position.set(20, 1, 0);
+        camera.lookAt(0, 5, 0);
+        orbitControls = new OrbitControls(camera, renderer.domElement);
+        orbitControls.target.set(0, 5, 0);
+        const dist = camera.position.distanceTo(orbitControls.target);
+        orbitControls.minDistance = dist;
+        orbitControls.maxDistance = dist;
+        const polarAngle = Math.acos((camera.position.y - orbitControls.target.y) / dist);
+        orbitControls.minPolarAngle = polarAngle;
+        orbitControls.maxPolarAngle = polarAngle;
+        orbitControls.enableZoom = false;
+        orbitControls.enablePan = false;
+        orbitControls.update();
+        playIntroSound();
+        setTimeout(() => {
+            if (isInIframe && !stopInIframe) {
+                document.getElementById('initiating').style.display = 'block';
+                fadeOutIntroSound();
+                runSequence();
+                isExperienceRunning = true;
+            }
+        }, 5000);
+
+        
+        document.getElementById('cameraBtn1').classList.add('selected');
+        document.getElementById('lensBtn1').classList.add('selected');
+
+        
+        const cameraButtons = [document.getElementById('cameraBtn1'), document.getElementById('cameraBtn2'), document.getElementById('cameraBtn3')];
+        cameraButtons.forEach(btn => {
+            btn.addEventListener('click', (event) => {
+                event.stopPropagation();
+                cameraButtons.forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                if (btn.id === 'cameraBtn1') {
+                    camera.position.set(20, 1, 0);
+                    camera.lookAt(0, 5, 0);
+                    orbitControls.target.set(0, 5, 0);
+                } else if (btn.id === 'cameraBtn2') {
+                    camera.position.set(25, 7, 0);
+                    camera.lookAt(0, 0, 0);
+                    orbitControls.target.set(0, 5, 0);
+                } else if (btn.id === 'cameraBtn3') {
+                    camera.position.set(6, 16, 0);
+                    camera.lookAt(0, 0, 0);
+                    orbitControls.target.set(0, 7, 0);
+                }
+                const dist = camera.position.distanceTo(orbitControls.target);
+                orbitControls.minDistance = dist;
+                orbitControls.maxDistance = dist;
+                const polarAngle = Math.acos((camera.position.y - orbitControls.target.y) / dist);
+                orbitControls.minPolarAngle = polarAngle;
+                orbitControls.maxPolarAngle = polarAngle;
+                orbitControls.update();
+            });
+        });
+
+        
+        const lensButtons = [document.getElementById('lensBtn1'), document.getElementById('lensBtn2'), document.getElementById('lensBtn3')];
+        lensButtons.forEach(btn => {
+            btn.addEventListener('click', (event) => {
+                event.stopPropagation();
+                lensButtons.forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                if (btn.id === 'lensBtn1') {
+                    camera.fov = 80;
+                } else if (btn.id === 'lensBtn2') {
+                    camera.fov = 50; 
+                } else if (btn.id === 'lensBtn3') {
+                    camera.fov = 100; 
+                }
+                camera.updateProjectionMatrix();
+            });
+        });
+    } else {
+        controls = new PointerLockControls(camera, document.body);
+        scene.remove(playerRig);
+        scene.add(controls.getObject());
+        camera.position.set(15, 1.8, 0);
+        controls.getObject().position.set(15, 1.8, 0);
+        playIntroSound();
+
+        blocker.addEventListener('click', (event) => {
+            event.stopPropagation();
+            controls.lock().catch((error) => {
+                console.error('Pointer Lock error:', error);
+                blocker.innerHTML = '<h1>Pointer Lock Blocked</h1><p>Open in a new tab for full experience.</p>';
+            });
+        });
+        controls.addEventListener('lock', () => {
+            blocker.style.display = 'none';
+            resume.style.display = 'none';
+            backgroundImg.style.display = 'none';
+            if (!experienceRunning) {
+                startButton.style.display = 'block';
+            }
+        });
+        controls.addEventListener('unlock', () => {
+        });
+        document.addEventListener('click', () => {
+            if (!controls.isLocked && bootShown) {
+                controls.lock().catch((error) => console.error('Pointer Lock error:', error));
+            }
+        });
+        if (bootShown && !controls.isLocked) {
+            blocker.style.display = 'block';
+        }
+    }
+}
+
+function setupVRControls() {
+    vrControlsActive = true;
+    document.getElementById('fullscreenButton').style.display = 'none';
+    document.getElementById('projectInfoButton').style.display = 'none';
+    document.getElementById('studioInfoButton').style.display = 'none';
+    document.getElementById('hintButton').style.display = 'none';
+    document.getElementById('creatorsNoteButton').style.display = 'none';
+    document.getElementById('instructions').style.display = 'none';
+    document.getElementById('openInNewTab').style.display = 'none';
+    document.getElementById('iframeWarning').style.display = 'none';
+    document.getElementById('iframeWarning2').style.display = 'none';
+    document.getElementById('dfw').style.display = 'none';
+
+    backgroundImg.src = 'https://arweave.net/I2fhARy6wX2JN1h6MbCjh5ciI5uIYw9Seei2zpSv5AU';
+    backgroundImg.style.display = 'block';
+    playIntroSound();
+
+    const vrButton = VRButton.createButton(renderer);
+    vrButton.textContent = 'Touch to Start';
+    vrButton.id = 'VRButton';
+    document.body.appendChild(vrButton);
+
+    const controllerModelFactory = new XRControllerModelFactory();
+    const controller1 = renderer.xr.getController(0);
+    const controllerGrip1 = renderer.xr.getControllerGrip(0);
+    controllerGrip1.add(controllerModelFactory.createControllerModel(controllerGrip1));
+    playerRig.add(controller1);
+    playerRig.add(controllerGrip1);
+    vrControllers.push(controller1);
+
+    const controller2 = renderer.xr.getController(1);
+    const controllerGrip2 = renderer.xr.getControllerGrip(1);
+    controllerGrip2.add(controllerModelFactory.createControllerModel(controllerGrip2));
+    playerRig.add(controller2);
+    playerRig.add(controllerGrip2);
+    vrControllers.push(controller2);
+
+    function onConnected(event) {
+        event.target.userData.gamepad = event.data.gamepad;
+        event.target.userData.hand = event.data.handedness;
+        console.log(`Controller connected: ${event.data.handedness}`);
+    }
+    controller1.addEventListener('connected', onConnected);
+    controller2.addEventListener('connected', onConnected);
+
+    renderer.xr.addEventListener('sessionstart', () => {
+        console.log('VR Session Started');
+
+        if (audioListener.context.state === 'suspended') {
+            audioListener.context.resume().then(() => {
+                console.log('AudioContext resumed');
+                const emptySound = audioListener.context.createBufferSource();
+                emptySound.buffer = audioListener.context.createBuffer(1, 1, 22050);
+                emptySound.connect(audioListener.context.destination);
+                emptySound.start();
+            }).catch(e => console.error('AudioContext resume failed:', e));
+        }
+
+        document.getElementById('startButton').style.display = 'none';
+        backgroundImg.style.display = 'none';
+        document.getElementById('initiating').style.display = 'block';
+        fadeOutIntroSound();
+        runSequence();
+    });
+
+    renderer.xr.addEventListener('sessionend', () => {
+        console.log('VR Session Ended');
+        window.location.reload();
+    });
+}
+
+    async function setupEnvironment() {
+        try {
+            const vrSupported = navigator.xr && await navigator.xr.isSessionSupported('immersive-vr');
+            if (vrSupported) {
+                setupVRControls();
+            } else {
+                setupDesktopControls();
+            }
+        } catch (e) {
+            console.error('Assez vu.', e);
+            setupDesktopControls();
+        }
+    }
+
+    let baseMoveSpeed = 20;
+    let currentMoveSpeed = baseMoveSpeed;
+    const jumpVelocity = 5;
+    let velocity = new THREE.Vector3();
+    let direction = new THREE.Vector3();
+    let prevTime = performance.now();
+    const gravity = 9.8;
+    let onFloor = true;
+    const keys = {
+        forward: false,
+        backward: false,
+        left: false,
+        right: false,
+        jump: false,
+        sprint: false
+    };
+    document.addEventListener('keydown', (event) => {
+        if (vrControlsActive) return;
+        switch (event.code) {
+            case 'KeyW': keys.forward = true; break;
+            case 'KeyS': keys.backward = true; break;
+            case 'KeyA': keys.left = true; break;
+            case 'KeyD': keys.right = true; break;
+            case 'Space': if (onFloor) { keys.jump = true; } break;
+            case 'ShiftLeft': keys.sprint = true; currentMoveSpeed = baseMoveSpeed * 4; break;
+        }
+    });
+    document.addEventListener('keyup', (event) => {
+        if (vrControlsActive) return;
+        switch (event.code) {
+            case 'KeyW': keys.forward = false; break;
+            case 'KeyS': keys.backward = false; break;
+            case 'KeyA': keys.left = false; break;
+            case 'KeyD': keys.right = false; break;
+            case 'Space': keys.jump = false; break;
+            case 'ShiftLeft': keys.sprint = false; currentMoveSpeed = baseMoveSpeed; break;
+        }
+    });
+
+    const pmremGenerator = new THREE.PMREMGenerator(renderer);
+    pmremGenerator.compileEquirectangularShader();
+    new RGBELoader().load('https://raw.githubusercontent.com/decentralize-dfw/c2w2/main/DARK-NEBULA.hdr', (texture) => {   // hdri
+        const envMap = pmremGenerator.fromEquirectangular(texture).texture;
+        scene.environment = envMap;
+        scene.background = envMap;
+        texture.dispose();
+        pmremGenerator.dispose();
+    });
+    
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
+    scene.add(ambientLight);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 5);
+    directionalLight.position.set(5, 10, 5);
+    directionalLight.castShadow = true;
+    directionalLight.shadow.mapSize.width = 4096;
+    directionalLight.shadow.mapSize.height = 4096;
+    directionalLight.shadow.camera.near = 0.5;
+    directionalLight.shadow.camera.far = 500;
+    scene.add(directionalLight);
+    const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x444444, 0.1);
+    hemisphereLight.position.set(0, 20, 0);
+    scene.add(hemisphereLight);
+    const dramaticLight = new THREE.DirectionalLight(0xffffff, 100);
+    dramaticLight.position.set(0, 30, 0);
+    dramaticLight.castShadow = true;
+    dramaticLight.shadow.mapSize.width = 4096;
+    dramaticLight.shadow.mapSize.height = 4096;
+    dramaticLight.shadow.camera.near = 0.5;
+    dramaticLight.shadow.camera.far = 100;
+    dramaticLight.shadow.camera.left = -50;
+    dramaticLight.shadow.camera.right = 50;
+    dramaticLight.shadow.camera.top = 50;
+    dramaticLight.shadow.camera.bottom = -50;
+    dramaticLight.shadow.bias = -0.0001;
+    dramaticLight.shadow.normalBias = 0.05;
+    dramaticLight.shadow.radius = 4;
+    dramaticLight.shadow.blurSamples = 16;
+    scene.add(dramaticLight);
+    
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.7/');
+    dracoLoader.setDecoderConfig({ type: 'js' });
+    const gltfLoader = new GLTFLoader();
+    gltfLoader.setDRACOLoader(dracoLoader);
+    gltfLoader.setMeshoptDecoder(MeshoptDecoder);
+    
+    const spaceUrl = 'https://arweave.net/q3XttMeWXlzp-vOjsNRLbqqTgylEJoDfEQPgwuRHQeA'; //   https://raw.githubusercontent.com/decentralize-dfw/c2w2runwayglbmodels1000/main/space-rw-grfft-v2-opt-v3.glb
+    let spaceBoundingBox = null;
+    document.getElementById('loading').style.display = 'block';
+    gltfLoader.load(
+        spaceUrl,
+        (gltf) => {
+            const spaceModel = gltf.scene;
+            spaceModel.position.set(0, 0, 0);
+            spaceModel.traverse((child) => {
+                if (child.isMesh) {
+                    child.castShadow = true;
+                    child.receiveShadow = true;
+                }
+            });
+            scene.add(spaceModel);
+            spaceBoundingBox = new THREE.Box3().setFromObject(spaceModel);
+            console.log('jE est Un aUtRe');
+            document.getElementById('loading').style.display = 'none';
+            backgroundImg.style.display = 'block';
+            
+            bootShown = true;
+            setupEnvironment(); 
+        },
+        (xhr) => {
+            document.getElementById('loading').textContent = `Loading: ${(xhr.loaded / xhr.total * 100).toFixed(2)}%`;
+        },
+        (error) => {
+            console.error('Error loading space:', error);
+            document.getElementById('loading').textContent = 'Error: Failed to load space!';
+        }
+    );
+
+
+    const modelUrls = [
+    'https://arweave.net/oZJozznfD7P060kx9_EY5JQWizdjn2ik3r7Rl1upNDQ', // Model 1 - 1-Belli_Capelli_RW1000
+    'https://arweave.net/d7I2xSpbKnb2X8ontNGf7isHZkg9AT_gEIn8ZS_cQRI', // Model 2 - 2-Lydia_RW1000
+    'https://arweave.net/YjYJpCgjlBLp6ls3vEN_0WSMVeXAI-rH9GHuWYi8YyM', // Model 3 - 3-Lucien_RW1000
+    'https://arweave.net/w_XtMv4WfNoUmAyaLRVbUF8B2dtO2TVbWD2wH1ZVREk', // Model 4 - 4-The_Wrestler_of_Silence_RW1000
+    'https://arweave.net/mKjOC69jSN7Xw7E0h5gM3kT3PIVinfMPm55AnWij39w', // Model 5 - 5-The_Devoured_Remnant_RW1000
+    'https://arweave.net/gHC6hYhIro3Erp5r4mi6CRkhRvyEOUr7Tf8VdLJOL6A', // Model 6 - 6-Squallor_Shark_RW1000
+    'https://arweave.net/TkDBE_tZqHMZS1KdCM7YCOb-RkH0pKmHbWfMZeZps3k', // Model 7 - 7-Neue2Dojo_Curator_RW1000
+    'https://arweave.net/SlPTDvvLtQgeTs_i-kVkObviah8rZ5J-Z7bjAJv_a3k', // Model 8 - 8-Joker_RW1000
+    'https://arweave.net/AC4qmQB0KohbgLWCOypppP5aRW2cEWiaFmQzfV4Ul5c', // Model 9 - 9-Bulky_Bride_RW1000
+    'https://arweave.net/sH1s44a5gkxIM-fpfwiWUNVxuN3Fyq7_hRGfPWzJwE4', // Model 10 - 10-Mare_RW1000
+    'https://arweave.net/-rNhHgpq-mAiNzz4CNslWWYP_yNZh0f8bMTT0DDVtks', // Model 11 - 11-Vertical_CT_Feed_Person_RW1000
+    'https://arweave.net/OMZX-yZJHeA66kUgG6XZWfSO6Efz62fiPs4Izj0YsbQ', // Model 12 - 12-Astral_Kindergarten_Teacher_RW1000
+    'https://arweave.net/aDvxuRCVrHDtsAvsAgGaB6EOxO_BYI1ZyTjM-aAv_yw', // Model 13 - 13-Invert_Smiley_RW1000
+    'https://arweave.net/k24jVLJArbqSlvq6VZHxl9dMv1ZCsm9CviKpJdfgsP0', // Model 14 - 14-Private_Pile_RW1000
+    'https://arweave.net/sSgXb3klYVVEGVbiuDy3KglywghIGcWu7o8JjJeZPxc', // Model 15 - 15-Uncle_Red_RW1000
+    'https://arweave.net/mLTR9eEo1dAR9z9QhOu1DG5pkWvYqPIizQOKvbfl8Gg', // Model 16 - 16-Xoku_RW1000
+    'https://arweave.net/mCw9QqyxAUiGKrSj1cmRj8-xdTLanhFHMCRrvNGjpuQ', // Model 17 - 17-Weekend_@_Saturn_RW1000
+    'https://arweave.net/vX7NJkgzjzJb7I_Ptu5RoAipFF-WQrt7gpEI6Tw3D9s', // Model 18 - 18-Seize_RW1000
+    'https://arweave.net/LzsLhrZiOSB0j_Y6gnA2vWTJn64im-EcHxG184I3zV0', // Model 19 - 19-Midemoiselle_RW1000
+    'https://arweave.net/1I5WpZBftab2ZCepzItZ9D3zqnrmZHMmGnwppF1o8iQ', // Model 20 - 20-Ferryman_RW1000
+    'https://arweave.net/ZkWQ1OUgtptx8HfTL0s1a37WEQXSlEKqpth_rtKswII', // Model 21 - 21-Panda_Boss_RW1000
+    'https://arweave.net/T4ZPK38vtozNBYUSq5YF2V48p2twgOt6i-_Np9yHTTI', // Model 22 - 22-Founder_Ape_RW1000
+    'https://arweave.net/2dmumjhdGq2BWTrXHu0Dq3-FzMjSLqoNbzn3tqhgUdo', // Model 23 - 23-Davicni_RW1000
+    'https://arweave.net/9kwCQ6sNRFZg4UpEePp2MegsxkC0Mj3GGzXKNgdCAWw', // Model 24 - 24-Chromozom_RW1000
+    'https://arweave.net/lM1QmjHPZN_OY1EcrY23Ltt5VY0QqDywME-2loN4x-M', // Model 25 - 25-Can't_See_Beep_Bop_Crap_RW1000
+    'https://arweave.net/N2IFXk81ENxTpAP0ZmvkXqp1D06Hdw1BZ-a2i9Du6uA', // Model 26 - 26-Bone_on_Air_RW1000
+    'https://arweave.net/EPMIQtWEQbPGzqY076Qa6RkWIPwxxMdxx1AGhuno7NQ', // Model 27 - 27-Ashium_RW1000
+    'https://arweave.net/c6lZjbQqrQm3Kd78xKjf66zK2zGIU2SUK3Edc4tO_8E', // Model 28 - 28-RR-Tiger_RW1000
+    'https://arweave.net/oZNeIKlRPmsfMp3A-dOKilpC0Ks90BNKaZ92cuuZ-QA', // Model 29 - 29-Teddyminator_RW1000
+    'https://arweave.net/di5t0JtbePXTe6x6sU6J-UMXMMu8Kr9DBPpA2-NubHI', // Model 30 - 30-Bad_Luck_RW1000
+    'https://arweave.net/FjdP1g51-2QZCxB8eZ4qG0N6mg1AhZjT_ZobOl0-8w8', // Model 31 - 31-Mayhem_Clown_RW1000
+    'https://arweave.net/UMeDIMFhRaqDmCwaCZG18qMjlpohR4roXZnM4Z052sM', // Model 32 - 32-Samu_RW1000
+    'https://arweave.net/IgtLoHYZsE18VEzhQpJD0kBnQkCN1x0QIKoDKC3FGVk', // Model 33 - 33-Baincaigai_RW1000
+    'https://arweave.net/LcZoFWh-LqDDKTtNlqimnBaDKP6lim870KEncql21gc', // Model 34 - 34-exBunny_RW1000
+    'https://arweave.net/xsGNlsZW0KvtO0G9V_pNQoYO2dGLaHIz6_fBir05OmU', // Model 35 - 35-Thomas_DT_RW1000
+    'https://arweave.net/qITvBRWUhvyOUaWJcG47-ha4WNzmMw-wPLjSoeiEusY', // Model 36 - 36-Bobo_Delirium_RW1000
+    'https://arweave.net/rl9y6gd1hHrvq9VCddbhUbvzE72CT1zSAsNWPzOqhM0', // Model 37 - 37-Xeu2_RW1000
+    'https://arweave.net/hlvSYpYodvZz9Q5DeXTnMxAkX_bNMHfIA5UDqwxT6ck', // Model 38 - 38-Ya_Bish_Opps_c2-RW1000
+    'https://arweave.net/jgUrTwqv8x1_zJ8masbA5Cuj9F0zEh9TMoqd-YCTPhM', // Model 39 - 39-sleekrobobİtch-SPIKES_RW1000
+    'https://arweave.net/OnkZUP3w024Ogp_qROcFZJdaqRYFuci8Wo8AfZ35_9s', // Model 40 - 40-Don_Mac_Don_v2-RW1000
+    'https://arweave.net/ZVTCwuvzOy9UjC-1aKg7oFilV47yVIFnAQvOVNmgiB8', // Model 41 - 41-Call_2_Sim_RW1000
+    'https://arweave.net/ZkZULoPkmgHJGKF36rcFKP-79zK5CT8-VmLFsQaEiNw', // Model 42 - 42-CYB0RG-E-xyz_RW1000
+    'https://arweave.net/RCUKhCQJNCLNNBIwesH3sRpRdSmMRmA72klXeKoLIww', // Model 43 - 43-Steroive_iObs_RW1000
+    'https://arweave.net/hp6ynx5FmyPezbvrx49PNq6-xXdH9nr5lTTPhc2SGDI', // Model 44 - 44-Tobby_Millefuille_RW1000
+    'https://arweave.net/vaCbId-g-bb-69z7PAerVws_EQlZQOqR9ojn-pVh_Ik', // Model 45 - 45-Junya_RW1000
+    'https://arweave.net/w2SaRsliNmMEGqQYE8QcP7EXijZFyPbDNPZX8AxItKY', // Model 46 - 46-Elextrogxd_RW1000
+    'https://arweave.net/U4P2t4KH1LOC-Tn4_5R91IQJV3RHilMnZKzfaxeolBA', // Model 47 - 47-Davicni_2_RW1000
+    'https://arweave.net/lwxdZ6tJ1GnUio75aVP-mgXutLWrX-jeUu_74TwJ1Hs', // Model 48 - 48-48-Xoqou-v2-_RW1000
+    'https://arweave.net/axaE1XdSghN3qXGhptoi39TuzzC3Lw4X3YjTDcK3pTg', // Model 49 - 49-Finale_unOpt_RW1000
+];
+   
+const modelDescriptions = [
+    'Belli Capelli.',
+    'Lydia.',
+    'Lucien.',
+    'The Wrestler of Silence.',
+    'The Devoured Remnant.',
+    'Squallor Shark.',
+    'Neue²Dojo Curator.',
+    'Joker.',
+    'Bulky Bride.',
+    'Mare.',
+    'Vertical CT Feed Person.',
+    'Astral Kindergarten Teacher.',
+    'Invert Smiley.',
+    'Private Pile.',
+    'Uncle Red.',
+    'Xoku.',
+    'Weekend @ Saturn.',
+    'Seize.',
+    'Midemoiselle.',
+    'Ferryman.',
+    'Panda Boss.',
+    'Founder Ape.',
+    'Davicni.',
+    'Chromozom.',
+    'Can\'t See Beep Bop Crap.',
+    'Bone on Air.',
+    'Ashium.',
+    'RR-Tiger.',
+    'Teddyminator.',
+    'Bad Luck.',
+    'Mayhem Clown.',
+    'Samu.',
+    'Baincaigai.',
+    'exBunny.',
+    'Thomas_DT.',
+    'Bobo Delirium.',
+    'Xeu2.',
+    'Ya Bish Opps.',
+    'sleekrobobİtch/SPIKES.',
+    'Don Mac Don.',
+    'Call_2_Sim.',
+    'CYB0RG-E-xyz.',
+    'Steroive iObs.',
+    'Tobby Millefuille.',
+    'Junya.',
+    'Elextrogxd.',
+    'Davicni.',  
+    'Xoqou.',
+    'FeLiNa.'
+];
+
+    const models = [];
+    
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+    let clickableObject = null;
+    
+    function onMouseMove(event) {
+        if (controls && controls.isLocked) {
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(scene.children, true);
+            const hoverText = document.getElementById('hoverText');
+            if (intersects.length > 0 && (intersects[0].object.name === 'balls' || intersects[0].object.name === 'Body')) {
+                hoverText.style.display = 'block';
+                document.body.style.cursor = 'pointer';
+            } else {
+                hoverText.style.display = 'none';
+                document.body.style.cursor = 'auto';
+            }
+        }
+    }
+    
+    function onMouseClick(event) {
+        if (vrControlsActive) return; 
+        
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(scene.children, true);
+        for (let i = 0; i < intersects.length; i++) {
+            if (intersects[i].object.name === 'balls' || intersects[i].object.name === 'Body') {
+                window.open('https://c2w2.art/', '_blank');
+                break;
+            }
+        }
+    }
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('click', onMouseClick);
+    
+    function loadModel(index) {
+        return new Promise((resolve, reject) => {
+            gltfLoader.load(
+                modelUrls[index - 1],
+                (gltf) => {
+                    const modelScene = gltf.scene;
+                    modelScene.position.set(0, 0, 0);
+                    modelScene.traverse((child) => {
+                        if (child.isMesh) {
+                            child.castShadow = true;
+                            child.receiveShadow = true;
+                            if (index === 49 && child.name === 'balls' && child.material.name === 'TT') {
+                                child.material.emissiveIntensity = 100; 
+                                clickableObject = child;
+                            } else {
+                                if (child.material.emissive) {
+                                    child.material.emissiveIntensity = 1; 
+                                }
+                            }
+                        }
+                    });
+                    scene.add(modelScene);
+                    let mixer = null;
+                    if (gltf.animations && gltf.animations.length > 0) {
+                        mixer = new THREE.AnimationMixer(modelScene);
+                        gltf.animations.forEach((clip) => {
+                            const action = mixer.clipAction(clip);
+                            action.loop = THREE.LoopRepeat;
+                        });
+                    }
+                    models[index] = { model: modelScene, mixer, animated: false };
+                    console.log(`3D AGENT BEING ${index} HAS BORN. (SILENT. BUT THERE. YOU KNOW THAT)`);
+                    resolve();
+                },
+                undefined,
+                (error) => {
+                    console.error(`Error loading model ${index}:`, error);
+                    reject(error);
+                }
+            );
+        });
+    }
+    function animateModel(index) {
+        const entry = models[index];
+        if (entry && entry.mixer && entry.mixer._actions.length > 0) {
+            entry.mixer.stopAllAction();
+            entry.animated = true;
+            entry.mixer.time = 0;
+            entry.mixer.update(0);
+            entry.mixer._actions.forEach(action => {
+                action.reset();
+                action.play();
+            });
+            console.log(`3D AGENT BEING ${index} DESTINY TRIGGERED (UNTIL THE END OF THE TIME)`);
+            document.getElementById('description').textContent = modelDescriptions[index - 1];
+            document.getElementById('description').style.display = 'block';
+        } else {
+            console.log(`No animation or mixer ready for model ${index}`);
+        }
+    }
+    function deleteModel(index) {
+        const entry = models[index];
+        if (entry) {
+            if (entry.mixer) entry.mixer.stopAllAction();
+            scene.remove(entry.model);
+            entry.model.traverse((child) => {
+                if (child.isMesh) {
+                    child.geometry.dispose();
+                    child.material.dispose();
+                }
+            });
+            models[index] = null;
+            console.log(`3D AGENT BEING ${index} IS DEATH. GIVE EM SOME FLOWERS AND A SINGLE TEAR.`);
+            document.getElementById('description').style.display = 'none';
+            if (index === 49) {
+                clickableObject = null;
+            }
+        }
+    }
+    function wait(seconds) {
+        return new Promise(resolve => setTimeout(resolve, seconds * 1000));
+    }
+
+
+
+    const audioLoader = new THREE.AudioLoader();
+    let sound1Buffer, sound2Buffer, sound3Buffer, sound4Buffer, sound5Buffer, sound6Buffer, introSoundBuffer;
+    let sound1, sound2, sound3, sound4, sound5, sound6, introSound;
+  const soundUrl1 = 'https://arweave.net/RQNUMGVhM8wcjNkLjEd6BQFanS5uB_t0Y3ZeuAIg0ew';
+const soundUrl2 = 'https://arweave.net/TDBkb0oFpfSlffXbNqRYmmOZw6TME84Rcf9qzh2QkG8';
+const soundUrl3 = 'https://arweave.net/Y0722novhkkb0ZDA8EaZ3RKQTk76_JT52q5pc_Ijy1c';
+const soundUrl4 = 'https://arweave.net/09XemuPQNP8641acUMuDhisppxdP_YIb6FUL8k7vMqo';
+const soundUrl5 = 'https://arweave.net/W6oEXyeEiPs3YW4GSePsA1LzoAq5ha2rf0cT0j0VdUU';
+const soundUrl6 = 'https://arweave.net/jfe12LN5xSTUCp0uYTSue9mrKB4kP-25mej-9S6FxVQ';
+const introSoundUrl = null;
+    
+
+const allSoundsReady = Promise.all([
+  new Promise((resolve, reject) => {
+    audioLoader.load(soundUrl1, (buffer) => {
+      sound1Buffer = buffer;
+      console.log('Assez eu.');
+      resolve();
+    }, undefined, reject);
+  }),
+  new Promise((resolve, reject) => {
+    audioLoader.load(soundUrl2, (buffer) => {
+      sound2Buffer = buffer;
+      console.log('Rumeurs des villes, le soir, et au soleil, et toujours.');
+      resolve();
+    }, undefined, reject);
+  }),
+  new Promise((resolve, reject) => {
+    audioLoader.load(soundUrl3, (buffer) => {
+      sound3Buffer = buffer;
+      console.log('Assez connu.');
+      resolve();
+    }, undefined, reject);
+  }),
+  new Promise((resolve, reject) => {
+    audioLoader.load(soundUrl4, (buffer) => {
+      sound4Buffer = buffer;
+      console.log('Les arrêts de la vie.');
+      resolve();
+    }, undefined, reject);
+  }),
+  new Promise((resolve, reject) => {
+    audioLoader.load(soundUrl5, (buffer) => {
+      sound5Buffer = buffer;
+      console.log('Ô Rumeurs et Visions !');
+      resolve();
+    }, undefined, reject);
+  }),
+  new Promise((resolve, reject) => {
+    audioLoader.load(soundUrl6, (buffer) => {
+      sound6Buffer = buffer;
+      console.log('Départ dans l’affection et le bruit neufs !');
+      resolve();
+    }, undefined, reject);
+  })
+]);
+
+
+function playIntroSound() {
+    if (introSoundBuffer) {
+        if (audioListener.context.state === 'suspended') {
+            audioListener.context.resume().then(() => {
+                introSound = new THREE.Audio(audioListener);
+                introSound.setBuffer(introSoundBuffer);
+                introSound.setLoop(true);
+                introSound.setVolume(0.5);
+                introSound.play();
+                console.log('Intro sound played');
+            }).catch(e => console.error('Intro sound AudioContext resume failed:', e));
+        } else {
+            introSound = new THREE.Audio(audioListener);
+            introSound.setBuffer(introSoundBuffer);
+            introSound.setLoop(true);
+            introSound.setVolume(0.5);
+            introSound.play();
+            console.log('Intro sound played');
+        }
+    } else {
+        console.error('La vision s’est rencontrée à tous les airs.');
+    }
+}
+    function fadeOutIntroSound() {
+        if (introSound && introSound.isPlaying) { 
+            const currentTime = audioListener.context.currentTime;
+            introSound.gain.gain.linearRampToValueAtTime(0, currentTime + 4);
+            setTimeout(() => {
+                introSound.stop();
+                console.log('Intro sound faded out and stopped');
+            }, 4000);
+        }
+    }
+    function playSound1() {
+if (sound1Buffer) {
+    if (audioListener.context.state === 'suspended') {
+        audioListener.context.resume().then(() => {
+            sound1 = new THREE.Audio(audioListener);
+            sound1.setBuffer(sound1Buffer);
+            sound1.setLoop(false);
+            sound1.setVolume(0.5);
+            sound1.play();
+            console.log('La chair est triste, hélas! et j’ai lu tous les livres.');
+        }).catch(e => console.error('Sound 1 AudioContext resume failed:', e));
+    } else {
+        sound1 = new THREE.Audio(audioListener);
+        sound1.setBuffer(sound1Buffer);
+        sound1.setLoop(false);
+        sound1.setVolume(0.5);
+        sound1.play();
+        console.log('La chair est triste, hélas! et j’ai lu tous les livres.');
+    }
+} else {  
+    console.error('Sound 1 buffer not ready');
+}
+}
+
+function playSound2() {
+if (sound2Buffer) {
+    if (audioListener.context.state === 'suspended') {
+        audioListener.context.resume().then(() => {
+            sound2 = new THREE.Audio(audioListener);
+            sound2.setBuffer(sound2Buffer);
+            sound2.setLoop(false);
+            sound2.setVolume(0.5);
+            sound2.play();
+            console.log('Fuir! là-bas fuir! Je sens que des oiseaux sont ivres');
+        }).catch(e => console.error('Sound 2 AudioContext resume failed:', e));
+    } else {
+        sound2 = new THREE.Audio(audioListener);
+        sound2.setBuffer(sound2Buffer);
+        sound2.setLoop(false);
+        sound2.setVolume(0.5);
+        sound2.play();
+        console.log('Fuir! là-bas fuir! Je sens que des oiseaux sont ivres');
+    }
+} else {
+    console.error('Sound 2 buffer not ready');
+}
+}
+
+function playSound3() {
+if (sound3Buffer) {
+    if (audioListener.context.state === 'suspended') {
+        audioListener.context.resume().then(() => {
+            sound3 = new THREE.Audio(audioListener);
+            sound3.setBuffer(sound3Buffer);
+            sound3.setLoop(false);
+            sound3.setVolume(0.5);
+            sound3.play();
+            console.log('D’être parmi l’écume inconnue et les cieux!');
+        }).catch(e => console.error('Sound 3 AudioContext resume failed:', e));
+    } else {
+        sound3 = new THREE.Audio(audioListener);
+        sound3.setBuffer(sound3Buffer);
+        sound3.setLoop(false);
+        sound3.setVolume(0.5);
+        sound3.play();
+        console.log('D’être parmi l’écume inconnue et les cieux!');
+    }
+} else {
+    console.error('Sound 3 buffer not ready');
+}
+}
+
+function playSound4() {
+if (sound4Buffer) {
+    if (audioListener.context.state === 'suspended') {
+        audioListener.context.resume().then(() => {
+            sound4 = new THREE.Audio(audioListener);
+            sound4.setBuffer(sound4Buffer);
+            sound4.setLoop(false);
+            sound4.setVolume(0.5);
+            sound4.play();
+            console.log('Rien, ni les vieux jardins reflétés par les yeux,');
+        }).catch(e => console.error('Sound 4 AudioContext resume failed:', e));
+    } else {
+        sound4 = new THREE.Audio(audioListener);
+        sound4.setBuffer(sound4Buffer);
+        sound4.setLoop(false);
+        sound4.setVolume(0.5);
+        sound4.play();
+        console.log('Rien, ni les vieux jardins reflétés par les yeux,');
+    }
+} else {
+    console.error('Sound 4 buffer not ready');
+}
+}
+
+function playSound5() {
+if (sound5Buffer) {
+    if (audioListener.context.state === 'suspended') {
+        audioListener.context.resume().then(() => {
+            sound5 = new THREE.Audio(audioListener);
+            sound5.setBuffer(sound5Buffer);
+            sound5.setLoop(false);
+            sound5.setVolume(0.5);
+            sound5.play();
+            console.log('Ne retiendra ce cœur qui dans la mer se trempe,');
+        }).catch(e => console.error('Sound 5 AudioContext resume failed:', e));
+    } else {
+        sound5 = new THREE.Audio(audioListener);
+        sound5.setBuffer(sound5Buffer);
+        sound5.setLoop(false);
+        sound5.setVolume(0.5);
+        sound5.play();
+        console.log('Ne retiendra ce cœur qui dans la mer se trempe,');
+    }
+} else {
+    console.error('Sound 5 buffer not ready');
+}
+}
+
+function playSound6() {
+if (sound6Buffer) {
+    if (audioListener.context.state === 'suspended') {
+        audioListener.context.resume().then(() => {
+            sound6 = new THREE.Audio(audioListener);
+            sound6.setBuffer(sound6Buffer);
+            sound6.setLoop(false);
+            sound6.setVolume(0.5);
+            sound6.play();
+            console.log('Ô nuits! ni la clarté déserte de ma lampe.');
+        }).catch(e => console.error('Sound 6 AudioContext resume failed:', e));
+    } else {
+        sound6 = new THREE.Audio(audioListener);
+        sound6.setBuffer(sound6Buffer);
+        sound6.setLoop(false);
+        sound6.setVolume(0.5);
+        sound6.play();
+        console.log('Ô nuits! ni la clarté déserte de ma lampe.');
+    }
+} else {
+    console.error('Sound 6 buffer not ready');
+}
+}
+
+
+    function stopSound1() {
+        if (sound1 && sound1.isPlaying) { sound1.stop(); console.log('DEATH 1S SILENCE'); }
+    }
+    function stopSound2() {
+        if (sound2 && sound2.isPlaying) { sound2.stop(); console.log('DEATH I2 SILENCE'); }
+    }
+    function stopSound3() {
+        if (sound3 && sound3.isPlaying) { sound3.stop(); console.log('D3ATH IS SIL3NC3'); }
+    }
+    function stopSound4() {
+        if (sound4 && sound4.isPlaying) { sound4.stop(); console.log('DE4TH IS SILENCE'); }
+    }
+    function stopSound5() {
+        if (sound5 && sound5.isPlaying) { sound5.stop(); console.log('DEATH IS 5ILENCE'); }
+    }
+    function stopSound6() {
+        if (sound6 && sound6.isPlaying) { sound6.stop(); console.log('End, after all... DEATH IS SILENCE'); }
+    }
+
+    async function printFinalText() {
+        console.log("Final metni alınıyor...");
+        try {
+            // 1. Metin dosyasını fetch ile çek
+            const response = await fetch('https://raw.githubusercontent.com/decentralize-dfw/c2w2runway/refs/heads/main/finalconsole.txt');
+            
+            if (!response.ok) {
+                console.error("Metin dosyası alınamadı:", response.statusText);
+                return;
+            }
+
+            // 2. Yanıtı metne dönüştür
+            const text = await response.text();
+
+            // 3. Metni satırlara ayır ('\n' new line karakterine göre)
+            const lines = text.split('\n');
+
+            // 4. Her bir satırı sırayla konsola yazdır
+            for (const line of lines) {
+                console.log(line);
+                // İsteğe bağlı: Satırlar arasında küçük bir gecikme ekleyebilirsiniz
+                // await new Promise(resolve => setTimeout(resolve, 50)); 
+            }
+
+        } catch (error) {
+            console.error("Metin alınırken veya yazdırılırken hata oluştu:", error);
+        }
+    }
+    
+
+
+    async function showScrollingText() {
+        console.log("HERE COMES THAT MESSAGE ON THE SCREEN! LFG. WE'RE F EARLY. SHOW ME YOUR ART. DROP BELOW. SORRY WRONG BOT. SORRY, AGENT. LOOOOOLLLL. xD");
+        try {
+            const response = await fetch('https://raw.githubusercontent.com/decentralize-dfw/c2w2runway/refs/heads/main/finalconsole.txt');
+            if (!response.ok) {
+                console.error("Metin dosyası alınamadı:", response.statusText);
+                return;
+            }
+            const text = await response.text();
+            
+            const container = document.getElementById('scrollingTextContainer');
+            const content = document.getElementById('scrollingTextContent');
+
+            content.textContent = text; 
+            
+            // --- Animasyon Sekansı (Düzeltilmiş Zamanlamalarla) ---
+
+            // 1. Fade-in (1 saniye)
+            container.style.transition = 'opacity 1s ease'; 
+            container.style.display = 'block';
+            await wait(0.1); 
+            container.style.opacity = '1';
+            await wait(1); // 1 saniye fade-in'in bitmesini bekle
+
+            // 2. Metnin başını 3 saniye göster
+            content.style.transition = 'none'; 
+            content.style.transform = 'translateY(90vh)'; 
+            await wait(3); // 3 saniye bekle
+
+            // 3. Kaydırmayı başlat (68 saniye)
+            content.style.transition = 'transform 68s linear'; 
+            content.style.transform = 'translateY(-100%)'; 
+            await wait(68); // 68 saniye animasyonun bitmesini bekle
+
+            // 4. 5 saniye dur 
+            await wait(5);
+
+            // 5. Fade out (3 saniye)
+            container.style.transition = 'opacity 3s ease'; 
+            container.style.opacity = '0';
+            await wait(3); // 3 saniye fade-out'un bitmesini bekle
+
+            // 6. Temizle
+            container.style.display = 'none';
+            content.style.transition = 'none'; 
+            content.style.transform = 'translateY(100vh)'; 
+
+        } catch (error) {
+            console.error("CAN T SHOW THE TEXT FFS.", error);
+        }
+    }
+
+async function runSequence() {
+    experienceRunning = true;
+    document.getElementById('initiating').style.display = 'block';
+    try {
+        await allSoundsReady;
+       console.log('Départ...');
+        await loadModel(1);
+            await wait(vrControlsActive ? 10 : 5);
+            document.getElementById('initiating').style.display = 'none';
+            playSound1();
+             animateModel(1);
+        
+            await wait(15);
+            await loadModel(2);
+            await wait(15);
+            deleteModel(1);
+            animateModel(2);
+            await wait(15);
+            await loadModel(3);
+            await wait(14.5);
+            deleteModel(2);
+            animateModel(3);
+            await wait(15);
+            await loadModel(4);
+            await wait(14.5);
+            deleteModel(3);
+            animateModel(4);
+            await wait(15);
+            await loadModel(5);
+            await wait(14.5);
+            deleteModel(4);
+            animateModel(5);
+            await wait(15);
+            await loadModel(6);
+            await wait(14.5);
+            deleteModel(5);
+            animateModel(6);
+            await wait(15);
+            await loadModel(7);
+            await wait(14.5);
+            deleteModel(6);
+            animateModel(7);
+            await wait(15);
+            await loadModel(8);
+            await wait(16);
+            deleteModel(7);
+            stopSound1();
+            playSound2();
+            
+            animateModel(8);
+            await wait(15);
+            await loadModel(9);
+            await wait(14.5);
+            deleteModel(8);
+            animateModel(9);
+            await wait(15);
+            await loadModel(10);
+            await wait(14.6);
+            deleteModel(9);
+            animateModel(10);
+            await wait(15);
+            await loadModel(11);
+            await wait(13.9);
+            deleteModel(10);
+            animateModel(11);
+            await wait(15);
+            await loadModel(12);
+            await wait(14.5);
+            deleteModel(11);
+            animateModel(12);
+            await wait(15);
+            await loadModel(13);
+            await wait(14);
+            deleteModel(12);
+            animateModel(13);
+            await wait(15);
+            await loadModel(14);
+            await wait(13.9);
+            deleteModel(13);
+            animateModel(14);
+            await wait(15);
+            await loadModel(15);
+            await wait(14);
+            deleteModel(14);
+            animateModel(15);
+            await wait(15);
+            await loadModel(16);
+            await wait(14.3);
+            deleteModel(15);
+            animateModel(16);
+            await wait(15);
+            await loadModel(17);
+            await wait(14.25);
+            deleteModel(16);
+            animateModel(17);
+            await wait(15);
+            await loadModel(18);
+            await wait(18);
+            deleteModel(17);
+            stopSound2();
+            playSound3();
+            
+            animateModel(18);
+            await wait(15);
+            await loadModel(19);
+            await wait(14.5);
+            deleteModel(18);
+            animateModel(19);
+            await wait(15);
+            await loadModel(20);
+            await wait(14.5);
+            deleteModel(19);
+            animateModel(20);
+            await wait(15);
+            await loadModel(21);
+            await wait(14.3);
+            deleteModel(20);
+            animateModel(21);
+            await wait(15);
+            await loadModel(22);
+            await wait(14.5);
+            deleteModel(21);
+            animateModel(22);
+            await wait(15);
+            await loadModel(23);
+            await wait(14.2);
+            deleteModel(22);
+            animateModel(23);
+            await wait(15);
+            await loadModel(24);
+            await wait(14.5);
+            deleteModel(23);
+            animateModel(24);
+            await wait(15);
+            await loadModel(25);
+            await wait(14.5);
+            deleteModel(24);
+            animateModel(25);
+            await wait(15);
+            await loadModel(26);
+            await wait(14.5);
+            deleteModel(25);
+            animateModel(26);
+            await wait(15);
+            await loadModel(27);
+            await wait(13.8);
+            deleteModel(26);
+            animateModel(27);
+            await wait(15);
+            await loadModel(28);
+            await wait(18);
+            deleteModel(27);
+            stopSound3();
+            playSound4();
+
+
+            animateModel(28);
+            await wait(15);
+            await loadModel(29);
+            await wait(14.5);
+            deleteModel(28);
+            animateModel(29);
+            await wait(15);
+            await loadModel(30);
+            await wait(14.7);
+            deleteModel(29);
+            animateModel(30);
+            await wait(15);
+            await loadModel(31);
+            await wait(15.2);
+            deleteModel(30);
+            animateModel(31);
+            await wait(15);
+            await loadModel(32);
+            await wait(15);
+            deleteModel(31);
+            animateModel(32);
+            await wait(15);
+            await loadModel(33);
+            await wait(15);
+            deleteModel(32);
+            animateModel(33);
+            await wait(15);
+            await loadModel(34);
+            await wait(15.3);
+            deleteModel(33);
+            animateModel(34);
+            await wait(15);
+            await loadModel(35);
+            await wait(15);
+            deleteModel(34);
+            animateModel(35);
+            await wait(15);
+            await loadModel(36);
+            await wait(14.2);
+            deleteModel(35);
+            animateModel(36);
+            await wait(15);
+            await loadModel(37);
+            await wait(14.2);
+            deleteModel(36);
+            animateModel(37);
+            await wait(15);
+            await loadModel(38);
+            await wait(18);
+            deleteModel(37);
+            stopSound4();
+
+            playSound5();
+            
+            animateModel(38);
+            await wait(17);
+            await loadModel(39);
+            await wait(13.95);
+            deleteModel(38);
+            animateModel(39);
+            await wait(14.6);
+            await loadModel(40);
+            await wait(15);
+            deleteModel(39);
+            animateModel(40);
+            await wait(15);
+            await loadModel(41);
+            await wait(14.5);
+            deleteModel(40);
+            animateModel(41);
+            await wait(15);
+            await loadModel(42);
+            await wait(14.7);
+            deleteModel(41);
+            animateModel(42);
+            await wait(15);
+            await loadModel(43);
+            await wait(14.3);
+            deleteModel(42);
+            animateModel(43);
+            await wait(15);
+            await loadModel(44);
+            await wait(14.4);
+            deleteModel(43);
+            animateModel(44);
+            await wait(15);
+            await loadModel(45);
+            await wait(14.7);
+            deleteModel(44);
+            animateModel(45);
+            await wait(15);
+            await loadModel(46);
+            await wait(14.7);
+            deleteModel(45);
+            animateModel(46);
+            await wait(15);
+            await loadModel(47);
+            await wait(15);
+            deleteModel(46);
+            stopSound5();
+
+            playSound6();
+            
+            
+           animateModel(47);
+            await wait(29);
+            await loadModel(7);
+            await wait(14.5);
+            deleteModel(47);
+            animateModel(7);
+            await wait(15);
+            await loadModel(14);
+            await wait(13.7);
+            deleteModel(7);
+            animateModel(14);
+            await wait(15);
+            await loadModel(18);
+            await wait(14);
+            deleteModel(14);
+            animateModel(18);
+            await wait(15);
+            await loadModel(48);
+            await wait(14.4);
+            deleteModel(18);
+            animateModel(48);
+            await wait(15);
+            await loadModel(26);
+           await wait(14.5);
+            deleteModel(48);
+            animateModel(26);
+            await wait(15);
+            await loadModel(27);
+            await wait(14.5);
+            deleteModel(26);
+            animateModel(27);
+            await wait(15);
+            await loadModel(49);
+            await wait(14.5);
+            deleteModel(27);
+            animateModel(49);
+            if (!vrControlsActive) {
+                showScrollingText();
+                printFinalText(); // <-- `await` YOK.
+            }
+            
+           
+            await wait(80);
+            
+            
+            deleteModel(49);
+            await wait(2);
+            stopSound6();
+
+
+       } catch (error) {
+            console.error(`Sequence error at model ${models.length || 'unknown'}:`, error);
+        } finally {
+            document.getElementById('initiating').style.display = 'none';
+            
+            document.getElementById('ended').style.display = 'block';
+            await wait(3);
+            document.getElementById('ended').style.display = 'none';
+
+       
+
+            if (!vrControlsActive) {
+                document.getElementById('startButton').style.display = 'block';
+            }
+            experienceRunning = false;
+        }
+    }
+    
+    const startButton = document.getElementById('startButton');
+    startButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        fadeOutIntroSound();
+        runSequence();
+        startButton.style.display = 'none';
+    });
+
+
+
+const openInNewTabButton = document.getElementById('openInNewTab');
+
+openInNewTabButton.addEventListener('click', (event) => {
+    event.stopPropagation();
+    if (isInIframe) {
+        stopInIframe = true;
+        isExperienceRunning = false;
+        models.forEach(entry => {
+            if (entry && entry.mixer) {
+                entry.mixer.stopAllAction();
+            }
+        });
+        if (introSound && introSound.isPlaying) introSound.stop();
+        if (sound1 && sound1.isPlaying) sound1.stop();
+        if (sound2 && sound2.isPlaying) sound2.stop();
+        if (sound3 && sound3.isPlaying) sound3.stop();
+        if (sound4 && sound4.isPlaying) sound4.stop();
+        if (sound5 && sound5.isPlaying) sound5.stop();
+        if (sound6 && sound6.isPlaying) sound6.stop();
+        document.getElementById('description').style.display = 'none';
+        document.getElementById('ended').style.display = 'block';
+        window.open('https://6qeg7mtbgmqcybfr52z7r45kehdlpnl3fpftqk5vry5saurgu4xq.arweave.net/9AhvsmEzICwEse6z-POqIca3tXsryzgrtY47IFImpy8', '_blank');
+    }
+});
+
+    const fullscreenButton = document.getElementById('fullscreenButton');
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().then(() => {
+                fullscreenButton.textContent = 'Exit Fullscreen';
+            }).catch(err => {
+                console.error('Full screen error:', err);
+            });
+        } else {
+            document.exitFullscreen().then(() => {
+                fullscreenButton.textContent = 'Full Screen';
+            }).catch(err => {
+                console.error('Exit full screen error:', err);
+            });
+        }
+    }
+    fullscreenButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        toggleFullscreen();
+    });
+    document.addEventListener('keydown', (event) => {
+        if (vrControlsActive) return;
+        if (event.key === 'f' || event.key === 'F') {
+            toggleFullscreen();
+        }
+    });
+    document.addEventListener('fullscreenchange', () => {
+        if (document.fullscreenElement) {
+            fullscreenButton.textContent = 'Exit Fullscreen';
+        } else {
+            fullscreenButton.textContent = 'Full Screen';
+        }
+    });
+    
+    const projectInfoButton = document.getElementById('projectInfoButton');
+    const projectInfoPanel = document.getElementById('projectInfoPanel');
+    const closeButton = document.getElementById('closeButton');
+    projectInfoButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        if (projectInfoPanel.style.display === 'block') {
+            projectInfoPanel.style.display = 'none';
+            projectInfoButton.style.opacity = '1';
+        } else {
+            projectInfoPanel.style.display = 'block';
+            projectInfoButton.style.opacity = '0.5';
+            studioInfoPanel.style.display = 'none';
+            studioInfoButton.style.opacity = '1';
+            hintPanel.style.display = 'none';
+            hintButton.style.opacity = '1';
+            creatorsNotePanel.style.display = 'none';
+            creatorsNoteButton.style.opacity = '1';
+        }
+    });
+    closeButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        projectInfoPanel.style.display = 'none';
+        projectInfoButton.style.opacity = '1';
+    });
+    projectInfoPanel.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
+    
+    const studioInfoButton = document.getElementById('studioInfoButton');
+    const studioInfoPanel = document.getElementById('studioInfoPanel');
+    const studioCloseButton = document.getElementById('studioCloseButton');
+    studioInfoButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        if (studioInfoPanel.style.display === 'block') {
+            studioInfoPanel.style.display = 'none';
+            studioInfoButton.style.opacity = '1';
+        } else {
+            studioInfoPanel.style.display = 'block';
+            studioInfoButton.style.opacity = '0.5';
+            projectInfoPanel.style.display = 'none';
+            projectInfoButton.style.opacity = '1';
+            hintPanel.style.display = 'none';
+            hintButton.style.opacity = '1';
+            creatorsNotePanel.style.display = 'none';
+            creatorsNoteButton.style.opacity = '1';
+        }
+    });
+    studioCloseButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        studioInfoPanel.style.display = 'none';
+        studioInfoButton.style.opacity = '1';
+    });
+    studioInfoPanel.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
+    
+    const hintButton = document.getElementById('hintButton');
+    const hintPanel = document.getElementById('hintPanel');
+    const hintCloseButton = document.getElementById('hintCloseButton');
+  hintButton.addEventListener('click', (event) => {
+    event.stopPropagation();
+    if (hintPanel.style.display === 'block') {
+        hintPanel.style.display = 'none';
+        hintButton.style.opacity = '1';
+    } else {
+        hintPanel.style.display = 'block';
+        hintButton.style.opacity = '0.5';
+        if (isInIframe) {
+            hintPanel.style.width = '250px'; 
+            hintPanel.style.height = '510px'; 
+            hintPanel.innerHTML = '<button id="hintCloseButton">X</button><iframe src="https://decentralize-dfw.github.io/c2w2runway/hint1.html" width="100%" height="550px" style="border:none; overflow:hidden; display:block;"></iframe>'; 
+            const hintCloseButton = document.getElementById('hintCloseButton');
+            hintCloseButton.addEventListener('click', (event) => {
+                event.stopPropagation();
+                hintPanel.style.display = 'none';
+                hintButton.style.opacity = '1';
+                hintPanel.style.width = '375px'; 
+                hintPanel.style.height = '750px'; 
+            });
+        }
+        projectInfoPanel.style.display = 'none';
+        projectInfoButton.style.opacity = '1';
+        studioInfoPanel.style.display = 'none';
+        studioInfoButton.style.opacity = '1';
+        creatorsNotePanel.style.display = 'none';
+        creatorsNoteButton.style.opacity = '1';
+    }
+});
+
+    hintCloseButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        hintPanel.style.display = 'none';
+        hintButton.style.opacity = '1';
+    });
+    hintPanel.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
+    
+    const creatorsNoteButton = document.getElementById('creatorsNoteButton');
+    const creatorsNotePanel = document.getElementById('creatorsNotePanel');
+    const creatorsCloseButton = document.getElementById('creatorsCloseButton');
+    creatorsNoteButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        if (creatorsNotePanel.style.display === 'block') {
+            creatorsNotePanel.style.display = 'none';
+            creatorsNoteButton.style.opacity = '1';
+        } else {
+            creatorsNotePanel.style.display = 'block';
+            creatorsNoteButton.style.opacity = '0.5';
+            projectInfoPanel.style.display = 'none';
+            projectInfoButton.style.opacity = '1';
+            studioInfoPanel.style.display = 'none';
+            studioInfoButton.style.opacity = '1';
+            hintPanel.style.display = 'none';
+            hintButton.style.opacity = '1';
+        }
+    });
+    creatorsCloseButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        creatorsNotePanel.style.display = 'none';
+        creatorsNoteButton.style.opacity = '1';
+    });
+    creatorsNotePanel.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
+
+    camera.position.set(15, 1.8, 0);
+    camera.lookAt(0, 0, 0);
+
+    const clock = new THREE.Clock();
+    
+   
+    function animate() {
+    const delta = clock.getDelta();
+    const time = performance.now();
+    const physicsDelta = (time - prevTime) / 1000;
+    prevTime = time;
+
+    if (isInIframe && orbitControls) {
+        orbitControls.update();
+    } else if (vrControlsActive && renderer.xr.isPresenting) {
+        velocity.x -= velocity.x * 10.0 * physicsDelta;
+        velocity.z -= velocity.z * 10.0 * physicsDelta;
+        velocity.y -= gravity * physicsDelta;
+
+        let moveSpeed = 80;
+        let moveDirection = new THREE.Vector3(0, 0, 0);
+
+        let moveGamepad = null;
+        let turnGamepad = null;
+        vrControllers.forEach(ctrl => {
+            if (ctrl.userData.hand === 'left' && ctrl.userData.gamepad) {
+                moveGamepad = ctrl.userData.gamepad;
+            } else if (ctrl.userData.hand === 'right' && ctrl.userData.gamepad) {
+                turnGamepad = ctrl.userData.gamepad;
+            }
+        });
+
+        if (moveGamepad) {
+            if (Math.abs(moveGamepad.axes[2]) > 0.2) {
+                moveDirection.x = moveGamepad.axes[2];
+            }
+            if (Math.abs(moveGamepad.axes[3]) > 0.2) {
+                moveDirection.z = moveGamepad.axes[3];
+            }
+
+            if (moveGamepad.buttons[0] && moveGamepad.buttons[0].value > 0.5) {
+                moveSpeed = 80 * 4;
+            }
+        }
+
+        if (turnGamepad) {
+            if (Math.abs(turnGamepad.axes[2]) > 0.2) {
+                playerRig.rotateY(-turnGamepad.axes[2] * delta * 2.0);
+            }
+        }
+
+        if (moveDirection.length() > 0.01) {
+            const cameraDirection = new THREE.Vector3();
+            camera.getWorldDirection(cameraDirection);
+            cameraDirection.y = 0;
+            cameraDirection.normalize();
+
+            const rightDirection = new THREE.Vector3().crossVectors(cameraDirection, camera.up).normalize();
+
+            const forwardVector = cameraDirection.multiplyScalar(-moveDirection.z * moveSpeed * physicsDelta);
+            const rightVector = rightDirection.multiplyScalar(moveDirection.x * moveSpeed * physicsDelta);
+
+            velocity.x += forwardVector.x + rightVector.x;
+            velocity.z += forwardVector.z + rightVector.z;
+        }
+
+        playerRig.position.x += velocity.x * physicsDelta;
+        playerRig.position.z += velocity.z * physicsDelta;
+        playerRig.position.y += velocity.y * physicsDelta;
+
+        if (playerRig.position.y < 1.6) {
+            velocity.y = 0;
+            playerRig.position.y = 1.6;
+            onFloor = true;
+        } else {
+            onFloor = false;
+        }
+    } else if (!vrControlsActive && controls && controls.isLocked) {
+        velocity.x -= velocity.x * 10.0 * physicsDelta;
+        velocity.z -= velocity.z * 10.0 * physicsDelta;
+        velocity.y -= gravity * physicsDelta;
+
+        direction.z = Number(keys.forward) - Number(keys.backward);
+        direction.x = Number(keys.right) - Number(keys.left);
+        direction.normalize();
+
+        if (keys.forward || keys.backward) velocity.z -= direction.z * currentMoveSpeed * physicsDelta;
+        if (keys.left || keys.right) velocity.x -= direction.x * currentMoveSpeed * physicsDelta;
+
+        if (keys.jump && onFloor) {
+            velocity.y = jumpVelocity;
+            onFloor = false;
+        }
+
+        controls.moveRight(-velocity.x * physicsDelta);
+        controls.moveForward(-velocity.z * physicsDelta);
+        controls.getObject().position.y += (velocity.y * physicsDelta);
+
+        if (controls.getObject().position.y < 1.6) {
+            velocity.y = 0;
+            controls.getObject().position.y = 1.6;
+            onFloor = true;
+        }
+    }
+
+    models.forEach(entry => {
+        if (entry && entry.mixer && entry.animated && !stopInIframe) {
+            entry.mixer.update(delta);
+        }
+    });
+
+    if (renderer.xr.isPresenting) {
+        renderer.render(scene, camera);
+    } else {
+        composer.render();
+    }
+}
+
+    window.onload = () => {
+        isExperienceRunning = false;
+        stopInIframe = false;
+        models.forEach((entry, index) => {
+            if (entry) deleteModel(index);
+        });
+    };
+
+    renderer.setAnimationLoop(animate);
+    
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        composer.setSize(window.innerWidth, window.innerHeight);
+    });
+</script>
+</body>
+</html>
